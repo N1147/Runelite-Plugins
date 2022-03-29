@@ -1,0 +1,9 @@
+net/runelite/client/plugins/NFarming/PFarmingState.java
+ net.runelite.client.plugins.NFarming.PFarmingState
+net/runelite/client/plugins/NFarming/PFarming.java
+ net.runelite.client.plugins.NFarming.PFarming
+ net.runelite.client.plugins.NFarming.PFarming$1
+net/runelite/client/plugins/NFarming/RunType.java
+ net.runelite.client.plugins.NFarming.RunType
+net/runelite/client/plugins/NFarming/PFarmingConfig.java
+ net.runelite.client.plugins.NFarming.PFarmingConfig

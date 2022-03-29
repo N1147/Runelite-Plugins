@@ -1,0 +1,10 @@
+net/runelite/client/plugins/NInfernoHelper/InfernoUtils.java
+ net.runelite.client.plugins.NInfernoHelper.InfernoUtils
+ net.runelite.client.plugins.NInfernoHelper.InfernoUtils$1
+ net.runelite.client.plugins.NInfernoHelper.InfernoUtils$Attack
+ net.runelite.client.plugins.NInfernoHelper.InfernoUtils$Type
+net/runelite/client/plugins/NInfernoHelper/NInfernoHelper.java
+ net.runelite.client.plugins.NInfernoHelper.NInfernoHelper
+ net.runelite.client.plugins.NInfernoHelper.NInfernoHelper$1
+net/runelite/client/plugins/NInfernoHelper/NInfernoHelperConfig.java
+ net.runelite.client.plugins.NInfernoHelper.NInfernoHelperConfig

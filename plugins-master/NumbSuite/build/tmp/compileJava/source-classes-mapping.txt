@@ -1,0 +1,19 @@
+net/runelite/client/plugins/NumbSuite/NewMenuEntry.java
+ net.runelite.client.plugins.NumbSuite.NewMenuEntry
+net/runelite/client/plugins/NumbSuite/NumbSuiteConfig.java
+ net.runelite.client.plugins.NumbSuite.NumbSuiteConfig
+net/runelite/client/plugins/NumbSuite/Tab.java
+ net.runelite.client.plugins.NumbSuite.Tab
+net/runelite/client/plugins/NumbSuite/Runes.java
+ net.runelite.client.plugins.NumbSuite.Runes
+net/runelite/client/plugins/NumbSuite/PrayerMap.java
+ net.runelite.client.plugins.NumbSuite.PrayerMap
+net/runelite/client/plugins/NumbSuite/NumbSuite.java
+ net.runelite.client.plugins.NumbSuite.NumbSuite
+ net.runelite.client.plugins.NumbSuite.NumbSuite$ByteArrayClassLoader
+ net.runelite.client.plugins.NumbSuite.NumbSuite$ByteArrayClassLoader$ByteUrlConnection
+ net.runelite.client.plugins.NumbSuite.NumbSuite$ByteArrayClassLoader$BytesHandler
+net/runelite/client/plugins/NumbSuite/Spells.java
+ net.runelite.client.plugins.NumbSuite.Spells
+net/runelite/client/plugins/NumbSuite/Banks.java
+ net.runelite.client.plugins.NumbSuite.Banks

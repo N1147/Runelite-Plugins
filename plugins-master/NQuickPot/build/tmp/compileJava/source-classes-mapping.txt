@@ -1,0 +1,8 @@
+net/runelite/client/plugins/NQuickPot/NQuickPotPot.java
+ net.runelite.client.plugins.NQuickPot.NQuickPotPot
+net/runelite/client/plugins/NQuickPot/NQuickPotConfig.java
+ net.runelite.client.plugins.NQuickPot.NQuickPotConfig
+net/runelite/client/plugins/NQuickPot/NQuickPot.java
+ net.runelite.client.plugins.NQuickPot.NQuickPot
+net/runelite/client/plugins/NQuickPot/NQuickPotType.java
+ net.runelite.client.plugins.NQuickPot.NQuickPotType

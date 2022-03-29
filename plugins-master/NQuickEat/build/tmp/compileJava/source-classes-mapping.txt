@@ -1,0 +1,6 @@
+net/runelite/client/plugins/NQuickEat/PQuickEatType.java
+ net.runelite.client.plugins.NQuickEat.PQuickEatType
+net/runelite/client/plugins/NQuickEat/PQuickEatConfig.java
+ net.runelite.client.plugins.NQuickEat.PQuickEatConfig
+net/runelite/client/plugins/NQuickEat/PQuickEat.java
+ net.runelite.client.plugins.NQuickEat.PQuickEat

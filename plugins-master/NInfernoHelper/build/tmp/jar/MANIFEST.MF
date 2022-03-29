@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Plugin-Version: 0.0.1
+Plugin-Id: ninfernohelper-plugin
+Plugin-Provider: ZTD#1147
+Plugin-Dependencies: nutils-plugin
+Plugin-Description: Inferno Prayer Swapper
+Plugin-License: 3-Clause BSD License
+
