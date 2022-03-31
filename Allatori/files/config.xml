@@ -15,7 +15,15 @@
         <class template="class net.runelite.client.plugins.NGatherer.NGathererType"/>
         <class template="class net.runelite.client.plugins.NGatherer.NGathererTypee"/>
         <class template="class net.runelite.client.plugins.NGatherer.NGathererTypeee"/>
-        <class template="class net.runelite.client.plugins.NGatherer.NGathererBankType">
+        <class template="class net.runelite.client.plugins.NGatherer.NGathererBankType"/>
+        <class template="class net.runelite.client.plugins.NGatherer.NGathererState">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+
+        <class template="class net.runelite.client.plugins.NInfernoHelper.NInfernoHelperConfig"/>
+        <class template="class net.runelite.client.plugins.NInfernoHelper.NInfernoHelper"/>
+        <class template="class net.runelite.client.plugins.NInfernoHelper.InfernoUtils">
             <field template="*"/>
             <method template="*(**)"/>
         </class>

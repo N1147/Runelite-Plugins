@@ -181,13 +181,28 @@ public class NGuardians extends Plugin
 		if (client.getWidget(231, 6).getText().contains("A simple transfiguration spell")){
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 15138821));
 		}
-		if (client.getWidget(231, 6).getText().contains("What do you want")){
-			clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 15138821));
-		}
-		if (utils.inventoryContains(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511)) {
+		*/
+
+		if (config.repair() && utils.inventoryContains(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906)) {
+			if (client.getWidget(217, 6) != null) {
+				if (client.getWidget(217, 6).getText().equals("Can you repair my pouches?")) {
+					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 14221317));
+					return NGuardiansState.IDLE;
+				}
+			}
+			if (client.getWidget(231, 6) != null) {
+				if (client.getWidget(231, 6).getText().equals("What do you want? Can't you see I'm busy?") && utils.inventoryContains(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906)) {
+					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 15138821));
+					return NGuardiansState.IDLE;
+				}
+			}
+			if (client.getWidget(219, 1) != null) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 1, 14352385));
+				return NGuardiansState.IDLE;
+			}
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 2, MenuAction.CC_OP.getId(), -1, 14286953));
 			return NGuardiansState.IDLE;
-		}*/
+		}
 		if (client.getWidget(746, 29).getText().equals("7/8") || client.getWidget(746, 29).getText().equals("9/10") || client.getWidget(746, 29).getText().equals("8/10") || client.getWidget(746, 29).getText().equals("7/10")|| client.getWidget(746, 29).getText().equals("6/10")|| client.getWidget(746, 29).getText().equals("5/10") || client.getWidget(746, 29).getText().equals("4/10") || client.getWidget(746, 29).getText().equals("3/10") || client.getWidget(746, 29).getText().equals("2/10") || client.getWidget(746, 29).getText().equals("1/10") || client.getWidget(746, 29).getText().equals("0/10") || client.getWidget(746, 29).getText().equals("6/8") || client.getWidget(746, 29).getText().equals("5/8") || client.getWidget(746, 29).getText().equals("4/8") || client.getWidget(746, 29).getText().equals("3/8") || client.getWidget(746, 29).getText().equals("2/8") || client.getWidget(746, 29).getText().equals("1/8") || client.getWidget(746, 29).getText().equals("0/8")) {
 			GuardiansNeeded = true;
 		}
@@ -300,84 +315,84 @@ public class NGuardians extends Plugin
 			return NGuardiansState.IDLE;
 		}
 		if (!config.cataOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 14) {//FIRE
-			if (client.getWidget(746, 19).getSpriteId() == 4357 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_FIRE)) {
+			if (client.getWidget(746, 20).getSpriteId() == 4357 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_FIRE)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Fire");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (config.blood() && !config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 14) {//FIRE
-			if (client.getWidget(746, 19).getSpriteId() == 4364 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_BLOOD)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4364 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_BLOOD)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Blood");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (config.death() && !config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 14) {//FIRE
-			if (client.getWidget(746, 19).getSpriteId() == 4363 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_DEATH)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4363 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_DEATH)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Death");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 44) {//NATURE
-			if (client.getWidget(746, 22).getSpriteId() == 4361 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_NATURE)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4361 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_NATURE)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Nature");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 54) {//LAW
-			if (client.getWidget(746, 22).getSpriteId() == 4362 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_LAW)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4362 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_LAW)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Law");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.cataOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 9) {//EARTH
-			if (client.getWidget(746, 19).getSpriteId() == 4356 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_EARTH)) {
+			if (client.getWidget(746, 20).getSpriteId() == 4356 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_EARTH)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Earth");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 35) {//CHAOS
-			if (client.getWidget(746, 22).getSpriteId() == 4360 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_CHAOS)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4360 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_CHAOS)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Chaos");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (config.cosmic() && !config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 27) {//COSMIC
-			if (client.getWidget(746, 22).getSpriteId() == 4359 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_COSMIC)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4359 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_COSMIC)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Cosmic");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.cataOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 5) {//WATER
-			if (client.getWidget(746, 19).getSpriteId() == 4355 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_WATER)) {
+			if (client.getWidget(746, 20).getSpriteId() == 4355 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_WATER)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Water");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 20) {//BODY
-			if (client.getWidget(746, 22).getSpriteId() == 4358 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_BODY)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4358 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_BODY)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Body");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 2) {//MIND
-			if (client.getWidget(746, 22).getSpriteId() == 4354 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_MIND)) {
+			if (client.getWidget(746, 23).getSpriteId() == 4354 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_MIND)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Mind");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (!config.cataOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 1) {//AIR
-			if (client.getWidget(746, 19).getSpriteId() == 4353 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_AIR)) {
+			if (client.getWidget(746, 20).getSpriteId() == 4353 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_AIR)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Air");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;

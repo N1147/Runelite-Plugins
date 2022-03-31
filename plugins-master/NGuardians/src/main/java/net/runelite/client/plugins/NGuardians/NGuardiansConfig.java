@@ -82,6 +82,14 @@ public interface NGuardiansConfig extends Config
 	default boolean blood() { return true; }
 
 	@ConfigItem(
+			keyName = "repair",
+			name = "Repair Pouches",
+			description = "",
+			position = 8
+	)
+	default boolean repair () { return false; }
+
+	@ConfigItem(
 			keyName = "startButton",
 			name = "Start/Stop",
 			description = "",
