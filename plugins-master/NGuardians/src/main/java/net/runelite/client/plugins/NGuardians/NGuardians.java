@@ -32,6 +32,7 @@ import java.time.Instant;
 	tags = {"ztd","numb","guardians", "rift"},
 	enabledByDefault = false
 )
+
 public class NGuardians extends Plugin
 {
 	@Override
@@ -120,6 +121,7 @@ public class NGuardians extends Plugin
 						WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.COLOSSAL_POUCH);
 						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
+					GiantPouchFilled = false;
 					return NGuardiansState.IDLE;
 				}
 				if (LargePouchFilled) {
@@ -127,6 +129,7 @@ public class NGuardians extends Plugin
 						WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.GIANT_POUCH);
 						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
+					LargePouchFilled = false;
 					return NGuardiansState.IDLE;
 				}
 				if (FullPouches){
@@ -141,6 +144,10 @@ public class NGuardians extends Plugin
 					if (utils.inventoryContains(ItemID.LARGE_POUCH)) {
 						WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.LARGE_POUCH);
 						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+					}
+					if (utils.inventoryContains(ItemID.COLOSSAL_POUCH)) {
+						WidgetItem Pouch4 = utils.getInventoryWidgetItem(ItemID.COLOSSAL_POUCH);
+						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch4.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch4.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					FullPouches = false;
 					return NGuardiansState.IDLE;
@@ -182,6 +189,10 @@ public class NGuardians extends Plugin
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 15138821));
 		}
 		*/
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryFull() && !utils.inventoryContains(ItemID.GUARDIAN_FRAGMENTS) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE)) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GUARDIAN_ESSENCE, MenuAction.ITEM_FIFTH_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.GUARDIAN_ESSENCE).getIndex(), WidgetInfo.INVENTORY.getId()));
+			return NGuardiansState.IDLE;
+		}
 
 		if (config.repair() && utils.inventoryContains(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906)) {
 			if (client.getWidget(217, 6) != null) {
@@ -215,8 +226,46 @@ public class NGuardians extends Plugin
 			return NGuardiansState.IDLE;
 		}
 		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && !GuardiansNeeded && utils.inventoryContains(ItemID.OVERCHARGED_CELL, ItemID.WEAK_CELL, ItemID.STRONG_CELL, ItemID.MEDIUM_CELL)) {
-			GroundObject CELL_TILE = utils.findNearestGroundObject(ObjectID.INACTIVE_CELL_TILE_43739, ObjectID.WEAK_CELL_TILE, ObjectID.MEDIUM_CELL_TILE, ObjectID.STRONG_CELL_TILE, ObjectID.OVERPOWERED_CELL_TILE);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", CELL_TILE.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), CELL_TILE.getLocalLocation().getSceneX(), CELL_TILE.getLocalLocation().getSceneY()));
+			GroundObject CELL_TILE_INACTIVE = utils.findNearestGroundObject(ObjectID.INACTIVE_CELL_TILE_43739);
+			GroundObject CELL_TILE_WEAK = utils.findNearestGroundObject(ObjectID.WEAK_CELL_TILE);
+			GroundObject CELL_TILE_MEDIUM = utils.findNearestGroundObject(ObjectID.MEDIUM_CELL_TILE);
+			GroundObject CELL_TILE_STRONG = utils.findNearestGroundObject(ObjectID.STRONG_CELL_TILE);
+			GroundObject CELL_TILE_OVERCHARGED = utils.findNearestGroundObject(ObjectID.OVERPOWERED_CELL_TILE);
+			if (CELL_TILE_INACTIVE != null){
+				clientThread.invoke(() -> client.invokeMenuAction("", "",
+						CELL_TILE_INACTIVE.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(),
+						CELL_TILE_INACTIVE.getLocalLocation().getSceneX(),
+						CELL_TILE_INACTIVE.getLocalLocation().getSceneY()));
+				return NGuardiansState.IDLE;
+			}
+			if (CELL_TILE_WEAK != null){
+				clientThread.invoke(() -> client.invokeMenuAction("", "",
+						CELL_TILE_WEAK.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(),
+						CELL_TILE_WEAK.getLocalLocation().getSceneX(),
+						CELL_TILE_WEAK.getLocalLocation().getSceneY()));
+				return NGuardiansState.IDLE;
+			}
+			if (CELL_TILE_MEDIUM != null){
+				clientThread.invoke(() -> client.invokeMenuAction("", "",
+						CELL_TILE_MEDIUM.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(),
+						CELL_TILE_MEDIUM.getLocalLocation().getSceneX(),
+						CELL_TILE_MEDIUM.getLocalLocation().getSceneY()));
+				return NGuardiansState.IDLE;
+			}
+			if (CELL_TILE_STRONG != null){
+				clientThread.invoke(() -> client.invokeMenuAction("", "",
+						CELL_TILE_STRONG.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(),
+						CELL_TILE_STRONG.getLocalLocation().getSceneX(),
+						CELL_TILE_STRONG.getLocalLocation().getSceneY()));
+				return NGuardiansState.IDLE;
+			}
+			if (CELL_TILE_OVERCHARGED != null){
+				clientThread.invoke(() -> client.invokeMenuAction("", "",
+						CELL_TILE_OVERCHARGED.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(),
+						CELL_TILE_OVERCHARGED.getLocalLocation().getSceneX(),
+						CELL_TILE_OVERCHARGED.getLocalLocation().getSceneY()));
+				return NGuardiansState.IDLE;
+			}
 			return NGuardiansState.IDLE;
 		}
 		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && GuardiansNeeded && utils.inventoryContains(ItemID.OVERCHARGED_CELL, ItemID.WEAK_CELL, ItemID.STRONG_CELL, ItemID.MEDIUM_CELL)) {
@@ -265,7 +314,7 @@ public class NGuardians extends Plugin
 			return NGuardiansState.IDLE;
 		}
 
-		if (client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !utils.inventoryFull()  && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_RUNE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_ADAMANT_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BLACK_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_MITHRIL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_IRON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BRONZE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_STEEL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_3A_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_CRYSTAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_GILDED_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_INFERNAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_OR && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_UPGRADED) {
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !utils.inventoryFull()  && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_RUNE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_ADAMANT_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BLACK_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_MITHRIL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_IRON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BRONZE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_STEEL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_3A_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_CRYSTAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_GILDED_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_INFERNAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_OR && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_OR_TRAILBLAZER && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_UPGRADED) {
 			GameObject GUARDIAN_PARTS = utils.findNearestGameObject(43720);
 			clientThread.invoke(() -> client.invokeMenuAction("", "", GUARDIAN_PARTS.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), GUARDIAN_PARTS.getSceneMinLocation().getX(), GUARDIAN_PARTS.getSceneMinLocation().getY()));
 			return NGuardiansState.IDLE;
@@ -307,19 +356,12 @@ public class NGuardians extends Plugin
 		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && MinedEssence && !utils.inventoryFull()) {
 			if (utils.inventoryContains(ItemID.AIR_RUNE, ItemID.WATER_RUNE, ItemID.MIND_RUNE, ItemID.EARTH_RUNE, ItemID.CHAOS_RUNE, ItemID.NATURE_RUNE, ItemID.BODY_RUNE, ItemID.FIRE_RUNE, ItemID.LAW_RUNE)) {
 				GameObject RUNE_POOL = utils.findNearestGameObject(43696);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", RUNE_POOL.getId(), MenuAction.GAME_OBJECT_SECOND_OPTION.getId(), RUNE_POOL.getSceneMinLocation().getX(), RUNE_POOL.getSceneMinLocation().getY()));
+				clientThread.invoke(() -> client.invokeMenuAction("", "", RUNE_POOL.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), RUNE_POOL.getSceneMinLocation().getX(), RUNE_POOL.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 			GameObject ESS_WORKBENCH = utils.findNearestGameObject(43754);
 			clientThread.invoke(() -> client.invokeMenuAction("", "", ESS_WORKBENCH.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), ESS_WORKBENCH.getSceneMinLocation().getX(), ESS_WORKBENCH.getSceneMinLocation().getY()));
 			return NGuardiansState.IDLE;
-		}
-		if (!config.cataOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 14) {//FIRE
-			if (client.getWidget(746, 20).getSpriteId() == 4357 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_FIRE)) {
-				GameObject Portal = utils.findNearestGameObject("Guardian of Fire");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
-				return NGuardiansState.IDLE;
-			}
 		}
 		if (config.blood() && !config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 14) {//FIRE
 			if (client.getWidget(746, 23).getSpriteId() == 4364 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_BLOOD)) {
@@ -335,6 +377,13 @@ public class NGuardians extends Plugin
 				return NGuardiansState.IDLE;
 			}
 		}
+		if (!config.cataOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 14) {//FIRE
+			if (client.getWidget(746, 20).getSpriteId() == 4357 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_FIRE)) {
+				GameObject Portal = utils.findNearestGameObject("Guardian of Fire");
+				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));
+				return NGuardiansState.IDLE;
+			}
+		}
 		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 44) {//NATURE
 			if (client.getWidget(746, 23).getSpriteId() == 4361 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_NATURE)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Nature");
@@ -342,7 +391,7 @@ public class NGuardians extends Plugin
 				return NGuardiansState.IDLE;
 			}
 		}
-		if (!config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 54) {//LAW
+		if (config.law() && !config.eleOnly() && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && client.getRealSkillLevel(Skill.RUNECRAFT) >= 54) {//LAW
 			if (client.getWidget(746, 23).getSpriteId() == 4362 || utils.inventoryContains(ItemID.PORTAL_TALISMAN_LAW)) {
 				GameObject Portal = utils.findNearestGameObject("Guardian of Law");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Portal.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Portal.getSceneMinLocation().getX(), Portal.getSceneMinLocation().getY()));

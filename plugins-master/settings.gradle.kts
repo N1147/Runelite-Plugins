@@ -1,4 +1,5 @@
 rootProject.name = "Numb"
+include("NUtils")
 include("NQuickEat")
 include("NQuickPray")
 include("NGatherer")
@@ -7,7 +8,6 @@ include("NTempoross")
 include("NQuickPot")
 include("NQuickFighter")
 include("NInfernoHelper")
-include("NUtils")
 include("NGauntlet")
 include("NGuardians")
 //include("NumbSuite")

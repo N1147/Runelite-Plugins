@@ -5,25 +5,63 @@
     <keep-names>
         <class template="class net.runelite.client.plugins.NFarming.PFarming"/>
         <class template="class net.runelite.client.plugins.NFarming.PFarmingConfig"/>
-        <class template="class net.runelite.client.plugins.NFarming.PFarmingState"/>
-        <class template="class net.runelite.client.plugins.NFarming.RunType">
+        <class template="class net.runelite.client.plugins.NFarming.PFarmingState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
         <class template="class net.runelite.client.plugins.NGatherer.NGatherer"/>
         <class template="class net.runelite.client.plugins.NGatherer.NGathererConfig"/>
-        <class template="class net.runelite.client.plugins.NGatherer.NGathererType"/>
-        <class template="class net.runelite.client.plugins.NGatherer.NGathererTypee"/>
-        <class template="class net.runelite.client.plugins.NGatherer.NGathererTypeee"/>
-        <class template="class net.runelite.client.plugins.NGatherer.NGathererBankType"/>
         <class template="class net.runelite.client.plugins.NGatherer.NGathererState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
-
+        <class template="class net.runelite.client.plugins.NGauntlet.Hunllef"/>
+        <class template="class net.runelite.client.plugins.NGauntlet.NGauntlet"/>
+        <class template="class net.runelite.client.plugins.NGauntlet.NGauntletConfig"/>
+        <class template="class net.runelite.client.plugins.NGauntlet.NGauntletState">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.NGuardians.NGuardians"/>
+        <class template="class net.runelite.client.plugins.NGuardians.NGuardiansConfig"/>
+        <class template="class net.runelite.client.plugins.NGuardians.NGuardiansState">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
         <class template="class net.runelite.client.plugins.NInfernoHelper.NInfernoHelperConfig"/>
         <class template="class net.runelite.client.plugins.NInfernoHelper.NInfernoHelper"/>
         <class template="class net.runelite.client.plugins.NInfernoHelper.InfernoUtils">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEat"/>
+        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEatConfig"/>
+        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEatType">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighter"/>
+        <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighterConfig"/>
+        <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighterState">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPot"/>
+        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotConfig"/>
+        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotPot"/>
+        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotType">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPray"/>
+        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPrayConfig"/>
+        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPrayType">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.NTempoross.NTempoross"/>
+        <class template="class net.runelite.client.plugins.NTempoross.NTemporossConfig"/>
+        <class template="class net.runelite.client.plugins.NTempoross.NTemporossState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
@@ -35,49 +73,6 @@
         <class template="class net.runelite.client.plugins.NUtils.NewMenuEntry"/>
         <class template="class net.runelite.client.plugins.NUtils.Banks"/>
         <class template="class net.runelite.client.plugins.NUtils.PConfig">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NTempoross.NTempoross"/>
-        <class template="class net.runelite.client.plugins.NTempoross.NTemporossConfig"/>
-        <class template="class net.runelite.client.plugins.NTempoross.NTemporossState">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEat"/>
-        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEatConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEatType">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPray"/>
-        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPrayConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPrayType">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPot"/>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotPot"/>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotType">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NGauntlet.NGauntlet"/>
-        <class template="class net.runelite.client.plugins.NGauntlet.Hunllef"/>
-        <class template="class net.runelite.client.plugins.NGauntlet.NGauntletConfig">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NGuardians.NGuardians"/>
-        <class template="class net.runelite.client.plugins.NGuardians.NGuardiansConfig"/>
-        <class template="class net.runelite.client.plugins.NGuardians.NGuardiansState">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighter"/>
-        <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighterConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighterState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
@@ -101,14 +96,14 @@
     <property name="string-encryption" value="enable" apply2class="class net.runelite.client.plugins.NQuickFighter.*"/>
     <property name="string-encryption" value="enable" apply2class="class net.runelite.client.plugins.NInfernoHelper.*"/>
     <property name="string-encryption" value="enable" apply2class="class net.runelite.client.plugins.NTempoross.*"/>
-    <property name="string-encryption" value="enable" apply2class="class net.runelite.client.plugins.NumbSuite.*"/>
+
     <property name="string-encryption" value="disable"/>
 
     <!-- Control flow obfuscation -->
     <property name="control-flow-obfuscation" value="enable"/>
     <property name="extensive-flow-obfuscation" value="maximum"/>
 
-    <property name="default-package" value="net.runelite.client.plugins.NumbPlugins"/>
+    <property name="default-package" value="net.runelite.client.plugins"/>
     <property name="force-default-package" value="enable"/>
 
     <property name="classes-naming-prefix" value="numbplugins"/>

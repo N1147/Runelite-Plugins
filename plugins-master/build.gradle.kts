@@ -14,7 +14,7 @@ plugins {
     checkstyle
 }
 
-project.extra["GithubUrl"] = "https://github.com/N1147/download"
+project.extra["GithubUrl"] = "https://discord.com/invite/rzaXeZdeNu"
 
 apply<BootstrapPlugin>()
 

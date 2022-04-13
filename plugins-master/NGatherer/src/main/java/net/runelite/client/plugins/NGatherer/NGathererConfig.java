@@ -1,6 +1,30 @@
 package net.runelite.client.plugins.NGatherer;
 
-import net.runelite.client.config.*;
+import net.runelite.api.Client;
+import net.runelite.api.ItemID;
+import net.runelite.api.MenuAction;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.WidgetItem;
+import net.runelite.client.config.Button;
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.ConfigSection;
+
+import java.util.Arrays;
+
+import static net.runelite.api.MenuAction.GAME_OBJECT_FIRST_OPTION;
+import static net.runelite.api.MenuAction.GAME_OBJECT_SECOND_OPTION;
+import static net.runelite.api.MenuAction.GAME_OBJECT_THIRD_OPTION;
+import static net.runelite.api.MenuAction.GAME_OBJECT_FOURTH_OPTION;
+import static net.runelite.api.MenuAction.GAME_OBJECT_FIFTH_OPTION;
+
+import static net.runelite.api.MenuAction.NPC_FIRST_OPTION;
+import static net.runelite.api.MenuAction.NPC_SECOND_OPTION;
+import static net.runelite.api.MenuAction.NPC_THIRD_OPTION;
+import static net.runelite.api.MenuAction.NPC_FOURTH_OPTION;
+import static net.runelite.api.MenuAction.NPC_FIFTH_OPTION;
 
 
 @ConfigGroup("NGatherer")
@@ -38,10 +62,7 @@ public interface NGathererConfig extends Config
 	)
 	String thieving = "thieving";
 
-	@Range(
-			min = 0,
-			max = 10
-	)
+
 	@ConfigItem(
 			keyName = "tickDelayMin",
 			name = "Game Tick Min",
@@ -54,10 +75,7 @@ public interface NGathererConfig extends Config
 		return 1;
 	}
 
-	@Range(
-			min = 0,
-			max = 10
-	)
+
 	@ConfigItem(
 			keyName = "tickDelayMax",
 			name = "Game Tick Max",
@@ -70,10 +88,7 @@ public interface NGathererConfig extends Config
 		return 2;
 	}
 
-	@Range(
-			min = 0,
-			max = 10
-	)
+
 	@ConfigItem(
 			keyName = "tickDelayTarget",
 			name = "Game Tick Target",
@@ -86,10 +101,7 @@ public interface NGathererConfig extends Config
 		return 1;
 	}
 
-	@Range(
-			min = 0,
-			max = 10
-	)
+
 	@ConfigItem(
 			keyName = "tickDelayDeviation",
 			name = "Game Tick Deviation",
@@ -355,4 +367,98 @@ public interface NGathererConfig extends Config
 		return new Button();
 	}
 
+}
+
+
+//* enums
+
+
+enum NGathererType
+{
+	PRAYER_POTION(ItemID.PRAYER_POTION1, ItemID.PRAYER_POTION2, ItemID.PRAYER_POTION3, ItemID.PRAYER_POTION4),
+	SUPER_RESTORE(ItemID.SUPER_RESTORE1, ItemID.SUPER_RESTORE2, ItemID.SUPER_RESTORE3, ItemID.SUPER_RESTORE4,
+			ItemID.BLIGHTED_SUPER_RESTORE1, ItemID.BLIGHTED_SUPER_RESTORE2, ItemID.BLIGHTED_SUPER_RESTORE3,
+			ItemID.BLIGHTED_SUPER_RESTORE4),
+	RANGED(ItemID.DIVINE_BASTION_POTION1, ItemID.DIVINE_BASTION_POTION2, ItemID.DIVINE_BASTION_POTION3, ItemID.DIVINE_BASTION_POTION4, ItemID.BASTION_POTION1, ItemID.BASTION_POTION2, ItemID.BASTION_POTION3, ItemID.BASTION_POTION4,ItemID.RANGING_POTION1, ItemID.RANGING_POTION2, ItemID.RANGING_POTION3, ItemID.RANGING_POTION4),
+	ANTIFIRE(ItemID.ANTIFIRE_POTION1, ItemID.ANTIFIRE_POTION2, ItemID.ANTIFIRE_POTION3, ItemID.ANTIFIRE_POTION4,ItemID.EXTENDED_SUPER_ANTIFIRE1,ItemID.EXTENDED_SUPER_ANTIFIRE2, ItemID.EXTENDED_SUPER_ANTIFIRE3, ItemID.EXTENDED_SUPER_ANTIFIRE4, ItemID.EXTENDED_ANTIFIRE1, ItemID.EXTENDED_ANTIFIRE2, ItemID.EXTENDED_ANTIFIRE3, ItemID.EXTENDED_ANTIFIRE4),
+	ANTIVENOM(ItemID.ANTIDOTE1_5958, ItemID.ANTIDOTE2_5956, ItemID.ANTIDOTE3_5954, ItemID.ANTIDOTE4_5952, ItemID.ANTIVENOM1_12919 ,ItemID.ANTIVENOM2_12917,ItemID.ANTIVENOM3_12915, ItemID.ANTIVENOM4_12913),
+	SANFEW_SERUM(ItemID.SANFEW_SERUM1, ItemID.SANFEW_SERUM2, ItemID.SANFEW_SERUM3, ItemID.SANFEW_SERUM4),
+	MAGIC(ItemID.IMBUED_HEART, ItemID.DIVINE_MAGIC_POTION1, ItemID.DIVINE_MAGIC_POTION2, ItemID.DIVINE_MAGIC_POTION3, ItemID.DIVINE_MAGIC_POTION4, ItemID.MAGIC_POTION1, ItemID.MAGIC_POTION2, ItemID.MAGIC_POTION3, ItemID.MAGIC_POTION4),
+	COMBAT(ItemID.DIVINE_SUPER_COMBAT_POTION1, ItemID.DIVINE_SUPER_COMBAT_POTION2, ItemID.DIVINE_SUPER_COMBAT_POTION3, ItemID.DIVINE_SUPER_COMBAT_POTION4, ItemID.SUPER_COMBAT_POTION1, ItemID.SUPER_COMBAT_POTION2, ItemID.SUPER_COMBAT_POTION3, ItemID.SUPER_COMBAT_POTION4, ItemID.COMBAT_POTION1, ItemID.COMBAT_POTION2, ItemID.COMBAT_POTION3, ItemID.COMBAT_POTION4);
+
+	public int[] ItemIDs;
+
+	NGathererType(int... ids)
+	{
+		this.ItemIDs = ids;
+	}
+
+	public boolean containsId(int id)
+	{
+		return Arrays.stream(this.ItemIDs).anyMatch(x -> x == id);
+	}
+
+	public WidgetItem getItemFromInventory(Client client)
+	{
+		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
+
+		if (inventoryWidget == null)
+		{
+			return null;
+		}
+
+		for (WidgetItem item : inventoryWidget.getWidgetItems())
+		{
+			if (Arrays.stream(ItemIDs).anyMatch(i -> i == item.getId()))
+			{
+				return item;
+			}
+		}
+
+		return null;
+	}
+}
+
+enum NGathererTypee
+{
+	NPC_FIRST(NPC_FIRST_OPTION),
+	NPC_SECOND(NPC_SECOND_OPTION),
+	NPC_THIRD(NPC_THIRD_OPTION),
+	NPC_FOURTH(NPC_FOURTH_OPTION),
+	NPC_FIFTH(NPC_FIFTH_OPTION),
+
+	OBJECT_FIRST(GAME_OBJECT_FIRST_OPTION),
+	OBJECT_SECOND(GAME_OBJECT_SECOND_OPTION),
+	OBJECT_THIRD(GAME_OBJECT_THIRD_OPTION),
+	OBJECT_FOURTH(GAME_OBJECT_FOURTH_OPTION),
+	OBJECT_FIFTH(GAME_OBJECT_FIFTH_OPTION);
+	MenuAction action;
+
+	NGathererTypee(MenuAction action)
+	{
+		this.action = action;
+	}
+}
+
+
+enum NGathererTypeee
+{
+	NPC,
+	OBJECT
+}
+
+enum NGathererBankType
+{
+	FIRST(GAME_OBJECT_FIRST_OPTION),
+	SECOND(GAME_OBJECT_SECOND_OPTION),
+	THIRD(GAME_OBJECT_THIRD_OPTION),
+	FOURTH(GAME_OBJECT_FOURTH_OPTION),
+	FIFTH(GAME_OBJECT_FIFTH_OPTION);
+
+	MenuAction action;
+
+	NGathererBankType(MenuAction action)
+	{
+		this.action = action;
+	}
 }

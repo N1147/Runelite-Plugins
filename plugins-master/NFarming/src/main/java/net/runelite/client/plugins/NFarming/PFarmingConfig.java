@@ -98,27 +98,13 @@ public interface PFarmingConfig extends Config
 		return false;
 	}
 
-	@ConfigItem(
-			keyName = "RunType",
-			name = "Run Type",
-			description = "",
-			position = 10,
-			section = "plugin"
-	)
-	default RunType RunType()
-	{
-		return RunType.TREES;
-	}
 
 	@ConfigItem(
 			keyName = "treeSappling",
 			name = "Tree Sappling ID",
 			description = "",
 			position = 11,
-			section = "plugin",
-			hidden = true,
-			unhide = "RunType",
-			unhideValue = "TREES"
+			section = "plugin"
 	)
 	default int treeSappling()
 	{
@@ -130,10 +116,7 @@ public interface PFarmingConfig extends Config
 			name = "Fruit Sappling ID",
 			description = "",
 			position = 12,
-			section = "plugin",
-			hidden = true,
-			unhide = "RunType",
-			unhideValue = "TREES"
+			section = "plugin"
 	)
 	default int fruitSappling()
 	{
@@ -145,10 +128,7 @@ public interface PFarmingConfig extends Config
 			name = "Tree Payment ID",
 			description = "",
 			position = 13,
-			section = "plugin",
-			hidden = true,
-			unhide = "RunType",
-			unhideValue = "TREES"
+			section = "plugin"
 	)
 	default int treePayment()
 	{
@@ -160,10 +140,7 @@ public interface PFarmingConfig extends Config
 			name = "Fruit Payment ID",
 			description = "",
 			position = 14,
-			section = "plugin",
-			hidden = true,
-			unhide = "RunType",
-			unhideValue = "TREES"
+			section = "plugin"
 	)
 	default int fruitPayment()
 	{

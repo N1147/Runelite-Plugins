@@ -31,24 +31,112 @@ import net.runelite.client.config.Button;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.ConfigSection;
 
-@ConfigGroup("NGauntlet")
+@ConfigGroup("NGauntletConfig")
 public interface NGauntletConfig extends Config
 {
-	@ConfigItem(
-			keyName = "instructions",
-			name = "",
+	@ConfigSection(
+			keyName = "Prep",
+			name = "Prep",
 			description = "",
 			position = 0
 	)
-	default String instructions() { return "Swaps prayers and gear during Gauntlet."; }
+	String Prep = "Prep";
 	@ConfigItem(
-			keyName = "offensive",
-			name = "Offensive Prayers",
-			description = "Rigour, Augury and Piety unlocked are required before enabling this.",
+			keyName = "foodAmt",
+			name = "Amount of Food",
+			description = "Amount of food to gather and cook.",
+			position = 0,
+			section = "Prep"
+	)
+	default int foodAmt() { return 16; }
+
+	@ConfigItem(
+			keyName = "AttunedArmour",
+			name = "Attuned Body & Legs",
+			description = "If disabled, uses basic helm, body and legs",
+			position = 1,
+			section = "Prep"
+	)
+	default boolean AttunedArmour() { return false; }
+
+	@ConfigItem(
+			keyName = "PerfectWeapons",
+			name = "Perfect Staff",
+			description = "If disabled, will only gather perfect bow and attuned staff",
+			position = 1,
+			section = "Prep"
+	)
+	default boolean PerfectWeapons() { return false; }
+
+	@ConfigSection(
+			keyName = "Boss",
+			name = "Boss",
+			description = "",
 			position = 1
 	)
-	default boolean offensive() { return false; }
+	String Boss = "Boss";
+	@ConfigItem(
+			keyName = "healthMin",
+			name = "Health to Eat",
+			description = "Minimum health before eating (boss fight only)",
+			position = 1,
+			section = "Boss"
+	)
+	default int healthMin() { return 60; }
+	@ConfigItem(
+			keyName = "prayMin",
+			name = "Pray to Drink",
+			description = "Minimum prayer before drinking pots (boss fight only)",
+			position = 2,
+			section = "Boss"
+	)
+	default int prayMin() { return 40; }
+	@ConfigItem(
+			keyName = "runMin",
+			name = "Run to Drink",
+			description = "Minimum run energy before drinking pots (boss fight only)",
+			position = 3,
+			section = "Boss"
+	)
+	default int runMin() { return 10; }
+
+
+
+
+	@ConfigSection(
+			keyName = "Prayer",
+			name = "Prayer",
+			description = "",
+			position = 2
+	)
+	String Other = "Prayer";
+
+	@ConfigItem(
+			keyName = "Rigour",
+			name = "Rigour",
+			description = "",
+			position = 1,
+			section = "Prayer"
+	)
+	default boolean Rigour() { return false; }
+	@ConfigItem(
+			keyName = "Augury",
+			name = "Augury",
+			description = "",
+			position = 1,
+			section = "Prayer"
+	)
+	default boolean Augury() { return false; }
+	@ConfigItem(
+			keyName = "Piety",
+			name = "Piety",
+			description = "",
+			position = 1,
+			section = "Prayer"
+	)
+	default boolean Piety() { return false; }
 	@ConfigItem(
 			keyName = "startButton",
 			name = "Start/Stop",

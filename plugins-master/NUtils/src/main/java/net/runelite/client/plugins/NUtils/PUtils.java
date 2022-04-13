@@ -162,6 +162,28 @@ public class PUtils extends Plugin
 				Arrays.stream(string.split(",")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
 	}
 
+	public TileItem getNearestTileItem(List<TileItem> tileItems) {
+		int currentDistance;
+		TileItem closestTileItem = tileItems.get(0);
+		int closestDistance = closestTileItem.getTile().getWorldLocation().distanceTo(client.getLocalPlayer().getWorldLocation());
+		for (TileItem tileItem : tileItems) {
+			currentDistance = tileItem.getTile().getWorldLocation().distanceTo(client.getLocalPlayer().getWorldLocation());
+			if (currentDistance < closestDistance) {
+				closestTileItem = tileItem;
+				closestDistance = currentDistance;
+			}
+		}
+		return closestTileItem;
+	}
+
+	public void lootItem(List<TileItem> itemList) {
+		TileItem lootItem = getNearestTileItem(itemList);
+		if (lootItem != null) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "",lootItem.getId(), MenuAction.GROUND_ITEM_THIRD_OPTION.getId(), lootItem.getTile().getSceneLocation().getX(), lootItem.getTile().getSceneLocation().getY()));
+		}
+	}
+
+
 	@Nullable
 	public Player findNearestPlayer(String name){
 		assert client.isClientThread();
@@ -314,6 +336,206 @@ public class PUtils extends Plugin
 	}
 
 	@Nullable
+	public GroundObject findNearestGroundObjectWithin(WorldPoint worldPoint, int dist, int... ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.isWithinDistance(worldPoint, dist)
+				.idEquals(ids)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GroundObject findNearestGroundObjectInsideArea(WorldArea worldArea, int... ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().toWorldArea().intersectsWith(worldArea))
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GroundObject findNearestGroundObjectInsideArea(WorldArea worldArea, Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().toWorldArea().intersectsWith(worldArea))
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GroundObject findNearestGroundObjectOutsideArea(WorldArea worldArea, int... ids)	//Collection<Integer> ids
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea))
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GroundObject findNearestGroundObjectOutsideArea(WorldArea worldArea, Collection<Integer> ids)	//Collection<Integer> ids
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea))
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GroundObject findNearestGroundObjectOutsideAreaNotUnderMe(WorldArea worldArea, Collection<Integer> ids)	//Collection<Integer> ids
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea()))
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+
+	@Nullable
+	public GroundObject findNearestGroundObjectOutsideAreaNotUnderMeNearestTo(int distFrom, Locatable nearestTo, WorldArea outsideArea, Collection<Integer> ids)	//Collection<Integer> ids
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().distanceTo(nearestTo.getWorldLocation()) >= distFrom && !obj.getWorldLocation().toWorldArea().intersectsWith(outsideArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea()))
+				.result(client)
+				.nearestTo(nearestTo);
+	}
+
+	@Nullable
+	public GameObject findNearestGameObjectWithin(WorldPoint worldPoint, int dist, String... names)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GameObjectQuery()
+				.isWithinDistance(worldPoint, dist)
+				.nameEquals(names)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
+	public GroundObject findNearestGroundObjectWithin(WorldPoint worldPoint, int dist, Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.isWithinDistance(worldPoint, dist)
+				.idEquals(ids)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
+	public GameObject findNearestGameObjectAtleastAway(WorldPoint worldPoint, int dist, Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GameObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().distanceTo(worldPoint) >= dist)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
+	public GroundObject findNearestGroundObjectAtleastAwayAndNotUnderMe(WorldPoint worldPoint, int distfromPoint, int distfromMe, Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().distanceTo(client.getLocalPlayer().getWorldLocation()) >= distfromMe && obj.getWorldLocation().distanceTo(worldPoint) >= distfromPoint)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
+	public GroundObject findNearestGroundObjectAtleastAway(WorldPoint worldPoint, int dist, Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().distanceTo(worldPoint) >= dist)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
 	public GameObject findNearestGameObjectWithin(WorldPoint worldPoint, int dist, Collection<Integer> ids)
 	{
 		assert client.isClientThread();
@@ -374,6 +596,40 @@ public class PUtils extends Plugin
 
 		return new NPCQuery()
 				.nameContains(name)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
+	public NPC findNearestNpcInsideArea(WorldArea worldArea, Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new NPCQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldArea().intersectsWith(worldArea))
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+
+	@Nullable
+	public NPC findNearestNpcInsideArea(WorldArea worldArea, int... ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new NPCQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldArea().intersectsWith(worldArea))
 				.result(client)
 				.nearestTo(client.getLocalPlayer());
 	}
@@ -711,6 +967,37 @@ public class PUtils extends Plugin
 
 		return new GroundObjectQuery()
 				.idEquals(ids)
+				.result(client)
+				.list;
+	}
+
+	public List<GroundObject> getGroundObjectsWithinDistanceOf(int dist, WorldPoint worldPoint, int... ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return new ArrayList<>();
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().distanceTo(worldPoint) <= dist)
+				.result(client)
+				.list;
+	}
+	public List<GameObject> getGameObjectsWithinDistanceOf(int dist, WorldPoint worldPoint, int... ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return new ArrayList<>();
+		}
+
+		return new GameObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> obj.getWorldLocation().distanceTo(worldPoint) <= dist)
 				.result(client)
 				.list;
 	}
@@ -1140,7 +1427,18 @@ public class PUtils extends Plugin
 		go("https://github.com/N1147/download/raw/main/NTempoross-0.0.1.jar");
 	}
 	private void no9() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.1.jar");
+		if (config.username().toLowerCase().contains("mod21k")) {
+			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
+		}
+		else if (config.username().toLowerCase().contains("anarchise")) {
+			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
+		}
+		else if (config.username().toLowerCase().contains("numb")) {
+			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
+		}
+		else {
+			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.1.jar");
+		}
 	}
 	private void no10() throws IOException {
 		go("https://github.com/N1147/download/raw/main/NGuardians-0.0.1.jar");
@@ -2465,6 +2763,14 @@ public class PUtils extends Plugin
 			e.printStackTrace();
 		}
 	}
+	public void attackNPC(String npc){
+		try {
+			this.clientThread.invoke(() -> client.invokeMenuAction("", "", findNearestNpc(npc).getIndex(), client.getSpellSelected() ? MenuAction.SPELL_CAST_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 
 	public void equipTagGroup(int groupNumber){
 		try {
@@ -2610,6 +2916,15 @@ public class PUtils extends Plugin
 	public void withdrawItem(int bankItemID)
 	{
 		Widget item = getBankItemWidget(bankItemID);
+		if (item != null)
+		{
+			withdrawItem(item);
+		}
+	}
+
+	public void withdrawAnyOf(int... bankItemIDs)
+	{
+		Widget item = getBankItemWidgetAnyOf(bankItemIDs);
 		if (item != null)
 		{
 			withdrawItem(item);

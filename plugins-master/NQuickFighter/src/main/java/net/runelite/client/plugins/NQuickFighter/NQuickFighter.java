@@ -262,20 +262,6 @@ public class NQuickFighter extends Plugin
 		utils.attackNPCDirect(target);
 	}
 
-	private TileItem getNearestTileItem(List<TileItem> tileItems) {
-		int currentDistance;
-		TileItem closestTileItem = tileItems.get(0);
-		int closestDistance = closestTileItem.getTile().getWorldLocation().distanceTo(player.getWorldLocation());
-		for (TileItem tileItem : tileItems) {
-			currentDistance = tileItem.getTile().getWorldLocation().distanceTo(player.getWorldLocation());
-			if (currentDistance < closestDistance) {
-				closestTileItem = tileItem;
-				closestDistance = currentDistance;
-			}
-		}
-		return closestTileItem;
-	}
-
 	private void buryBones() {
 		List<WidgetItem> bones = utils.getInventoryItems("bones");
 		for (WidgetItem bone : bones) {
@@ -286,11 +272,12 @@ public class NQuickFighter extends Plugin
 	}
 
 	private void lootItem(List<TileItem> itemList) {
-		TileItem lootItem = getNearestTileItem(itemList);
+		TileItem lootItem = utils.getNearestTileItem(itemList);
 		if (lootItem != null) {
 			clientThread.invoke(() -> client.invokeMenuAction("", "",lootItem.getId(), MenuAction.GROUND_ITEM_THIRD_OPTION.getId(), lootItem.getTile().getSceneLocation().getX(), lootItem.getTile().getSceneLocation().getY()));
 		}
 	}
+
 	private NQuickFighterState getAirsState() {
 
 		if (utils.inventoryContains("bones") && config.buryBones()) {

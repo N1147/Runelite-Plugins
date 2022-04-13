@@ -28,9 +28,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.runelite.client.plugins.NTempoross.NTemporossState.*;
-
-
 @Extension
 @PluginDependency(PUtils.class)
 @PluginDescriptor(
@@ -223,7 +220,7 @@ public class NTempoross extends Plugin
 		player = client.getLocalPlayer();
 		if (client != null && player != null) {
 			if (timeout > 0) {
-				return TIMEOUT;
+				return NTemporossState.TIMEOUT;
 			}
 			/*if (!config.useBuckets() && utils.findNearestObject(NullObjectID.NULL_41006) != null && player.getWorldArea().intersectsWith(utils.findNearestObject(NullObjectID.NULL_41006).getWorldLocation().toWorldArea())) {
 				previousState = RUN_FROM_FIRE;
@@ -234,29 +231,29 @@ public class NTempoross extends Plugin
 				return RUN_FROM_FIRE;
 			}*/
 			if (player.getWorldArea().intersectsWith(new WorldArea(new WorldPoint(3136, 2818, 0), new WorldPoint(3168, 2853, 0)))) {
-				previousState = ENTER_LOBBY;
+				previousState = NTemporossState.ENTER_LOBBY;
 				firstInventory = true;
 				GotLocations = false;
 				StartedDepositing = false;
 				StartedCooking = false;
 				startedFishing = false;
-				return ENTER_LOBBY;
+				return NTemporossState.ENTER_LOBBY;
 			}
 			if (waveIsIncoming && !hasTethered){
-				previousState = TETHER;
-				return TETHER;
+				previousState = NTemporossState.TETHER;
+				return NTemporossState.TETHER;
 			}
 			if (client.getWidget(437, 45) == null) {
-				previousState = TIMEOUT;
-				return TIMEOUT;
+				previousState = NTemporossState.TIMEOUT;
+				return NTemporossState.TIMEOUT;
 			}
 			if (client.getWidget(437, 45).getText().equals("Essence: 1%")) {
-				previousState = TIMEOUT;
-				return TIMEOUT;
+				previousState = NTemporossState.TIMEOUT;
+				return NTemporossState.TIMEOUT;
 			}
 			if (client.getWidget(437, 45).getText().equals("Essence: 0%")) {
-				previousState = TIMEOUT;
-				return TIMEOUT;
+				previousState = NTemporossState.TIMEOUT;
+				return NTemporossState.TIMEOUT;
 			}
 			if (client.getWidget(437, 35) != null)  {
 				roundStarted = true;
@@ -299,21 +296,21 @@ public class NTempoross extends Plugin
 				if (utils.findNearestNpc(10571) != null) {
 					StartedCooking = false;
 					StartedDepositing = false;
-					return SPIRIT_POOL;
+					return NTemporossState.SPIRIT_POOL;
 				}
 				if (client.getWidget(437, 35).getText().equals("Energy: 1%")) {
 					StartedCooking = false;
 					StartedDepositing = false;
-					return SPIRIT_POOL;
+					return NTemporossState.SPIRIT_POOL;
 				}
 				else if (client.getWidget(437, 35).getText().equals("Energy: 0%")) {
 					StartedCooking = false;
 					StartedDepositing = false;
-					return SPIRIT_POOL;
+					return NTemporossState.SPIRIT_POOL;
 				}
 				if (config.useBuckets() && utils.inventoryContains(1929) && utils.findNearestNpcWithin(player.getWorldLocation(), 6, Collections.singleton(8643)) != null)  {
-					previousState = DOUSE_FIRE;
-					return DOUSE_FIRE;
+					previousState = NTemporossState.DOUSE_FIRE;
+					return NTemporossState.DOUSE_FIRE;
 				}
 				if (StormBlowing) {
 					utils.walk(new WorldPoint(player.getWorldLocation().getX() - 5, player.getWorldLocation().getY(), player.getWorldLocation().getPlane()));
@@ -415,23 +412,23 @@ public class NTempoross extends Plugin
 				if (!StartedDepositing && utils.findNearestNpc(10571) == null) {
 					if (config.OnlyDepositCooked() && utils.inventoryFull() && utils.inventoryContains(25565) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE) {
 						StartedDepositing = true;
-						previousState = DEPOSIT_FISH;
-						return DEPOSIT_FISH;
+						previousState = NTemporossState.DEPOSIT_FISH;
+						return NTemporossState.DEPOSIT_FISH;
 					}
 					if (!config.OnlyDepositCooked() && utils.inventoryFull() && utils.inventoryContains(25564) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE) {
 						StartedDepositing = true;
-						previousState = DEPOSIT_FISH;
-						return DEPOSIT_FISH;
+						previousState = NTemporossState.DEPOSIT_FISH;
+						return NTemporossState.DEPOSIT_FISH;
 					}
 					if (config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25565, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE) {
 						StartedDepositing = true;
-						previousState = DEPOSIT_FISH;
-						return DEPOSIT_FISH;
+						previousState = NTemporossState.DEPOSIT_FISH;
+						return NTemporossState.DEPOSIT_FISH;
 					}
 					if (!config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25564, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE) {
 						StartedDepositing = true;
-						previousState = DEPOSIT_FISH;
-						return DEPOSIT_FISH;
+						previousState = NTemporossState.DEPOSIT_FISH;
+						return NTemporossState.DEPOSIT_FISH;
 					}
 				}
 				if (StartedDepositing && !utils.inventoryContains(25564) && !utils.inventoryContains(25565)) {
@@ -439,75 +436,75 @@ public class NTempoross extends Plugin
 				}
 				if (StartedDepositing && utils.findNearestNpcWithin(client.getLocalPlayer().getWorldLocation(), 7,10576, 10577, 10578, 10579) != null){
 					if (utils.inventoryContains(25564) && client.getLocalPlayer().getAnimation() != 896){
-						return DEPOSIT_FISH;
+						return NTemporossState.DEPOSIT_FISH;
 					}
 					if (utils.inventoryContains(25565) && client.getLocalPlayer().getAnimation() != 896){
-						return DEPOSIT_FISH;
+						return NTemporossState.DEPOSIT_FISH;
 					}
 				}
 				if (StartedDepositing && utils.findNearestNpcWithin(client.getLocalPlayer().getWorldLocation(), 7,10576, 10577, 10578, 10579) == null && utils.findNearestNpc(10571) == null) {
 					utils.walk(Hammers.getWorldLocation().toWorldArea().toWorldPoint());
-					return TIMEOUT;
+					return NTemporossState.TIMEOUT;
 				}
 				if (config.useBuckets() && !utils.inventoryContains(1925) && !utils.inventoryContains(1929) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE) {
-					previousState = GET_BUCKETS;
-					return GET_BUCKETS;
+					previousState = NTemporossState.GET_BUCKETS;
+					return NTemporossState.GET_BUCKETS;
 				}
 				if (!utils.inventoryContains(2347) && client.getLocalPlayer().getAnimation() != 896){
-					previousState = GET_HAMMER;
-					return GET_HAMMER;
+					previousState = NTemporossState.GET_HAMMER;
+					return NTemporossState.GET_HAMMER;
 				}
 				if (utils.findNearestGameObjectWithin(player.getWorldLocation(), 8, 40997, 40996, 41010, 41011) != null ) {
-					previousState = REPAIR_MAST;
-					return REPAIR_MAST;
+					previousState = NTemporossState.REPAIR_MAST;
+					return NTemporossState.REPAIR_MAST;
 				}
 				if (!config.getRopes() && !utils.inventoryContains(954) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE && client.getLocalPlayer().getAnimation() != 896) {
-					previousState = GET_ROPES;
-					return GET_ROPES;
+					previousState = NTemporossState.GET_ROPES;
+					return NTemporossState.GET_ROPES;
 				}
 				if (!utils.inventoryContains(311) && !utils.isItemEquipped(Collections.singleton(21028))&& !utils.isItemEquipped(Collections.singleton(23762))&& !utils.isItemEquipped(Collections.singleton(23864)) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE && client.getLocalPlayer().getAnimation() != 896) {
-					previousState = GET_HARPOON;
-					return GET_HARPOON;
+					previousState = NTemporossState.GET_HARPOON;
+					return NTemporossState.GET_HARPOON;
 				}
 				if (config.useBuckets() && utils.inventoryContains(1925) && !utils.inventoryContains(1929) && client.getLocalPlayer().getAnimation() != 896) {
-					previousState = FILL_BUCKETS;
-					return FILL_BUCKETS;
+					previousState = NTemporossState.FILL_BUCKETS;
+					return NTemporossState.FILL_BUCKETS;
 				}
 				if (!StartedCooking && utils.findNearestNpc(10571) == null) {
 					if (config.OnlyDepositCooked() && utils.inventoryFull() && utils.inventoryContains(25564) && client.getLocalPlayer().getAnimation() != 896) {
 						StartedCooking = true;
-						previousState = COOKING;
-						return COOKING;
+						previousState = NTemporossState.COOKING;
+						return NTemporossState.COOKING;
 					}
 					if (config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25564, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.FISHING_HARPOON && client.getLocalPlayer().getAnimation() != 896) {
 						StartedCooking = true;
-						previousState = COOKING;
-						return COOKING;
+						previousState = NTemporossState.COOKING;
+						return NTemporossState.COOKING;
 					}
 					if (config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25564, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.FISHING_BARBTAIL_HARPOON && client.getLocalPlayer().getAnimation() != 896) {
 						StartedCooking = true;
-						previousState = COOKING;
-						return COOKING;
+						previousState = NTemporossState.COOKING;
+						return NTemporossState.COOKING;
 					}
 					if (config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25564, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.FISHING_DRAGON_HARPOON && client.getLocalPlayer().getAnimation() != 896) {
 						StartedCooking = true;
-						previousState = COOKING;
-						return COOKING;
+						previousState = NTemporossState.COOKING;
+						return NTemporossState.COOKING;
 					}
 					if (config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25564, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.FISHING_CRYSTAL_HARPOON && client.getLocalPlayer().getAnimation() != 896) {
 						StartedCooking = true;
-						previousState = COOKING;
-						return COOKING;
+						previousState = NTemporossState.COOKING;
+						return NTemporossState.COOKING;
 					}
 					if (config.OnlyDepositCooked() && utils.inventoryItemContainsAmount(25564, amount, false, false) && client.getLocalPlayer().getAnimation() == AnimationID.IDLE && client.getLocalPlayer().getAnimation() != 896) {
 						StartedCooking = true;
-						previousState = COOKING;
-						return COOKING;
+						previousState = NTemporossState.COOKING;
+						return NTemporossState.COOKING;
 					}
 				}
 				if (StartedCooking && utils.findNearestNpc(10571) == null){
 					if (utils.inventoryContains(25564) && client.getLocalPlayer().getAnimation() != 896){
-						return COOKING;
+						return NTemporossState.COOKING;
 					}
 					if (!utils.inventoryContains(25564)){
 						StartedCooking = false;
@@ -515,22 +512,22 @@ public class NTempoross extends Plugin
 				}
 				if (utils.findNearestNpc(10569) != null && client.getLocalPlayer().getInteracting() != utils.findNearestNpc(10569) && client.getLocalPlayer().getAnimation() != 896 && !utils.inventoryItemContainsAmount(25564, amount, false, false)) {
 					interactNPC(10569);
-					return TIMEOUT;
+					return NTemporossState.TIMEOUT;
 				}
 				if (utils.findNearestNpc(10568) != null && utils.findNearestNpc(10569) == null && client.getLocalPlayer().getInteracting() == null && client.getLocalPlayer().getAnimation() != 896 && !utils.inventoryItemContainsAmount(25564, amount, false, false)) {
 					interactNPC(10568);
-					return TIMEOUT;
+					return NTemporossState.TIMEOUT;
 				}
 				if (utils.findNearestNpc(10568) == null && utils.findNearestNpc(10569) == null && utils.findNearestNpc(10565) == null && client.getLocalPlayer().getAnimation() != 896) {
 					utils.walk(utils.findNearestObject(41236).getWorldLocation().toWorldArea().toWorldPoint());
 				}
 				if (!utils.inventoryItemContainsAmount(25564, amount, false, false)) {
-					return FISHING;
+					return NTemporossState.FISHING;
 				}
-				return TIMEOUT;
+				return NTemporossState.TIMEOUT;
 			}
 		}
-		return NULL_STATE;
+		return NTemporossState.NULL_STATE;
 	}
 	public boolean started = false;
 	@Subscribe

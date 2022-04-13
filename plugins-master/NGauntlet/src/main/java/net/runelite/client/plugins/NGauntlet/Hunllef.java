@@ -11,7 +11,7 @@ import net.runelite.client.game.SkillIconManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Hunllef
+class Hunllef
 {
 	private static final int ATTACK_TICK_SPEED = 6;
 

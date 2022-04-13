@@ -3,10 +3,10 @@
  * All rights reserved.
  * Licensed under GPL3, see LICENSE for the full scope.
  */
-version = "0.0.1"
+version = "0.0.2"
 
 project.extra["PluginName"] = "NGauntlet"
-project.extra["PluginDescription"] = "Gauntlet Prayer Swapper."
+project.extra["PluginDescription"] = "Automated Gauntlet."
 project.extra["PluginProvider"] = "ZTD#1147"
 project.extra["PluginSupportUrl"] = "https://github.com/N1147/download"
 dependencies {

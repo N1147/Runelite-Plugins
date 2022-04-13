@@ -1,15 +1,11 @@
 net/runelite/client/plugins/NGatherer/NGathererConfig.java
+ net.runelite.client.plugins.NGatherer.NGathererBankType
  net.runelite.client.plugins.NGatherer.NGathererConfig
+ net.runelite.client.plugins.NGatherer.NGathererType
+ net.runelite.client.plugins.NGatherer.NGathererTypee
+ net.runelite.client.plugins.NGatherer.NGathererTypeee
 net/runelite/client/plugins/NGatherer/NGathererState.java
  net.runelite.client.plugins.NGatherer.NGathererState
-net/runelite/client/plugins/NGatherer/NGathererTypeee.java
- net.runelite.client.plugins.NGatherer.NGathererTypeee
 net/runelite/client/plugins/NGatherer/NGatherer.java
  net.runelite.client.plugins.NGatherer.NGatherer
  net.runelite.client.plugins.NGatherer.NGatherer$1
-net/runelite/client/plugins/NGatherer/NGathererTypee.java
- net.runelite.client.plugins.NGatherer.NGathererTypee
-net/runelite/client/plugins/NGatherer/NGathererType.java
- net.runelite.client.plugins.NGatherer.NGathererType
-net/runelite/client/plugins/NGatherer/NGathererBankType.java
- net.runelite.client.plugins.NGatherer.NGathererBankType

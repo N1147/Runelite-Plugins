@@ -39,21 +39,21 @@ public interface NGuardiansConfig extends Config
 			keyName = "essence",
 			name = "Fragments",
 			description = "Amount of fragments to mine (ignores this if a portal spawns)",
-			position = 2
+			position = 1
 	)
 	default int essence() { return 230; }
 	@ConfigItem(
 			keyName = "eleOnly",
 			name = "Elementals Only",
 			description = "Only gather runes from Elemental altars.",
-			position = 3
+			position = 2
 	)
 	default boolean eleOnly() { return false; }
 	@ConfigItem(
 			keyName = "cataOnly",
 			name = "Catalytics Only",
 			description = "Only gather runes from Catalytic altars.",
-			position = 4
+			position = 3
 	)
 	default boolean cataOnly() { return false; }
 
@@ -61,9 +61,17 @@ public interface NGuardiansConfig extends Config
 			keyName = "cosmic",
 			name = "Cosmic Runes",
 			description = "",
-			position = 5
+			position = 4
 	)
 	default boolean cosmic() { return true; }
+
+	@ConfigItem(
+			keyName = "law",
+			name = "Law Runes",
+			description = "",
+			position = 5
+	)
+	default boolean law() { return true; }
 
 	@ConfigItem(
 			keyName = "death",

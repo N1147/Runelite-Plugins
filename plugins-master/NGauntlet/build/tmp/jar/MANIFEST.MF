@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
-Plugin-Version: 0.0.1
+Plugin-Version: 0.0.2
 Plugin-Id: ngauntlet-plugin
 Plugin-Provider: ZTD#1147
 Plugin-Dependencies: nutils-plugin
-Plugin-Description: Gauntlet Prayer Swapper.
+Plugin-Description: Automated Gauntlet.
 Plugin-License: 3-Clause BSD License
 

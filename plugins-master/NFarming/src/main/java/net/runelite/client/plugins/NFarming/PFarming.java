@@ -210,64 +210,63 @@ public class PFarming extends Plugin
 		/**
 		 taverley
 		 */
-		if (config.RunType() == RunType.TREES) {
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(FALADOR) && !taverly) {
-				utils.walk(TaverlyWalk);
-				return PFarmingState.IDLE;
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(FALADOR) && !taverly) {
+			utils.walk(TaverlyWalk);
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyWalk1) && !taverly) {
+			utils.walk(TaverlyGate);
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyGateArea) && !firstgate) {
+			if (utils.findNearestWallObject(1569, 1728, 1569).getWorldLocation().toWorldArea().intersectsWith(TaverlyGateArea)) {
+				WallObject gate = utils.findNearestWallObject("gate");
+				utils.useWallObjectDirect(gate, 0, MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
 			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyWalk1) && !taverly) {
-				utils.walk(TaverlyGate);
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyGateArea) && !firstgate) {
-				if (utils.findNearestWallObject(1569, 1728, 1569).getWorldLocation().toWorldArea().intersectsWith(TaverlyGateArea)) {
-					WallObject gate = utils.findNearestWallObject("gate");
-					utils.useWallObjectDirect(gate, 0, MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				}
-				firstgate = true;
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyGateArea) && firstgate) {
-				utils.walk(new WorldPoint(2936, 3441, 0));
-				firstgate = false;
-				return PFarmingState.IDLE;
-			}
+			firstgate = true;
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyGateArea) && firstgate) {
+			utils.walk(new WorldPoint(2936, 3441, 0));
+			firstgate = false;
+			return PFarmingState.IDLE;
+		}
 
 
-			if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch)) {
-				if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.FALADOR_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.FALADOR_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
-					taverly = true;
-					stumpcleared = false;
-					harvested = false;
-					checkedHealth = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				stumpcleared = true;
+		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch)) {
+			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.FALADOR_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.FALADOR_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
+				taverly = true;
+				stumpcleared = false;
+				harvested = false;
+				checkedHealth = false;
 				return PFarmingState.IDLE;
 			}
-			if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
-				utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
-				NPC alain = utils.findNearestNpc("Alain");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
-				NPC alain = utils.findNearestNpc("Alain");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
+			utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
+			NPC alain = utils.findNearestNpc("Alain");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
+			NPC alain = utils.findNearestNpc("Alain");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
 
 
 
@@ -287,200 +286,200 @@ public class PFarming extends Plugin
 				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
 				return PFarmingState.IDLE;
 			}*/
-			/**
-			 taverley
-			 */
-			/**
-			 falador
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(FALADOR) && taverly) {
-				utils.walk(FallyWalk1);
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch)) {
-				if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.LUMBRIDGE_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.LUMBRIDGE_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
-					falador = true;
-					stumpcleared = false;
-					harvested = false;
-					checkedHealth = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
-				utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
-				NPC alain = utils.findNearestNpc("Heskel");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
-				NPC alain = utils.findNearestNpc("Heskel");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			/**
-			 falador
-			 */
-			/**
-			 lumbridge
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE) && !lumbridge) {
-				utils.walk(LumbWalk);
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH)) {
-				if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.VARROCK_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.VARROCK_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
-					lumbridge = true;
-					stumpcleared = false;
-					harvested = false;
-					checkedHealth = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
-				utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
-				NPC alain = utils.findNearestNpc("Fayeth");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
-				NPC alain = utils.findNearestNpc("Fayeth");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			/**
-			 lumbridge
-			 */
-			/**
-			 varrock
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(VARROCK) && !varrock) {
-				utils.walk(VarrockWalk);
-				return PFarmingState.IDLE;
-			}
-
-			if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && !varrock) {
-				if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-					varrock = true;
-					utils.walk(GEWalk);
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
-				utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
-				NPC alain = utils.findNearestNpc("Treznor");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
-				NPC alain = utils.findNearestNpc("Treznor");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			/**
-			 varrock
-			 */
-			/**
-			 GnomeT
-			 */
-			if (client.getWidget(187, 3) != null && !gnomet) {
-				if (!client.getWidget(187, 3).isHidden()) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 1, 12255235));
-					stumpcleared = false;
-					harvested = false;
-					checkedHealth = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(GEArea) && !gnomet) {
-				GameObject GTree = utils.findNearestGameObject(1295);
-				utils.useGameObjectDirect(GTree, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+		/**
+		 taverley
+		 */
+		/**
+		 falador
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(FALADOR) && taverly) {
+			utils.walk(FallyWalk1);
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch)) {
+			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.LUMBRIDGE_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.LUMBRIDGE_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
+				falador = true;
 				stumpcleared = false;
 				harvested = false;
 				checkedHealth = false;
 				return PFarmingState.IDLE;
 			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && gnomet && !gnomef) {
-				utils.walk(new WorldPoint(2474, 3444, 0));
-				utils.sendGameMessage("Tree run completed! Starting fruit tree run");
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
+			utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
+			NPC alain = utils.findNearestNpc("Heskel");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
+			NPC alain = utils.findNearestNpc("Heskel");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		/**
+		 falador
+		 */
+		/**
+		 lumbridge
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE) && !lumbridge) {
+			utils.walk(LumbWalk);
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH)) {
+			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.VARROCK_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.VARROCK_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
+				lumbridge = true;
 				stumpcleared = false;
 				harvested = false;
+				checkedHealth = false;
 				return PFarmingState.IDLE;
 			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(STRONGHOLD) && !gnomet && !gnomef) {
-				utils.walk(GnomeWalk);
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
+			utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
+			NPC alain = utils.findNearestNpc("Fayeth");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
+			NPC alain = utils.findNearestNpc("Fayeth");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		/**
+		 lumbridge
+		 */
+		/**
+		 varrock
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(VARROCK) && !varrock) {
+			utils.walk(VarrockWalk);
+			return PFarmingState.IDLE;
+		}
+
+		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && !varrock) {
+			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
+				varrock = true;
+				utils.walk(GEWalk);
 				return PFarmingState.IDLE;
 			}
-			if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT)) {
-				if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-					gnomet = true;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				stumpcleared = true;
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && !checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
+			utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
+			NPC alain = utils.findNearestNpc("Treznor");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
+			NPC alain = utils.findNearestNpc("Treznor");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		/**
+		 varrock
+		 */
+		/**
+		 GnomeT
+		 */
+		if (client.getWidget(187, 3) != null && !gnomet) {
+			if (!client.getWidget(187, 3).isHidden()) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 1, 12255235));
+				stumpcleared = false;
+				harvested = false;
+				checkedHealth = false;
 				return PFarmingState.IDLE;
 			}
-			if (!harvested && !checkedHealth && !stumpcleared && !gnomet && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
-				utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(GEArea) && !gnomet) {
+			GameObject GTree = utils.findNearestGameObject(1295);
+			utils.useGameObjectDirect(GTree, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			stumpcleared = false;
+			harvested = false;
+			checkedHealth = false;
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && gnomet && !gnomef) {
+			utils.walk(new WorldPoint(2474, 3444, 0));
+			utils.sendGameMessage("Tree run completed! Starting fruit tree run");
+			stumpcleared = false;
+			harvested = false;
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(STRONGHOLD) && !gnomet && !gnomef) {
+			utils.walk(GnomeWalk);
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT)) {
+			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
+				gnomet = true;
 				return PFarmingState.IDLE;
 			}
-			if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
-				NPC alain = utils.findNearestNpc("Prissy Scilla");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
-				NPC alain = utils.findNearestNpc("Prissy Scilla");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (!harvested && checkedHealth && stumpcleared && !gnomet && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && !checkedHealth && !stumpcleared && !gnomet && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
+			utils.useGameObjectDirect(patch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && !stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
+			NPC alain = utils.findNearestNpc("Prissy Scilla");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
+			NPC alain = utils.findNearestNpc("Prissy Scilla");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (!harvested && checkedHealth && stumpcleared && !gnomet && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
 		//}
 		/**
 		 GnomeT
@@ -503,227 +502,225 @@ public class PFarming extends Plugin
 				harvested = false;
 				return PFarmingState.IDLE;
 			}*/
-			/**
-			 GnomeF
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch.getName().contains("stump") && !gnomef && gnomet) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch != null && !gnomef && gnomet) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 7962, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch != null && !gnomef && gnomet) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(231, 4) != null) {
-				if (client.getWidget(231, 4).getText().contains("Bolongo")) {
-					GameObject STree = utils.findNearestGameObject(1294);
-					utils.useGameObjectDirect(STree, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-					gnomef = true;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
+		/**
+		 GnomeF
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch.getName().contains("stump") && !gnomef && gnomet) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch != null && !gnomef && gnomet) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 7962, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch != null && !gnomef && gnomet) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 4) != null) {
+			if (client.getWidget(231, 4).getText().contains("Bolongo")) {
+				GameObject STree = utils.findNearestGameObject(1294);
+				utils.useGameObjectDirect(STree, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
 				gnomef = true;
 				return PFarmingState.IDLE;
 			}
-			if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && !gnomef && gnomet) {
-				NPC alain = utils.findNearestNpc("Bolongo");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(187, 3) != null && gnomef) {
-				if (!client.getWidget(187, 3).isHidden()) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 0, 12255235));
-					stumpcleared = false;
-					harvested = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && gnomef && gnomet) {
-				GameObject STree = utils.findNearestGameObject(1294);
-				utils.useGameObjectDirect(STree, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			/**
-			 GnomeF
-			 */
-			/**
-			 Khazard
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(ElkoyInside) && !khazard) {
-				utils.useWallObjectDirect(fence, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldLocation().equals(Elkoy) && !khazard) {
-				utils.interactNPC(MenuAction.NPC_THIRD_OPTION.getId(), sleepDelay(), ElkoyNPC.getId());
-				stumpcleared = false;
-				harvested = false;
-				checkedHealth = false;
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(MAZE) && !khazard) {
-				utils.walk(new WorldPoint(2515, 3161, 0));
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(MAZE_OUT) && !khazard) {
-				utils.walk(new WorldPoint(2491, 3181, 0));
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch.getName().contains("stump") && !khazard) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch != null && !khazard) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 7963, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch != null && !khazard) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(231, 4) != null) {
-				if (client.getWidget(231, 4).getText().contains("Gileth")) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 8010, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(8010).getIndex(), WidgetInfo.INVENTORY.getId()));
-					khazard = true;
-					stumpcleared = false;
-					harvested = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				khazard = true;
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && !khazard) {
-				NPC alain = utils.findNearestNpc("Gileth");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-
-			/**
-			 Khazard
-			 */
-
-			/**
-			 * Catherby
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(CAMELOT) && !catherby) {
-				utils.walk(CATHERBYWALK1);
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYWALK2) && !catherby) {
-				utils.walk(CATHERBYWALK3);
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch.getName().contains("stump") && !catherby) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch != null && !catherby) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 7965, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch != null && !catherby) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(231, 4) != null) {
-				if (client.getWidget(231, 4).getText().contains("Ellena")) {
-					catherby = true;
-					utils.walk(new WorldPoint(2803, 3415, 0));
-					stumpcleared = false;
-					harvested = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && !catherby) {
-				NPC alain = utils.findNearestNpc("Ellena");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-
-
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBY_DOCKS) && catherby) {
-				NPC charter = utils.findNearestNpc("Trader Crewmember");
-				utils.interactNPC(MenuAction.NPC_FIFTH_OPTION.getId(), sleepDelay(), charter.getId());
-				return PFarmingState.IDLE;
-			}
-			/**
-			 * Catherby
-			 */
-			/**
-			 * Brimhaven
-			 */
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_BOAT) && !brimhaven) {
-				GameObject plank = utils.findNearestGameObject("gangplank");
-				utils.useGameObjectDirect(plank, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				stumpcleared = false;
-				harvested = false;
-				checkedHealth = false;
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_DOCKS) && !brimhaven) {
-				utils.walk(BRIMHAVEN_PATCH);
-				return PFarmingState.IDLE;
-			}
-			if (client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch.getName().contains("stump") && !brimhaven) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				stumpcleared = true;
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch != null && !brimhaven) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 7964, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
-				return PFarmingState.IDLE;
-			}
-			if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch != null && !brimhaven) {
-				utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
-				return PFarmingState.IDLE;
-			}
-			if (client.getWidget(231, 4) != null) {
-				if (client.getWidget(231, 4).getText().contains("Garth")) {
-					brimhaven = true;
-					reset();
-					stumpcleared = false;
-					harvested = false;
-					return PFarmingState.IDLE;
-				}
-			}
-			if (client.getWidget(219, 1) != null) {
-				utils.typeString("1");
-				return PFarmingState.IDLE;
-			}
-			if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && !brimhaven) {
-				NPC alain = utils.findNearestNpc("Garth");
-				clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
-				return PFarmingState.IDLE;
-			}
-			/**
-			 * Brimhaven
-			 */
 		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			gnomef = true;
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && !gnomef && gnomet) {
+			NPC alain = utils.findNearestNpc("Bolongo");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(187, 3) != null && gnomef) {
+			if (!client.getWidget(187, 3).isHidden()) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 0, 12255235));
+				stumpcleared = false;
+				harvested = false;
+				return PFarmingState.IDLE;
+			}
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && gnomef && gnomet) {
+			GameObject STree = utils.findNearestGameObject(1294);
+			utils.useGameObjectDirect(STree, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		/**
+		 GnomeF
+		 */
+		/**
+		 Khazard
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(ElkoyInside) && !khazard) {
+			utils.useWallObjectDirect(fence, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldLocation().equals(Elkoy) && !khazard) {
+			utils.interactNPC(MenuAction.NPC_THIRD_OPTION.getId(), sleepDelay(), ElkoyNPC.getId());
+			stumpcleared = false;
+			harvested = false;
+			checkedHealth = false;
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(MAZE) && !khazard) {
+			utils.walk(new WorldPoint(2515, 3161, 0));
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(MAZE_OUT) && !khazard) {
+			utils.walk(new WorldPoint(2491, 3181, 0));
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch.getName().contains("stump") && !khazard) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch != null && !khazard) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 7963, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch != null && !khazard) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 4) != null) {
+			if (client.getWidget(231, 4).getText().contains("Gileth")) {
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 8010, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(8010).getIndex(), WidgetInfo.INVENTORY.getId()));
+				khazard = true;
+				stumpcleared = false;
+				harvested = false;
+				return PFarmingState.IDLE;
+			}
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			khazard = true;
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && !khazard) {
+			NPC alain = utils.findNearestNpc("Gileth");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+
+		/**
+		 Khazard
+		 */
+
+		/**
+		 * Catherby
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(CAMELOT) && !catherby) {
+			utils.walk(CATHERBYWALK1);
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYWALK2) && !catherby) {
+			utils.walk(CATHERBYWALK3);
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch.getName().contains("stump") && !catherby) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch != null && !catherby) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 7965, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch != null && !catherby) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 4) != null) {
+			if (client.getWidget(231, 4).getText().contains("Ellena")) {
+				catherby = true;
+				utils.walk(new WorldPoint(2803, 3415, 0));
+				stumpcleared = false;
+				harvested = false;
+				return PFarmingState.IDLE;
+			}
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && !catherby) {
+			NPC alain = utils.findNearestNpc("Ellena");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+
+
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBY_DOCKS) && catherby) {
+			NPC charter = utils.findNearestNpc("Trader Crewmember");
+			utils.interactNPC(MenuAction.NPC_FIFTH_OPTION.getId(), sleepDelay(), charter.getId());
+			return PFarmingState.IDLE;
+		}
+		/**
+		 * Catherby
+		 */
+		/**
+		 * Brimhaven
+		 */
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_BOAT) && !brimhaven) {
+			GameObject plank = utils.findNearestGameObject("Gangplank");
+			utils.useGameObjectDirect(plank, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			stumpcleared = false;
+			harvested = false;
+			checkedHealth = false;
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_DOCKS) && !brimhaven) {
+			utils.walk(BRIMHAVEN_PATCH);
+			return PFarmingState.IDLE;
+		}
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch.getName().contains("stump") && !brimhaven) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			stumpcleared = true;
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch != null && !brimhaven) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 7964, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
+			return PFarmingState.IDLE;
+		}
+		if (!stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch != null && !brimhaven) {
+			utils.useGameObjectDirect(fruitpatch, sleepDelay(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId());
+			return PFarmingState.IDLE;
+		}
+		if (client.getWidget(231, 4) != null) {
+			if (client.getWidget(231, 4).getText().contains("Garth")) {
+				brimhaven = true;
+				reset();
+				stumpcleared = false;
+				harvested = false;
+				return PFarmingState.IDLE;
+			}
+		}
+		if (client.getWidget(219, 1) != null) {
+			utils.typeString("1");
+			return PFarmingState.IDLE;
+		}
+		if (stumpcleared && harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && !brimhaven) {
+			NPC alain = utils.findNearestNpc("Garth");
+			clientThread.invoke(() -> client.invokeMenuAction("", "", alain.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0));
+			return PFarmingState.IDLE;
+		}
+		/**
+		 * Brimhaven
+		 */
 		return PFarmingState.TIMEOUT;
 	}
-
-	private PFarmingState getBankState()
-	{
-		if (!banked){
+	private final Set<Integer> AXES = Set.of(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862);
+	private PFarmingState getBankState() {
+		if (!banked) {
 			utils.depositAll();
 			banked = true;
 			return PFarmingState.DEPOSIT_ITEMS;
@@ -740,48 +737,52 @@ public class PFarming extends Plugin
 			utils.withdrawItem(ItemID.RAKE);
 			return PFarmingState.IDLE;
 		}
+		if (!utils.isItemEquipped(AXES) && !utils.inventoryContains(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862)) {
+			utils.withdrawAnyOf(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862);
+			return PFarmingState.IDLE;
+		}
 		if (!utils.inventoryContains(ItemID.VARROCK_TELEPORT)) {
 			utils.withdrawAllItem(ItemID.VARROCK_TELEPORT);
 			return PFarmingState.IDLE;
 		}
-		if (config.RunType() == RunType.TREES) {
-			if (!utils.inventoryContains(ItemID.FALADOR_TELEPORT)) {
-				utils.withdrawAllItem(ItemID.FALADOR_TELEPORT);
-				return PFarmingState.IDLE;
-			}
-			if (!utils.inventoryContains(ItemID.LUMBRIDGE_TELEPORT)) {
-				utils.withdrawAllItem(ItemID.LUMBRIDGE_TELEPORT);
-				return PFarmingState.IDLE;
-			}
-			if (!utils.inventoryContains(ItemID.CAMELOT_TELEPORT)) {
-				utils.withdrawAllItem(ItemID.CAMELOT_TELEPORT);
-				return PFarmingState.IDLE;
-			}
-			if (!utils.inventoryContains(config.treeSappling())) {
-				utils.withdrawItemAmount(config.treeSappling(), 5);
-				return PFarmingState.IDLE;
-			}
-			if (!utils.inventoryContains(config.fruitSappling())) {
-				utils.withdrawItemAmount(config.fruitSappling(), 5);
-				return PFarmingState.IDLE;
-			}
-			if (!utils.inventoryContains(config.treePayment() + 1)) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), -1, 786456));
-				utils.withdrawAllItem(config.treePayment());
-				banked = true;
-				return PFarmingState.IDLE;
-			}
-			if (!utils.inventoryContains(config.fruitPayment() + 1)) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), -1, 786456));
-				utils.withdrawAllItem(config.fruitPayment());
-				banked = true;
-				return PFarmingState.IDLE;
-			}
-			if (banked) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 8009, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(8009).getIndex(), WidgetInfo.INVENTORY.getId()));
-				return PFarmingState.IDLE;
-			}
+
+		if (!utils.inventoryContains(ItemID.FALADOR_TELEPORT)) {
+			utils.withdrawAllItem(ItemID.FALADOR_TELEPORT);
+			return PFarmingState.IDLE;
 		}
+		if (!utils.inventoryContains(ItemID.LUMBRIDGE_TELEPORT)) {
+			utils.withdrawAllItem(ItemID.LUMBRIDGE_TELEPORT);
+			return PFarmingState.IDLE;
+		}
+		if (!utils.inventoryContains(ItemID.CAMELOT_TELEPORT)) {
+			utils.withdrawAllItem(ItemID.CAMELOT_TELEPORT);
+			return PFarmingState.IDLE;
+		}
+		if (!utils.inventoryContains(config.treeSappling())) {
+			utils.withdrawItemAmount(config.treeSappling(), 5);
+			return PFarmingState.IDLE;
+		}
+		if (!utils.inventoryContains(config.fruitSappling())) {
+			utils.withdrawItemAmount(config.fruitSappling(), 5);
+			return PFarmingState.IDLE;
+		}
+		if (!utils.inventoryContains(config.treePayment() + 1)) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), -1, 786456));
+			utils.withdrawAllItem(config.treePayment());
+			banked = true;
+			return PFarmingState.IDLE;
+		}
+		if (!utils.inventoryContains(config.fruitPayment() + 1)) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), -1, 786456));
+			utils.withdrawAllItem(config.fruitPayment());
+			banked = true;
+			return PFarmingState.IDLE;
+		}
+		if (banked) {
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 8009, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(8009).getIndex(), WidgetInfo.INVENTORY.getId()));
+			return PFarmingState.IDLE;
+		}
+
 		return PFarmingState.TIMEOUT;
 	}
 
