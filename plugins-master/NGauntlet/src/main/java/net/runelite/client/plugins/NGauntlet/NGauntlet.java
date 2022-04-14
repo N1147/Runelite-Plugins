@@ -62,13 +62,14 @@ import java.util.*;
 		tags = {"ztd","numb","gauntlet", "hunllef"},
 		enabledByDefault = false
 )
+
 public class NGauntlet extends Plugin
 {
 	private final Set<Integer> ORES = Set.of(ItemID.CORRUPTED_ORE, ItemID.CRYSTAL_ORE);
 	private final Set<Integer> LINUM = Set.of(ItemID.LINUM_TIRINUM_23876, ItemID.LINUM_TIRINUM);
 	private final Set<Integer> BARK = Set.of(ItemID.PHREN_BARK_23878, ItemID.PHREN_BARK);
 	private final Set<Integer> HERBS = Set.of(ItemID.GRYM_LEAF, ItemID.GRYM_LEAF_23875);
-
+	public List<WorldPoint> gauntPath = new LinkedList<WorldPoint>();
 	private final Set<Integer> HALBERDS = Set.of(ItemID.CRYSTAL_HALBERD_BASIC, ItemID.CRYSTAL_HALBERD_ATTUNED, ItemID.CRYSTAL_HALBERD_PERFECTED, ItemID.CORRUPTED_HALBERD_BASIC, ItemID.CORRUPTED_HALBERD_ATTUNED, ItemID.CORRUPTED_HALBERD_PERFECTED);
 	private final Set<Integer> BOWS = Set.of(ItemID.CRYSTAL_BOW_BASIC, ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CRYSTAL_BOW_PERFECTED, ItemID.CORRUPTED_BOW_BASIC, ItemID.CORRUPTED_BOW_ATTUNED, ItemID.CORRUPTED_BOW_PERFECTED);
 	private final Set<Integer> STAVES = Set.of(ItemID.CRYSTAL_STAFF_BASIC, ItemID.CRYSTAL_STAFF_ATTUNED, ItemID.CRYSTAL_STAFF_PERFECTED, ItemID.CORRUPTED_STAFF_BASIC, ItemID.CORRUPTED_STAFF_ATTUNED, ItemID.CORRUPTED_STAFF_PERFECTED);
@@ -254,7 +255,7 @@ public class NGauntlet extends Plugin
 		hunllef = null;
 		wrongAttackStyle = false;
 		switchWeapon = false;
-
+		hasPotions = false;
 		hasOres = false;
 		hasHerbs = false;
 		hasBark = false;
@@ -361,7 +362,7 @@ public class NGauntlet extends Plugin
 		}
 	}
 	private boolean hasWeaponSupplies = false;
-	private boolean firstPotion = true;
+	private boolean hasPotions = true;
 	@Subscribe
 	private void onClientTick(ClientTick event) throws IOException {
 		if (!started) {
@@ -379,6 +380,9 @@ public class NGauntlet extends Plugin
 		}
 		if (hunllefSpawnLocation == null && utils.findNearestNpc("Hunllef") != null) {
 			hunllefSpawnLocation = utils.findNearestNpc("Hunllef").getWorldLocation();
+		}
+		if (!hasPotions && utils.inventoryItemContainsAmount(POTIONS_FULL, 3, false, false)) {
+			hasPotions = true;
 		}
 		if (config.AttunedArmour()) {
 			if (hasBark && hasLinum && hasOres && utils.inventoryItemContainsAmount(ItemID.CRYSTAL_SHARDS, hasWeapons ? 250 : 500, true, false)) {
@@ -401,10 +405,10 @@ public class NGauntlet extends Plugin
 			}
 		}
 		if (!config.AttunedArmour()) {
-			if (hasBark && hasLinum && hasOres && utils.inventoryItemContainsAmount(ItemID.CRYSTAL_SHARDS, hasWeapons ? 250 : 500, true, false)) {
+			if (hasBark && hasLinum && hasOres && utils.inventoryItemContainsAmount(ItemID.CRYSTAL_SHARDS, hasWeapons ? 250 : 400, true, false)) {
 				hasArmourSupplies = true;																					// 500
 			}
-			if (hasBark && hasLinum && hasOres && utils.inventoryItemContainsAmount(ItemID.CORRUPTED_SHARDS, hasWeapons ? 250 : 500, true, false)) {
+			if (hasBark && hasLinum && hasOres && utils.inventoryItemContainsAmount(ItemID.CORRUPTED_SHARDS, hasWeapons ? 250 : 400, true, false)) {
 				hasArmourSupplies = true;																					//	500
 			}
 			if (utils.isItemEquipped(Collections.singleton(ItemID.CRYSTAL_BODY_BASIC)) && utils.isItemEquipped(Collections.singleton(ItemID.CRYSTAL_LEGS_BASIC)) && utils.isItemEquipped(Collections.singleton(ItemID.CRYSTAL_HELM_BASIC))) {
@@ -424,10 +428,10 @@ public class NGauntlet extends Plugin
 		/////////
 		//Weapons
 		if (config.PerfectWeapons()) {
-			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING) && utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 500, true, false)) {
+			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING) && utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
-			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING) && utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 500, true, false)) {
+			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING) && utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
 			if (utils.inventoryItemContainsAmount(WEAPON_FRAMES, 2, false, false)) {
@@ -450,10 +454,10 @@ public class NGauntlet extends Plugin
 			}
 		}
 		if (!config.PerfectWeapons()) {
-			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 500, true, false)) {
+			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
-			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 500, true, false)) {
+			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
 			if (utils.inventoryItemContainsAmount(WEAPON_FRAMES, 2, false, false)) {
@@ -497,7 +501,7 @@ public class NGauntlet extends Plugin
 			hasBark = true;
 			lootableItems.remove("Phren bark");
 		}
-		if (utils.inventoryItemContainsAmount(HERBS, 2, false, false)) {
+		if (utils.inventoryItemContainsAmount(HERBS, 3, false, false)) {
 			hasHerbs = true;
 			lootableItems.remove("Grym leaf");
 		}
@@ -601,7 +605,7 @@ public class NGauntlet extends Plugin
 					break;
 				case IDLE:
 					utils.handleRun(20, 10);
-					timeout = 1;
+					//timeout = 1;
 					break;
 				case IDLE_2:
 					timeout = 3;
@@ -628,6 +632,9 @@ public class NGauntlet extends Plugin
 	}
 
 	private NGauntletState getStateBoss() {
+		if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 1, 37339, 37339, 36097, 36095, 35992, 35994) != null) {
+			utils.walk(hunllefSpawnLocation);
+		}
 		if (client.getBoostedSkillLevel(Skill.HITPOINTS) <= config.healthMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.PADDLEFISH, ItemID.CORRUPTED_PADDLEFISH, ItemID.CRYSTAL_PADDLEFISH);
 			if (AllWeapons != null) {
@@ -646,24 +653,22 @@ public class NGauntlet extends Plugin
 				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
-		if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 1, 37339, 37339, 36097, 36095, 35992, 35994) != null) {
-			utils.walk(hunllefSpawnLocation);
-		}
+
 		if (utils.findNearestGroundObjectWithin(client.getLocalPlayer().getWorldLocation(), 0, DANGEROUS_TILES) != null) {
 			//utils.walk(utils.findNearestGroundObjectAtleastAwayAndNotUnderMe(utils.findNearestNpc("Hunllef").getWorldLocation(), 2, 1, SAFE_TILES).getWorldLocation());
-			GroundObject SAFEST_SPOT = utils.findNearestGroundObjectOutsideAreaNotUnderMeNearestTo(1, client.getLocalPlayer(), utils.findNearestNpc("Hunllef").getWorldArea(), SAFE_TILES);
-			utils.walk(SAFEST_SPOT.getWorldLocation()); //fksdkfj
-			return NGauntletState.UNHANDLED_STATE;
+			GroundObject SAFEST_SPOT = utils.findGauntSafeTile(utils.findNearestNpc("Hunllef").getWorldArea(), 2, SAFE_TILES, utils.findNearestGameObject(36099, 36103, 36102, 36101, 36100, 37339, 36098, 36097, 36096, 36095, 36094));
+			utils.walk(SAFEST_SPOT.getWorldLocation());
+			return NGauntletState.IDLE;
 		}
 		if (utils.findNearestNpcWithin(client.getLocalPlayer().getWorldLocation(), 3, 9025, 9039) != null) {
 			//utils.walk(utils.findNearestGroundObjectAtleastAwayAndNotUnderMe(utils.findNearestNpc("Hunllef").getWorldLocation(), utils.getRandomIntBetweenRange(2, 7), 3, SAFE_TILES).getWorldLocation());
-			GroundObject SAFEST_SPOT = utils.findNearestGroundObjectOutsideAreaNotUnderMeNearestTo(utils.getRandomIntBetweenRange(2, 6),  client.getLocalPlayer(), utils.findNearestNpc("Hunllef").getWorldArea(), SAFE_TILES);
+			GroundObject SAFEST_SPOT = utils.findGauntSafeTile(utils.findNearestNpc("Hunllef").getWorldArea(), utils.getRandomIntBetweenRange(2, 5), SAFE_TILES, utils.findNearestGameObject(36099, 36103, 36102, 36101, 36100, 37339, 36098, 36097, 36096, 36095, 36094));
 			utils.walk(SAFEST_SPOT.getWorldLocation());
-			return NGauntletState.UNHANDLED_STATE;
+			return NGauntletState.IDLE;
 		}
 		if (client.getLocalPlayer().getInteracting() != utils.findNearestNpc("Hunllef")) {
 			utils.attackNPC("Hunllef");
-			return NGauntletState.UNHANDLED_STATE;
+			//return NGauntletState.UNHANDLED_STATE;
 		}
 		return NGauntletState.UNHANDLED_STATE;
 	}
@@ -696,13 +701,13 @@ public class NGauntlet extends Plugin
 			utils.lootItem(loot);
 			return NGauntletState.IDLE;
 		}
-		if (hasWeapons && hasArmour && hasFish && utils.inventoryItemContainsAmount(ItemID.EGNIOL_POTION_3, 2, false, false)) {
-			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 10, 37339) != null) {
+		if (hasWeapons && hasArmour && hasFish && hasPotions) {
+			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 20, 37339) != null) {
 				GameObject Linum = utils.findNearestGameObject(37339);
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_SECOND_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
 				return NGauntletState.IDLE;
 			}////////
-			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,37339) == null) {
+			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),20,37339) == null) {
 				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
 				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
@@ -742,14 +747,18 @@ public class NGauntlet extends Plugin
 		/////////////////
 		/////////////////
 		//Potions
-		if (firstPotion) {
+		if (!hasPotions) {
 			if (!firstWeapon) {
 				if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") != null) {
+					if (utils.inventoryItemContainsAmount(EMPTY_VIALS, 2, false, true)) {
+						utils.typeString("2");
+						return NGauntletState.IDLE;
+					}
 					if (utils.inventoryItemContainsAmount(EMPTY_VIALS, 1, false, true)) {
 						utils.typeString("2");
 						return NGauntletState.IDLE;
 					}
-					if (!utils.inventoryContains(EMPTY_VIALS)) {
+					if (!utils.inventoryContains(WATER_FILLED_VIALS) && !utils.inventoryContains(EMPTY_VIALS)) {
 						utils.typeString("2");
 						return NGauntletState.IDLE;
 					}
@@ -757,9 +766,14 @@ public class NGauntlet extends Plugin
 				if (utils.inventoryContains(ItemID.WATERFILLED_VIAL) && utils.inventoryContains(ItemID.GRYM_LEAF_23875)) {
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_LEAF_23875, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_LEAF_23875).getIndex(), WidgetInfo.INVENTORY.getId()));
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.WATERFILLED_VIAL, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.WATERFILLED_VIAL).getIndex(), WidgetInfo.INVENTORY.getId()));
-					return NGauntletState.IDLE;
+					//return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && !utils.inventoryContains(ItemID.CRYSTAL_DUST_23867, ItemID.CORRUPTED_DUST)) {
+				if (utils.inventoryContains(ItemID.WATERFILLED_VIAL) && utils.inventoryContains(ItemID.GRYM_LEAF)) {
+					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_LEAF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_LEAF).getIndex(), WidgetInfo.INVENTORY.getId()));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.WATERFILLED_VIAL, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.WATERFILLED_VIAL).getIndex(), WidgetInfo.INVENTORY.getId()));
+					//return NGauntletState.IDLE;
+				}
+				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && !utils.inventoryContains(ItemID.CRYSTAL_DUST_23867, ItemID.CORRUPTED_DUST) && utils.inventoryItemContainsAmount(SHARDS, 10, true, false)) {
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.PESTLE_AND_MORTAR_23865, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.PESTLE_AND_MORTAR_23865).getIndex(), WidgetInfo.INVENTORY.getId()));
 					if (utils.inventoryContains(ItemID.CRYSTAL_SHARDS)) {
 						clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CRYSTAL_SHARDS, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CRYSTAL_SHARDS).getIndex(), WidgetInfo.INVENTORY.getId()));
@@ -767,24 +781,24 @@ public class NGauntlet extends Plugin
 					if (utils.inventoryContains(ItemID.CORRUPTED_SHARDS)) {
 						clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CORRUPTED_SHARDS, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CORRUPTED_SHARDS).getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
-					return NGauntletState.IDLE;
+					//return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && utils.inventoryContains(ItemID.CRYSTAL_DUST_23867)) {
+				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && utils.inventoryItemContainsAmount(ItemID.CRYSTAL_DUST_23867, 10, true, false)) {
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_POTION_UNF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_POTION_UNF).getIndex(), WidgetInfo.INVENTORY.getId()));
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CRYSTAL_DUST_23867, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CRYSTAL_DUST_23867).getIndex(), WidgetInfo.INVENTORY.getId()));
-					return NGauntletState.IDLE;
+					//return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && utils.inventoryContains(ItemID.CORRUPTED_DUST)) {
+				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && utils.inventoryItemContainsAmount(ItemID.CORRUPTED_DUST, 10, true, false)) {
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_POTION_UNF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_POTION_UNF).getIndex(), WidgetInfo.INVENTORY.getId()));
 					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CORRUPTED_DUST, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CORRUPTED_DUST).getIndex(), WidgetInfo.INVENTORY.getId()));
-					return NGauntletState.IDLE;
+					//return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.VIAL_23879) && utils.inventoryContains(HERBS) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 1, "Water Pump") == null) {
+				if (utils.inventoryContains(ItemID.VIAL_23879) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 1, "Water Pump") == null) {
 					GameObject Linum = utils.findNearestGameObject("Water Pump");
 					clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
 					return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.VIAL_23879) && utils.inventoryContains(HERBS) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 2, "Water Pump") != null) {
+				if (utils.inventoryContains(ItemID.VIAL_23879) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 2, "Water Pump") != null) {
 					return NGauntletState.IDLE;    ///// < Just wait bro.... lmao
 				}
 				if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 100, true, false) && !utils.inventoryContains(EMPTY_VIALS) && !utils.inventoryContains(WATER_FILLED_VIALS) && !utils.inventoryContains(POTIONS_ALL)) {
@@ -817,7 +831,7 @@ public class NGauntlet extends Plugin
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
 				return NGauntletState.IDLE;
 			}
-			if (!utils.inventoryItemContainsAmount(FISH, config.foodAmt(), false, false) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 40, "Fishing Spot") != null) {
+			if (!utils.inventoryItemContainsAmount(FISH, config.foodAmt(), false, false) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 100, "Fishing Spot") != null) {
 				GameObject Linum = utils.findNearestGameObject("Fishing Spot");
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
 				return NGauntletState.IDLE;
@@ -1104,7 +1118,7 @@ public class NGauntlet extends Plugin
 			clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
 			return NGauntletState.IDLE;
 		}
-		if (!hasHerbs && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 40,"Grym Root") != null) {
+		if (!hasHerbs && !hasPotions && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 40,"Grym Root") != null) {
 			GameObject Linum = utils.findNearestGameObject("Grym Root");
 			clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
 			return NGauntletState.IDLE;

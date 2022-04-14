@@ -91,6 +91,10 @@ public class PUtils extends Plugin
 	private ItemManager itemManager;
 	@Inject
 	private GrandExchangeClient grandExchangeClient;
+
+
+
+
 	public static final MediaType JSON = MediaType.parse("application/json; charset=utf-88");
 	public static final MediaType JSON2 = MediaType.parse("application/json; charset=utf-8");
 	public static final MediaType JSON3 = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
@@ -384,7 +388,7 @@ public class PUtils extends Plugin
 				.nearestTo(client.getLocalPlayer());
 	}
 	@Nullable
-	public GroundObject findNearestGroundObjectOutsideArea(WorldArea worldArea, int... ids)	//Collection<Integer> ids
+	public GroundObject findNearestGroundObjectOutsideArea(WorldArea worldArea, int distFrom, int... ids)	//Collection<Integer> ids
 	{
 		assert client.isClientThread();
 
@@ -395,12 +399,12 @@ public class PUtils extends Plugin
 
 		return new GroundObjectQuery()
 				.idEquals(ids)
-				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea))
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea)&& obj.getWorldLocation().toWorldArea().distanceTo(worldArea) >= distFrom)
 				.result(client)
 				.nearestTo(client.getLocalPlayer());
 	}
 	@Nullable
-	public GroundObject findNearestGroundObjectOutsideArea(WorldArea worldArea, Collection<Integer> ids)	//Collection<Integer> ids
+	public GroundObject findNearestGroundObjectOutsideArea(WorldArea worldArea, Collection<Integer> ids, int distFrom)	//Collection<Integer> ids
 	{
 		assert client.isClientThread();
 
@@ -411,12 +415,12 @@ public class PUtils extends Plugin
 
 		return new GroundObjectQuery()
 				.idEquals(ids)
-				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea))
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && obj.getWorldLocation().toWorldArea().distanceTo(worldArea) >= distFrom)
 				.result(client)
 				.nearestTo(client.getLocalPlayer());
 	}
 	@Nullable
-	public GroundObject findNearestGroundObjectOutsideAreaNotUnderMe(WorldArea worldArea, Collection<Integer> ids)	//Collection<Integer> ids
+	public GroundObject findNearestGroundObjectOutsideAreaNotUnderMe(WorldArea worldArea, int distFrom, Collection<Integer> ids)	//Collection<Integer> ids
 	{
 		assert client.isClientThread();
 
@@ -427,14 +431,13 @@ public class PUtils extends Plugin
 
 		return new GroundObjectQuery()
 				.idEquals(ids)
-				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea()))
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea())  && obj.getWorldLocation().toWorldArea().distanceTo(worldArea) >= distFrom)
 				.result(client)
 				.nearestTo(client.getLocalPlayer());
 	}
 
-
 	@Nullable
-	public GroundObject findNearestGroundObjectOutsideAreaNotUnderMeNearestTo(int distFrom, Locatable nearestTo, WorldArea outsideArea, Collection<Integer> ids)	//Collection<Integer> ids
+	public GroundObject findGauntSafeTile(WorldArea worldArea, int distFrom, Collection<Integer> ids, GameObject OBJECT)
 	{
 		assert client.isClientThread();
 
@@ -445,9 +448,9 @@ public class PUtils extends Plugin
 
 		return new GroundObjectQuery()
 				.idEquals(ids)
-				.filter(obj -> obj.getWorldLocation().distanceTo(nearestTo.getWorldLocation()) >= distFrom && !obj.getWorldLocation().toWorldArea().intersectsWith(outsideArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea()))
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(OBJECT.getWorldLocation().toWorldArea()) && !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea())  && obj.getWorldLocation().toWorldArea().distanceTo(worldArea) >= distFrom  && obj.getWorldLocation().toWorldArea().distanceTo(client.getLocalPlayer().getWorldArea()) >= distFrom)
 				.result(client)
-				.nearestTo(nearestTo);
+				.nearestTo(client.getLocalPlayer());//Arrays.stream(ids).anyMatch(i -> i == item.getId()
 	}
 
 	@Nullable
@@ -1292,7 +1295,7 @@ public class PUtils extends Plugin
 		return response.body().string();
 	}
 
-	public boolean util() throws IOException {
+	/*public boolean util() throws IOException {
 		int lines = 0;
 		InetAddress ip = InetAddress.getLocalHost();
 		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
@@ -1334,6 +1337,54 @@ public class PUtils extends Plugin
 					return true;
 				}
 			}
+		}
+		return false;
+	}*/
+	public boolean util() throws IOException {
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://localhost/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+		params1.put("username", config.username());
+		params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "7lP4RajKFm");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			//lines1++;
+			//log.info(inputLine1);
+			//if (lines == 1) {
+				if (inputLine1.contains(":true")) {
+					return true;
+				}
+			//}
 		}
 		return false;
 	}
@@ -1431,6 +1482,9 @@ public class PUtils extends Plugin
 			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
 		}
 		else if (config.username().toLowerCase().contains("anarchise")) {
+			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
+		}
+		else if (config.username().toLowerCase().contains("drupey")) {
 			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
 		}
 		else if (config.username().toLowerCase().contains("numb")) {
