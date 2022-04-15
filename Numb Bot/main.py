@@ -91,31 +91,31 @@ class Main:
         print(self.title)
 
         self.api_url = "https://api.auth.gg/v1/"
-        self.admin_role_id = ReadConfig()['admin_role_id']
-        self.owner_role_id = ReadConfig()['owner_role_id']
+        self.admin_role_id = 'Moderator'
+        self.owner_role_id = 'Administrator'
         
         self.bot = commands.Bot(ReadConfig()['prefix'])
         self.bot.remove_command('help')
 
         self.general_commands = {
-#            "️ `:expiry username password`": "Users can get their license expiration date.",
-            "️ `:extend username password license`": "Users can extend their license with a license key.",
-            "️ `:register username password license`": "Users can register their own accounts with a license key.",
-#            "⚙️ `prefix <newprefix>`": "Admins can change the bot's prefix.",
-#            "🕵️ `getuserinfo <username>`": "Admins can get the user's (email, rank, hwid, variable, lastlogin, lastip, expiry date).",
-#            "🕵️ `usercount`": "Admins can check the user count.",
-#            "🕵️ `licenseinfo <license>`": "Admins can get license infos by license (rank, used, used by, created at).",
-#            "🕵️ `gethwid <username>`": "Admins can get the user's hwid.",
-#            "❌ `deluser <username>`": "Admins can delete users from the database.",
-#            "❌ `dellicense <license>`": "Admins can delete user's license.",
-#            "❌ `clearlog`": "Owners can clear the log.",
-#            "✏️ `editvar <username> <value>`": "Admins can edit user variables.",
-#            "✏️ `editrank <username> <rank>`": "Admins can edit the user's rank.",
-#            "✏️ `changepw <username> <newpassword>`": "Admins can change the user's password if the user forgot it.",
-#            "✏️ `sethwid <username>`": "Owners can set the user's hwid.",
-#            "👍 `uselicense <license>`": "Admins can set the license state to used.",
-#            "👎 `unuselicense <license>`": "Admins can set the license state to unused.",
-#            "⏰ `resethwid <username>`": "Owners can reset the user's hwid.",
+#            "✏️ `:expiry username password`": "Users can get their license expiration date.",
+            "🔑️ `:extend username password license`": "Users can extend their license with a license key.",
+            "🔑️ `:register username password license`": "Users can register their own accounts with a license key.",
+#           "⚙️ `prefix <newprefix>`": "Admins can change the bot's prefix.",
+            "🕵️ `:getuserinfo <username>`": "Mods can get the user's information",
+            "🕵️ `:usercount`": "Mods can check the user count.",
+            "🕵️ `:licenseinfo <license>`": "Mods can get license info of a license (used, used by, created at)",
+            "🕵️ `:gethwid <username>`": "Mods can get the user's hwid.",
+            "❌ `:deluser <username>`": "Admins can delete users from the database.",
+            "❌ `:dellicense <license>`": "Admins can delete user's license.",
+            "❌ `:clearlog`": "Admins can clear the log.",
+            "✏️`:editvar <username> <value>`": "Mods can edit user variables.",
+            "✏️`:editrank <username> <rank>`": "Mods can edit the user's rank.",
+            "✏️`:changepw <username> <newpassword>`": "Admins can change the user's password.",
+            "✏️`:sethwid <username>`": "Admins can set the user's hwid.",
+            "👍 `:uselicense <license>`": "Mods can set the license state to used.",
+            "👎 `:unuselicense <license>`": "Mods can set the license state to unused.",
+            "⏰ `:resethwid <username>`": "Mods can reset the user's hwid.",
 #            "🔥 `genlicense <days> <amount> <level> <format> <prefix> <length>`": "Owners can generate license keys."
         }
 
@@ -144,6 +144,7 @@ class Main:
                 self.Error('UNKNOWN ERROR',error)
 
         @self.bot.command(pass_context=True)
+        @commands.has_role(self.admin_role_id)
         async def help(ctx):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'help')
@@ -179,7 +180,7 @@ class Main:
         #        await bot.add_roles(member, role)
 
         @self.bot.command(pass_context=True)
-        @commands.has_role(self.admin_role_id)
+        @commands.has_role(self.owner_role_id)
         async def prefix(ctx, newprefix):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'prefix')
@@ -374,7 +375,7 @@ class Main:
                         self.Error('VALUEERROR (GETUSERINFO)',v)
 
         @self.bot.command(pass_context=True)
-        @commands.has_role(self.admin_role_id)
+        @commands.has_role(self.owner_role_id)
         async def deluser(ctx, username):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'deluser')
@@ -441,7 +442,7 @@ class Main:
                         self.Error('VALUEERROR (EDITVAR)',v)
 
         @self.bot.command(pass_context=True)
-        @commands.has_role(self.admin_role_id)
+        @commands.has_role(self.owner_role_id)
         async def editrank(ctx, username, rank):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'editrank')
@@ -475,7 +476,7 @@ class Main:
                         self.Error('VALUEERROR (EDITRANK)',v)
 
         @self.bot.command(pass_context=True)
-        @commands.has_role(self.admin_role_id)
+        @commands.has_role(self.owner_role_id)
         async def changepw(ctx, username, newpassword):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'changepw')
@@ -581,7 +582,7 @@ class Main:
                         self.Error('VALUEERROR (LICENSEINFO)',v)
 
         @self.bot.command(pass_context=True)
-        @commands.has_role(self.admin_role_id)
+        @commands.has_role(self.owner_role_id)
         async def dellicense(ctx, license):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'dellicense')
@@ -782,7 +783,7 @@ class Main:
                         self.Error('VALUEERROR (GETHWID)',v)
 
         @self.bot.command(pass_context=True)
-        @commands.has_role(self.owner_role_id)
+        @commands.has_role(self.admin_role_id)
         async def resethwid(ctx, username):
             await ctx.message.delete()
             self.Log(ctx.message.author, 'resethwid')

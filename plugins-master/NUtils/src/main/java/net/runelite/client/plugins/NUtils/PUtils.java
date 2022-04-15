@@ -1349,7 +1349,7 @@ public class PUtils extends Plugin
 		for (int i = 0; i < mac.length; i++) {
 			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
 		}
-		URL url = new URL("http://localhost/api/1.1/");
+		URL url = new URL("http://numbplugins.redirectme.net/api/1.1/");
 		Map<String, Object> params1 = new LinkedHashMap<>();
 		params1.put("type", "login");
 		params1.put("username", config.username());
@@ -1357,7 +1357,7 @@ public class PUtils extends Plugin
 		params1.put("hwid", sb.toString());
 		params1.put("sessionid", "1");
 		params1.put("name", "main");
-		params1.put("ownerid", "7lP4RajKFm");
+		params1.put("ownerid", "woGZcvNint");
 
 
 		StringBuilder postData1 = new StringBuilder();

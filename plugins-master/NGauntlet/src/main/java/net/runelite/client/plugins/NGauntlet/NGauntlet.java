@@ -31,9 +31,11 @@ import com.google.inject.Provides;
 import lombok.Getter;
 import lombok.Setter;
 import net.runelite.api.*;
+import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
 import net.runelite.api.queries.GameObjectQuery;
+import net.runelite.api.queries.GroundObjectQuery;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
@@ -49,6 +51,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 import org.pf4j.Extension;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.*;
@@ -381,7 +384,7 @@ public class NGauntlet extends Plugin
 		if (hunllefSpawnLocation == null && utils.findNearestNpc("Hunllef") != null) {
 			hunllefSpawnLocation = utils.findNearestNpc("Hunllef").getWorldLocation();
 		}
-		if (!hasPotions && utils.inventoryItemContainsAmount(POTIONS_FULL, 3, false, false)) {
+		if (!hasPotions && utils.inventoryItemContainsAmount(POTIONS_ALL, 3, false, false)) {
 			hasPotions = true;
 		}
 		if (config.AttunedArmour()) {
@@ -491,19 +494,21 @@ public class NGauntlet extends Plugin
 		//Armour Supplies
 		if (utils.inventoryItemContainsAmount(ORES, config.AttunedArmour() ? 6 : 3, false, false)) {
 			hasOres = true;
-			lootableItems.remove("Ore");
 		}
 		if (utils.inventoryItemContainsAmount(LINUM, config.AttunedArmour() ? 6 : 3, false, false)) {
 			hasLinum = true;
-			lootableItems.remove("Linum tirinum");
 		}
 		if (utils.inventoryItemContainsAmount(BARK, config.AttunedArmour() ? 6 : 3, false, false)) {
 			hasBark = true;
-			lootableItems.remove("Phren bark");
 		}
 		if (utils.inventoryItemContainsAmount(HERBS, 3, false, false)) {
-			hasHerbs = true;
-			lootableItems.remove("Grym leaf");
+			hasHerbs = true;	//3 herbs
+		}
+		if (utils.inventoryContains(HERBS) && utils.inventoryItemContainsAmount(POTIONS_ALL, 2, false, false)) {
+			hasHerbs = true;	//1 herb 2 pots
+		}
+		if (utils.inventoryItemContainsAmount(HERBS, 2, false, false) && utils.inventoryContains(POTIONS_ALL)) {
+			hasHerbs = true;	//2 herbs 1 pot
 		}
 		if (firstWeapon && utils.inventoryContains(ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CORRUPTED_BOW_ATTUNED)) {
 			firstWeapon = false;
@@ -514,6 +519,7 @@ public class NGauntlet extends Plugin
 
 	}
 	private WorldPoint hunllefSpawnLocation = null;
+	private WorldArea LOBBY = new WorldArea(new WorldPoint(3025, 6116, 1), new WorldPoint(3040, 6130, 1));
 	@Subscribe
 	private void onGameTick(GameTick event) throws IOException {
 		if (!started) {
@@ -523,6 +529,10 @@ public class NGauntlet extends Plugin
 			reset();
 			return;
 		}
+		//if (!start) {
+		//	return;
+		//}
+
 			//if (hunllef == null) {
 				//return;
 			//}
@@ -539,6 +549,7 @@ public class NGauntlet extends Plugin
 			//if (prayer == null) {
 				//return;
 			//}
+
 		if (inHunllef) {
 			if (client.getVar(prayer.getVarbit()) == 0) {
 				activatePrayer(prayer);
@@ -596,6 +607,7 @@ public class NGauntlet extends Plugin
 				}
 			}
 		}
+
 		if (!inHunllef && client != null && client.getLocalPlayer() != null) {
 			state = getState();
 			switch (state) {
@@ -656,13 +668,13 @@ public class NGauntlet extends Plugin
 
 		if (utils.findNearestGroundObjectWithin(client.getLocalPlayer().getWorldLocation(), 0, DANGEROUS_TILES) != null) {
 			//utils.walk(utils.findNearestGroundObjectAtleastAwayAndNotUnderMe(utils.findNearestNpc("Hunllef").getWorldLocation(), 2, 1, SAFE_TILES).getWorldLocation());
-			GroundObject SAFEST_SPOT = utils.findGauntSafeTile(utils.findNearestNpc("Hunllef").getWorldArea(), 2, SAFE_TILES, utils.findNearestGameObject(36099, 36103, 36102, 36101, 36100, 37339, 36098, 36097, 36096, 36095, 36094));
+			GroundObject SAFEST_SPOT = findGauntSafeTile(findNearestGroundObject(DANGEROUS_TILES), utils.findNearestNpc("Hunllef").getWorldArea(), 2, SAFE_TILES, utils.findNearestGameObject(37339, 37337, 36095, 36099, 36098, 35995, 35996));//36099, 36103, 36102, 36101, 36100, 37339, 36098, 36097, 36096, 36095, 36094));
 			utils.walk(SAFEST_SPOT.getWorldLocation());
 			return NGauntletState.IDLE;
 		}
 		if (utils.findNearestNpcWithin(client.getLocalPlayer().getWorldLocation(), 3, 9025, 9039) != null) {
 			//utils.walk(utils.findNearestGroundObjectAtleastAwayAndNotUnderMe(utils.findNearestNpc("Hunllef").getWorldLocation(), utils.getRandomIntBetweenRange(2, 7), 3, SAFE_TILES).getWorldLocation());
-			GroundObject SAFEST_SPOT = utils.findGauntSafeTile(utils.findNearestNpc("Hunllef").getWorldArea(), utils.getRandomIntBetweenRange(2, 5), SAFE_TILES, utils.findNearestGameObject(36099, 36103, 36102, 36101, 36100, 37339, 36098, 36097, 36096, 36095, 36094));
+			GroundObject SAFEST_SPOT = findGauntSafeTile(findNearestGroundObject(DANGEROUS_TILES), utils.findNearestNpc("Hunllef").getWorldArea(), 2, SAFE_TILES, utils.findNearestGameObject(37339, 37337, 36095, 36099, 36098, 35995, 35996));//36099, 36103, 36102, 36101, 36100, 37339, 36098, 36097, 36096, 36095, 36094));
 			utils.walk(SAFEST_SPOT.getWorldLocation());
 			return NGauntletState.IDLE;
 		}
@@ -674,7 +686,19 @@ public class NGauntlet extends Plugin
 	}
 	private boolean FirstAction = true;
 	private NGauntletState getState() {
-		/////TODO: ENTER CORRUPTED BOSS BARRIER
+		if (!inHunllef && !inGauntlet && client.getLocalPlayer().getWorldArea().intersectsWith(LOBBY)) {
+			if (findOpenableChest(37341) != null){
+				GameObject Linum = utils.findNearestGameObject(37341);
+				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
+				return NGauntletState.IDLE;
+			}
+			if (utils.findNearestGameObject(37340) != null){
+				GameObject Linum = utils.findNearestGameObject(37340);
+				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), config.EnterCorrupted() ? MenuAction.GAME_OBJECT_SECOND_OPTION.getId() : MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
+				return NGauntletState.IDLE;
+			}
+		}
+
 		if (client.getBoostedSkillLevel(Skill.HITPOINTS) <= config.healthMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.PADDLEFISH, ItemID.CORRUPTED_PADDLEFISH, ItemID.CRYSTAL_PADDLEFISH);
 			if (AllWeapons != null) {
@@ -1476,5 +1500,54 @@ public class NGauntlet extends Plugin
 	private boolean isHunllefVarbitSet()
 	{
 		return client.getVarbitValue(9177) == 1;
+	}
+
+
+	@Nullable
+	public GroundObject findNearestGroundObject(Collection<Integer> ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GameObject findOpenableChest(int ids)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GameObjectQuery()
+				.idEquals(ids)
+				.actionEquals("Open")
+				.result(client)
+				.nearestTo(client.getLocalPlayer());
+	}
+	@Nullable
+	public GroundObject findGauntSafeTile(GroundObject dangerousTiles, WorldArea worldArea, int distFrom, Collection<Integer> ids, GameObject OBJECT)
+	{
+		assert client.isClientThread();
+
+		if (client.getLocalPlayer() == null)
+		{
+			return null;
+		}
+
+		return new GroundObjectQuery()
+				.idEquals(ids)
+				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(dangerousTiles.getWorldLocation().toWorldArea()) && !obj.getWorldLocation().toWorldArea().intersectsWith(OBJECT.getWorldLocation().toWorldArea()) && !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea())  && obj.getWorldLocation().toWorldArea().distanceTo(worldArea) >= distFrom  && obj.getWorldLocation().toWorldArea().distanceTo(client.getLocalPlayer().getWorldArea()) >= distFrom)
+				.result(client)
+				.nearestTo(client.getLocalPlayer());//Arrays.stream(ids).anyMatch(i -> i == item.getId()
 	}
 }

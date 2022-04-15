@@ -37,6 +37,21 @@ import net.runelite.client.config.ConfigSection;
 public interface NGauntletConfig extends Config
 {
 	@ConfigSection(
+			keyName = "Main",
+			name = "Main",
+			description = "",
+			position = 0
+	)
+	String Main = "Main";
+	@ConfigItem(
+			keyName = "EnterCorrupted",
+			name = "Corrupted Gauntlet",
+			description = "Chose whether to enter normal gauntlet or corrupted",
+			position = 1,
+			section = "Main"
+	)
+	default boolean EnterCorrupted() { return false; }
+	@ConfigSection(
 			keyName = "Prep",
 			name = "Prep",
 			description = "",
@@ -60,6 +75,8 @@ public interface NGauntletConfig extends Config
 			section = "Prep"
 	)
 	default boolean AttunedArmour() { return false; }
+
+
 
 	@ConfigItem(
 			keyName = "PerfectWeapons",
