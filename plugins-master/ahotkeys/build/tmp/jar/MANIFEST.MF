@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 1.0.2
-Plugin-Id: ahotkey-plugin
-Plugin-Provider: ZTD#1147
-Plugin-Dependencies: nutils-plugin
-Plugin-Description: Anarchise' Widget Hotkeys
-Plugin-License: 3-Clause BSD License
-

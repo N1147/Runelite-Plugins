@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 1.0.3
-Plugin-Id: aconstruction-plugin
-Plugin-Provider: Anarchise
-Plugin-Dependencies: nutils-plugin
-Plugin-Description: Anarchise' Construction
-Plugin-License: 3-Clause BSD License
-

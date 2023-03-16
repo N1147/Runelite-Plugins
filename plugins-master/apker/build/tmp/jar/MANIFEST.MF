@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 1.0.1
-Plugin-Id: apker-plugin
-Plugin-Provider: Anarchise
-Plugin-Dependencies: nutils-plugin
-Plugin-Description: Overpowered PvP tools based on Ben93riggs' pktools p
- lugin.
-Plugin-License: 3-Clause BSD License
-

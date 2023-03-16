@@ -1,6 +1,0 @@
-net/runelite/client/plugins/NQuickPray/NQuickPrayType.java
- net.runelite.client.plugins.NQuickPray.NQuickPrayType
-net/runelite/client/plugins/NQuickPray/NQuickPray.java
- net.runelite.client.plugins.NQuickPray.NQuickPray
-net/runelite/client/plugins/NQuickPray/NQuickPrayConfig.java
- net.runelite.client.plugins.NQuickPray.NQuickPrayConfig

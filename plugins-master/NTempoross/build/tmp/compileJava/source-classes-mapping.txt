@@ -1,7 +1,0 @@
-net/runelite/client/plugins/NTempoross/NTemporossState.java
- net.runelite.client.plugins.NTempoross.NTemporossState
-net/runelite/client/plugins/NTempoross/NTemporossConfig.java
- net.runelite.client.plugins.NTempoross.NTemporossConfig
-net/runelite/client/plugins/NTempoross/NTempoross.java
- net.runelite.client.plugins.NTempoross.NTempoross
- net.runelite.client.plugins.NTempoross.NTempoross$1

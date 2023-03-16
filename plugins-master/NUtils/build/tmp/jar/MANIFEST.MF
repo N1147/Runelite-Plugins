@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 0.0.5
-Plugin-Id: nutils-plugin
-Plugin-Provider: ZTD#1147
-Plugin-Description: Numb plugin utilities.
-Plugin-License: 3-Clause BSD License
-

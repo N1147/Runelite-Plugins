@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 1.0.8
-Plugin-Id: avorkath-plugin
-Plugin-Provider: Anarchise
-Plugin-Dependencies: nutils-plugin
-Plugin-Description: Anarchise' Automated Vorkath.
-Plugin-License: 3-Clause BSD License
-

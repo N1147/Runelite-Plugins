@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 0.0.1
-Plugin-Id: nquickpot-plugin
-Plugin-Provider: ZTD#1147
-Plugin-Dependencies: nutils-plugin
-Plugin-Description: Automatically drinks pots for you.
-Plugin-License: 3-Clause BSD License
-
