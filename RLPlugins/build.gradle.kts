@@ -15,7 +15,7 @@ plugins {
     checkstyle
 }
 
-project.extra["GithubUrl"] = "https://github.com/Anarchise/aplugins"
+project.extra["GithubUrl"] = "https://github.com/N1147/RLPlugins"
 
 apply<BootstrapPlugin>()
 
@@ -63,8 +63,8 @@ subprojects {
     dependencies {
         annotationProcessor(Libraries.lombok)
         annotationProcessor(Libraries.pf4j)
-        compileOnly("net.runelite:runelite-api:1.9.12-SNAPSHOT")
-        compileOnly("net.runelite:client:1.9.12-SNAPSHOT")
+        compileOnly("net.runelite:runelite-api:1.9.14-SNAPSHOT")
+        compileOnly("net.runelite:client:1.9.14-SNAPSHOT")
         compileOnly(Libraries.findbugs)
         compileOnly(Libraries.apacheCommonsText)
         compileOnly(Libraries.guava)

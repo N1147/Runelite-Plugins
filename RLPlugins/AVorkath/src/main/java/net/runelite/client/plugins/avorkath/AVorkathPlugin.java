@@ -70,14 +70,7 @@ public class AVorkathPlugin extends Plugin
 	private List<WorldPoint> acidFreePath = new ArrayList<>();
 	private int lastAcidSpotsSize = 0;
 	//private final Set<Integer> DIAMOND_SET = Set.of(ItemID.DIAMOND_DRAGON_BOLTS_E, ItemID.DIAMOND_BOLTS_E);
-	WorldArea EDGEVILLE_BANK = new WorldArea(new WorldPoint(3082, 3485, 0), new WorldPoint(3100, 3502, 0));
-	WorldArea RELEKKA_POH = new WorldArea(new WorldPoint(2664, 3625, 0), new WorldPoint(2678, 3638, 0));
-	WorldArea RELEKKA_TOWN= new WorldArea(new WorldPoint(2635, 3668, 0), new WorldPoint(2652, 3684, 0));
-	WorldArea VORKATH = new WorldArea(new WorldPoint(2262, 4032, 0), new WorldPoint(2286, 4053, 0));
-	WorldArea VORKATH2 = new WorldArea(new WorldPoint(2259, 4053, 0), new WorldPoint(2290, 4083, 0));
-	//private List<Integer> RUBY_SET = new ArrayList<>();
-	//private List<Integer> DIAMOND_SET = new ArrayList<>();
-		//Set.of();
+
 	AVorkathState state;
 	LocalPoint beforeLoc;
 	Player player;
@@ -248,9 +241,6 @@ public class AVorkathPlugin extends Plugin
 		{
 			return AVorkathState.TIMEOUT;
 		}
-		if(core.isBankOpen()){
-			return getBankState();
-		}
 		else {
 			return getStates();
 		}
@@ -284,9 +274,6 @@ public class AVorkathPlugin extends Plugin
 			noBomb2 = true;
 			attacked = false;
 		}
-		if (banked && client.getLocalPlayer().getWorldArea().intersectsWith(EDGEVILLE_BANK)  && !core.isBankOpen()){
-			banked = false;
-		}
 		if (client.getVar(Varbits.QUICK_PRAYER) == 1 && !isInVorkath())
 		{
 			return AVorkathState.DEACTIVATE_PRAY;
@@ -303,19 +290,6 @@ public class AVorkathPlugin extends Plugin
 			}
 			if (isInVorkath() && calculateHealth(vorkath, 750) < 265 && core.inventoryContains(ItemID.DIAMOND_DRAGON_BOLTS_E, ItemID.DIAMOND_BOLTS_E) && !core.isItemEquipped(Collections.singleton(ItemID.DIAMOND_BOLTS_E)) && !core.isItemEquipped(Collections.singleton(ItemID.DIAMOND_DRAGON_BOLTS_E)) && acidSpots.isEmpty() && configvk.useRanged() && !configvk.useBlowpipe()) {
 				return AVorkathState.EQUIP_DIAMONDS;
-			}
-
-			if (player.getWorldArea().intersectsWith(EDGEVILLE_BANK) && banked && configvk.autoBank()) {
-				return AVorkathState.WALK_FIRST;
-			}
-			if (player.getWorldArea().intersectsWith(EDGEVILLE_BANK) && !banked && configvk.autoBank()) {
-				return AVorkathState.FIND_BANK;
-			}
-		/*if (player.getLocalLocation() == new LocalPoint(5824, 7872) && isInVorkath()) {
-			core.walk(new LocalPoint(6080, 7872));
-		}*/
-			if (isInPOH(client) && client.getBoostedSkillLevel(Skill.PRAYER) < client.getRealSkillLevel(Skill.PRAYER) && configvk.usePOHpool()) {
-				return AVorkathState.DRINK_POOL;
 			}
 			if (core.isItemEquipped(Collections.singleton(configvk.specWeapon())) && client.getVar(VarPlayer.SPECIAL_ATTACK_PERCENT) < configvk.specThreshold() * 10) {
 				WidgetItem weapon = core.getInventoryWidgetItem(Collections.singletonList(configvk.normalWeapon()));
@@ -344,31 +318,8 @@ public class AVorkathPlugin extends Plugin
 			if (!loot.isEmpty() && !core.inventoryFull() && isInVorkath()) {
 				return AVorkathState.LOOT_ITEMS;
 			}
-
-			if (core.inventoryContains(22124) && loot.isEmpty() && !isInPOH(client) && isInVorkath() && !configvk.onlytelenofood()) {
-				return AVorkathState.WALK_SECOND;
-			}
-			if (!core.inventoryContains(configvk.foodID()) && client.getBoostedSkillLevel(Skill.HITPOINTS) <= configvk.healthTP() && loot.isEmpty() && !isInPOH(client) && isInVorkath()) {
-				return AVorkathState.WALK_SECOND;
-			}
 			if (core.inventoryContains(configvk.foodID()) && core.inventoryFull() && !loot.isEmpty() && !isInPOH(client) && isInVorkath()) {
 				return AVorkathState.EAT_FOOD;
-			}
-			if (!core.inventoryContains(ItemID.PRAYER_POTION1, ItemID.PRAYER_POTION2, ItemID.PRAYER_POTION3, ItemID.PRAYER_POTION4, ItemID.SUPER_RESTORE1, ItemID.SUPER_RESTORE2, ItemID.SUPER_RESTORE3, ItemID.SUPER_RESTORE4, ItemID.BLIGHTED_SUPER_RESTORE1, ItemID.BLIGHTED_SUPER_RESTORE2, ItemID.BLIGHTED_SUPER_RESTORE3, ItemID.BLIGHTED_SUPER_RESTORE4, ItemID.SANFEW_SERUM1, ItemID.SANFEW_SERUM2, ItemID.SANFEW_SERUM3, ItemID.SANFEW_SERUM4) && client.getBoostedSkillLevel(Skill.PRAYER) <= configvk.prayTP() && isInVorkath()) {
-				return AVorkathState.WALK_SECOND;
-			}
-			if (configvk.autoBank() && isInPOH(client)) {
-				return AVorkathState.TELE_EDGE;
-			}
-
-			if (player.getWorldArea().intersectsWith(RELEKKA_POH)) {
-				return AVorkathState.WALK_THIRD;
-			}
-			if (player.getWorldArea().intersectsWith(RELEKKA_TOWN)) {
-				return AVorkathState.USE_BOAT;
-			}
-			if (player.getWorldArea().intersectsWith(VORKATH)) {
-				return AVorkathState.JUMP_OBSTACLE;
 			}
 		}
 		if (!acidSpots.isEmpty() && isInVorkath()){
@@ -385,7 +336,7 @@ public class AVorkathPlugin extends Plugin
 			return AVorkathState.TIMEOUT;
 		}
 		if (!configvk.helperMode()) {
-			if (configvk.antivenomplus() && client.getVar(VarPlayer.IS_POISONED) > 0 && isInVorkath()) {
+			if (configvk.antivenomplus() && client.getVar(VarPlayer.POISON) > 0 && isInVorkath()) {
 				return AVorkathState.DRINK_ANTIVENOM;
 			}
 			if (client.getBoostedSkillLevel(Skill.RANGED) <= configvk.potThreshold() && isInVorkath() && configvk.useRanged()) {
@@ -406,10 +357,6 @@ public class AVorkathPlugin extends Plugin
 		{
 			return AVorkathState.ACTIVATE_PRAY;
 		}
-		//if (client.getVar(Varbits.QUICK_PRAYER) != 0 && isInVorkath() && !acidSpots.isEmpty() || !noBomb2 || !noBomb)
-		//{
-		//	return AVorkathState.DEACTIVATE_PRAY;
-		//}
 		if (!configvk.helperMode()) {
 			if (core.findNearestNpc(8059) != null && isInVorkath() && loot.isEmpty() && core.inventoryItemContainsAmount(configvk.foodID(), 3, false, false)) {
 				return AVorkathState.WAKE_VORKATH;
@@ -435,59 +382,6 @@ public class AVorkathPlugin extends Plugin
 		}
 		return AVorkathState.TIMEOUT;
 	}
-	private AVorkathState getBankState()
-	{
-		if (configvk.autoBank()) {
-			if (!banked) {
-				core.depositAll();
-				banked = true;
-				return AVorkathState.DEPOSIT_ITEMS;
-			}
-			if (configvk.useSpec() && !core.inventoryContains(configvk.specWeapon())) {
-				core.withdrawItem(configvk.specWeapon());
-			}
-			if (!core.inventoryContains(ItemID.DIAMOND_DRAGON_BOLTS_E, ItemID.DIAMOND_BOLTS_E) && configvk.useRanged() && !configvk.useBlowpipe()) {
-				return AVorkathState.WITHDRAW_BOLTS;
-			}
-			if (!core.inventoryContains(8013)) {
-				return AVorkathState.WITHDRAW_TELES;
-			}
-			if (!core.inventoryContains(12791)) {
-				return AVorkathState.WITHDRAW_POUCH;
-			}
-			if ((!core.inventoryContains(ItemID.RANGING_POTION4)|| !core.inventoryContains(ItemID.DIVINE_BASTION_POTION4)) && configvk.useRanged()) {
-				return AVorkathState.WITHDRAW_RANGED;
-			}
-			if (!core.inventoryContains(12695) && !configvk.useRanged()) {
-				return AVorkathState.WITHDRAW_COMBAT;
-			}
-			if (configvk.superantifire() && !core.inventoryContains(22209)) {
-				return AVorkathState.WITHDRAW_ANTIFIRE;
-			}
-			if (!configvk.superantifire() && !core.inventoryContains(2452)) {
-				return AVorkathState.WITHDRAW_ANTIFIRE;
-			}
-			if (configvk.antivenomplus() && !core.inventoryContains(12913)) {
-				return AVorkathState.WITHDRAW_VENOM;
-			}
-			if (!configvk.antivenomplus() && !core.inventoryContains(5952)) {
-				return AVorkathState.WITHDRAW_VENOM;
-			}
-			if (!core.inventoryContains(3024) && !core.inventoryContains(2434)) {
-				return AVorkathState.WITHDRAW_RESTORES;
-			}
-			if (!core.inventoryContains(configvk.foodID())) {
-				return AVorkathState.WITHDRAW_FOOD1;
-			}
-			if (!core.inventoryContains(configvk.foodID2()) && configvk.foodID2() != 0) {
-				return AVorkathState.WITHDRAW_FOOD2;
-			}
-			if (player.getWorldArea().intersectsWith(EDGEVILLE_BANK) && core.inventoryContains(configvk.foodID2()) && banked) {
-				return AVorkathState.WALK_FIRST;
-			}
-		}
-		return AVorkathState.TIMEOUT;
-	}
 
 	private boolean attacked = false;
 	private int AcidTickCount = 0;
@@ -504,7 +398,6 @@ public class AVorkathPlugin extends Plugin
 			switch (state)
 			{
 				case TIMEOUT:
-					//if (client.)
 					timeout--;
 					break;
 				case SPECIAL_ATTACK:
@@ -517,10 +410,6 @@ public class AVorkathPlugin extends Plugin
 					walking.walkTileOnScreen(new WorldPoint(player.getWorldLocation().getX(), player.getWorldLocation().getY() - 3, player.getWorldLocation().getPlane()));
 					//core.walk(new WorldPoint(player.getWorldLocation().getX(), player.getWorldLocation().getY() - 3, player.getWorldLocation().getPlane()));
 					//timeout = tickDelay();
-					break;
-				case TELE_EDGE:
-					core.useDecorativeObject(13523, MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), sleepDelay());
-					timeout = tickDelay();
 					break;
 				case EQUIP_SPEC:
 					WidgetItem weapon = core.getInventoryWidgetItem(Collections.singletonList(configvk.specWeapon()));
@@ -625,75 +514,10 @@ public class AVorkathPlugin extends Plugin
 					core.clickWidget(WidgetInfo.MINIMAP_QUICK_PRAYER_ORB);
 					//clientThread.invoke(() -> client.invokeMenuAction("Activate", "Quick-prayers", 1,  MenuAction.CC_OP.getId(), -1, 10485775));
 					break;
-				case WITHDRAW_COMBAT:
-					core.withdrawAnyOf(ItemID.DIVINE_SUPER_COMBAT_POTION4, ItemID.SUPER_COMBAT_POTION4);
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_RANGED:
-					core.withdrawAnyOf(ItemID.DIVINE_BASTION_POTION4, ItemID.RANGING_POTION4);
-					//core.withdrawItem(id2.getId());
-					timeout = tickDelay();
-					break;
 				case WAKE_VORKATH:
 					core.attackNPC("Vorkath");
 					//clientThread.invoke(() -> client.invokeMenuAction("", "", core.findNearestNpc("Vorkath").getIndex(), MenuAction.NPC_FIRST_OPTION.getId(), 0, 0));
 					timeout = tickDelay();
-					break;
-				case CLOSE_BANK:
-					core.closeBank();
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_VENOM:
-					if (configvk.antivenomplus()) {
-						core.withdrawItemAmount(12913, configvk.antipoisonamount()); //anti venom+
-					}
-					if (!configvk.antivenomplus()){
-						core.withdrawItemAmount(5952, configvk.antipoisonamount()); // antidote++
-					}
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_ANTIFIRE:
-					if (configvk.superantifire()) {
-						core.withdrawItem(22209); //extended super antifire
-					}
-					if (!configvk.superantifire()){
-						core.withdrawItem(2452); // regular antifire
-					}
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_POUCH:
-					core.withdrawItem(12791); //rune pouch
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_RESTORES:
-					if (configvk.useRestores()) {
-						core.withdrawItemAmount(3024, configvk.praypotAmount()); //super restore x2
-					}
-					else {
-						core.withdrawItemAmount(2434, configvk.praypotAmount()); //prayer pot x2
-					}
-					timeout = 4;
-					break;
-				case WITHDRAW_TELES:
-					core.withdrawItemAmount(8013, 10); //house tabs
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_BOLTS:
-					if (core.bankContains(ItemID.DIAMOND_DRAGON_BOLTS_E, 1)) {
-						core.withdrawAllItem(ItemID.DIAMOND_DRAGON_BOLTS_E);
-					}
-					if (!core.bankContains(ItemID.DIAMOND_DRAGON_BOLTS_E, 1) && core.bankContains(ItemID.DIAMOND_BOLTS_E, 1)){
-						core.withdrawAllItem(ItemID.DIAMOND_BOLTS_E);
-					}
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_FOOD1:
-					core.withdrawItemAmount(configvk.foodID(), configvk.foodAmount());
-					timeout = 1;
-					break;
-				case WITHDRAW_FOOD2:
-					core.withdrawItemAmount(configvk.foodID2(), configvk.foodAmount2());
-					timeout = 4;
 					break;
 				case MOVING:
 					//core.handleRun(30, 20);
@@ -735,47 +559,16 @@ public class AVorkathPlugin extends Plugin
 					}
 					//timeout = tickDelay();
 					break;
-				case WALK_FIRST:
-					WidgetItem tab = core.getInventoryWidgetItem(Collections.singletonList(8013));
-					core.useItem(tab.getId(), "outside");
-					//clientThread.invoke(() -> client.invokeMenuAction("", "", 8013, MenuAction.ITEM_THIRD_OPTION.getId(), core.getInventoryWidgetItem(Collections.singletonList(8013)).getIndex(), WidgetInfo.INVENTORY.getId()));
-					banked = false;
-					timeout = tickDelay();
-					break;
 				case WALK_SECOND:
 					WidgetItem tab2 = core.getInventoryWidgetItem(Collections.singletonList(8013));
 					core.useItem(tab2.getId(), "break");
 					//clientThread.invoke(() -> client.invokeMenuAction("", "", 8013, MenuAction.CC_OP.getId(), core.getInventoryWidgetItem(Collections.singletonList(8013)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					timeout = tickDelay();
 					break;
-				case WALK_THIRD:
-					walking.walkTileOnScreen(new WorldPoint(2643, 3676, 0));
-				//	core.walk(new WorldPoint(2643, 3676, 0));
-					timeout = tickDelay();
-					break;
-				case USE_BOAT:
-					GameObject boat = core.findNearestGameObject(29917);
-					core.useGameObjectDirect(boat);
-					timeout = tickDelay();
-					break;
-				case FIND_BANK:
-					openBank();
-					timeout = tickDelay();
-					break;
-				case DEPOSIT_ITEMS:
-					timeout = tickDelay();
-					break;
-				case WITHDRAW_ITEMS:
-					timeout = tickDelay();
-					break;
 				case LOOT_ITEMS:
 					lootItem(spawnedItems);
 					//lootItem(loot);
 					//timeout = tickDelay();
-					break;
-				case JUMP_OBSTACLE:
-					core.useGameObject(31990, 3, sleepDelay());
-					timeout = tickDelay();
 					break;
 			}
 		}
@@ -1150,26 +943,13 @@ public class AVorkathPlugin extends Plugin
 }
 enum AVorkathState
 {
-	ANIMATING,
 	MOVING,
 	TIMEOUT,
-	BANK_NOT_FOUND,
 	FIND_BANK,
-	DEPOSIT_ITEMS,
-	WITHDRAW_RANGED,
-	WITHDRAW_VENOM,
-	WITHDRAW_ANTIFIRE,
 	EAT_FOOD,
 	EQUIP_SPEC,
-	WITHDRAW_COMBAT,
 	DRINK_COMBAT,
-	WITHDRAW_RESTORES,
-	WITHDRAW_TELES,
-	WITHDRAW_FOOD1,
-	WITHDRAW_FOOD2,
 	SPECIAL_ATTACK,
-	WITHDRAW_POUCH,
-	CLOSE_BANK,
 	WAKE_VORKATH,
 	LOOT_ITEMS,
 	ACTIVATE_PRAY,
@@ -1178,8 +958,6 @@ enum AVorkathState
 	HANDLE_BOMB,
 	ATTACK_VORKATH,
 	HANDLE_ICE,
-	TELE_EDGE,
-	WITHDRAW_BOLTS,
 	DRINK_POOL,
 	EQUIP_DIAMONDS,
 	EQUIP_RUBIES,
@@ -1187,13 +965,6 @@ enum AVorkathState
 	DRINK_RANGE,
 	DRINK_ANTIVENOM,
 	DRINK_ANTIFIRE,
-	JUMP_OBSTACLE,
 	WALK_FIRST,
-	WALK_SECOND,
-	WALK_THIRD,
-	USE_BOAT,
-	BURY_BONES,
-	ATTACK,
-	WITHDRAW_ITEMS,
-	UNHANDLED_STATE;
+	WALK_SECOND;
 }

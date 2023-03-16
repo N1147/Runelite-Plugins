@@ -9,8 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AHotkeys" />
-            <option value="$PROJECT_DIR$/APker" />
             <option value="$PROJECT_DIR$/ATempoross" />
             <option value="$PROJECT_DIR$/AVorkath" />
             <option value="$PROJECT_DIR$/NGatherer" />
@@ -18,10 +16,7 @@
             <option value="$PROJECT_DIR$/NQuickFighter" />
             <option value="$PROJECT_DIR$/autologhop" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/launcher" />
-            <option value="$PROJECT_DIR$/leftclickcons" />
             <option value="$PROJECT_DIR$/leftclickloot" />
-            <option value="$PROJECT_DIR$/zulrah" />
           </set>
         </option>
       </GradleProjectSettings>

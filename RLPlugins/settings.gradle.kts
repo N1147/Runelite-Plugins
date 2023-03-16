@@ -3,13 +3,12 @@ rootProject.name = "Numb"
 include("NGuardians")
 include("NGatherer")
 include("AVorkath")
-include("APker")
 include("ATempoross")
-include("AHotkeys")
+//include("AHotkeys")
 include("autologhop")
 include("leftclickloot")
 include("NQuickFighter")
-include("zulrah")
+//include("zulrah") // Requires resources. I'm too lazy
 for (project in rootProject.children) {
     project.apply {
         projectDir = file(name)

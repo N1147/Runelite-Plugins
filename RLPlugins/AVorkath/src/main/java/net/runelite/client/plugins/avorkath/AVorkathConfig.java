@@ -14,7 +14,7 @@ public interface AVorkathConfig extends Config
 	@ConfigItem(
 			keyName = "helperMode",
 			name = "Helper Mode",
-			description = "Disables full automation. Plugin will only enable quick prayers, avoid bombs, acid walk and kill ice spawns. Will NOT attack, loot or bank.",
+			description = "Disables full automation. Plugin will ONLY automate\n boss mechanics such as quick prayers, \navoid bombs, acid walk and kill ice spawns.",
 			position = 0
 	)
 	default boolean helperMode() { return false; }
@@ -22,7 +22,7 @@ public interface AVorkathConfig extends Config
 	@ConfigItem(
 			keyName = "usage" ,
 			name = "Instructions",
-			description = "Requires a POH mounted glory, and house to be in Relekka.",
+			description = "",
 			position = 1
 	)
 	default String usage() { return ""; }
@@ -70,14 +70,6 @@ public interface AVorkathConfig extends Config
 	)
 	default boolean useRanged() { return true; }
 
-	@ConfigItem(
-			keyName = "autoBank",
-			name = "Auto Restock",
-			description = "If disabled, will only automate the kills and not bank for you.",
-			position = 57,
-			section = Other
-	)
-	default boolean autoBank() { return true; }
 
 	@ConfigItem(
 			keyName = "useBlowpipe",
@@ -124,67 +116,6 @@ public interface AVorkathConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "antipoisonamount",
-			name = "Antivenom Amount",
-			description =  "Amount of (4) dose Antivenom+, or Antidote++ to take",
-			position = 67,
-			section = Potions
-	)
-	default int antipoisonamount() { return 1; }
-
-	@ConfigItem(
-			keyName = "usePOHpool",
-			name = "Drink POH Pool",
-			description =  "Enable to drink from POH pool to restore HP / Prayer.",
-			position = 68,
-			section = Other
-	)
-	default boolean usePOHpool()
-	{
-		return true;
-	}
-
-
-	@ConfigItem(
-			keyName = "praypotAmount",
-			name = "Amount of Super Restores",
-			description = "Amount of super restores to withdraw from the bank",
-			position = 69,
-			section = Potions
-	)
-	default int praypotAmount() { return 2; }
-
-	@ConfigItem(
-			keyName = "useRestores",
-			name = "Use Super Restores",
-			description = "Disable to use Prayer Potions",
-			position = 70,
-			section = Potions
-	)
-	default boolean useRestores() { return true; }
-
-	@ConfigItem(
-			keyName = "onlytelenofood",
-			name = "Only Tele With No Food",
-			description =  "Enable to only teleport out when you have 0 food and / or 0 restore pots. Disable to teleport out after every kill.",
-			position = 71,
-			section = Other
-	)
-	default boolean onlytelenofood()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-			keyName = "foodAmount",
-			name = "Amount of food 1",
-			description = "Amount of food to withdraw",
-			position = 79,
-			section = Potions
-	)
-	default int foodAmount() { return 17; }
-
-	@ConfigItem(
 			keyName = "foodID",
 			name = "ID of food 1",
 			description = "ID of food to withdraw.",
@@ -193,41 +124,6 @@ public interface AVorkathConfig extends Config
 	)
 	default int foodID() { return 385; }
 
-	@ConfigItem(
-			keyName = "foodAmount2",
-			name = "Amount of food 2",
-			description = "Amount of food to withdraw",
-			position = 81,
-			section = Potions
-	)
-	default int foodAmount2() { return 4; }
-
-	@ConfigItem(
-			keyName = "foodID2",
-			name = "ID of food 2",
-			description = "ID of food to withdraw. (Only use if combo eating is required)",
-			position = 82,
-			section = Potions
-	)
-	default int foodID2() { return 0; }
-
-	@ConfigItem(
-			keyName = "healthTP",
-			name = "Min Health",
-			description = "Minimum health to allow before teleporting (after running out of food)",
-			position = 82,
-			section = Other
-	)
-	default int healthTP() { return 40; }
-
-	@ConfigItem(
-			keyName = "prayTP",
-			name = "Min Pray",
-			description = "Minimum prayer to allow before teleporting (after running out of potions)",
-			position = 82,
-			section = Other
-	)
-	default int prayTP() { return 1; }
 
 	@ConfigItem(
 			keyName = "useSpec",
@@ -286,16 +182,5 @@ public interface AVorkathConfig extends Config
 			section = Spec
 	)
 	default int specThreshold() { return 50; }
-
-
-	@ConfigItem(
-			keyName = "startButton",
-			name = "Start/Stop",
-			description = "",
-			position = 150
-	)
-	default Button startButton() {
-		return new Button();
-	}
 
 }

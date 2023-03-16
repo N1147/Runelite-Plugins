@@ -6,8 +6,8 @@ project.extra["PluginDescription"] = "Automated tempoross."
 dependencies {
     annotationProcessor(Libraries.lombok)
     annotationProcessor(Libraries.pf4j)
-    compileOnly("net.runelite:runelite-api:1.9.12-SNAPSHOT")
-    compileOnly("net.runelite:client:1.9.12-SNAPSHOT")
+    compileOnly("net.runelite:runelite-api:1.9.14-SNAPSHOT")
+    compileOnly("net.runelite:client:1.9.14-SNAPSHOT")
     compileOnly(Libraries.guice)
     compileOnly(Libraries.lombok)
     compileOnly(Libraries.pf4j)

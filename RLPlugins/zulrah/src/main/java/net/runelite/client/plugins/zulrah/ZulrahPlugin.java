@@ -24,7 +24,6 @@ import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.Utils.Core;
-import net.runelite.client.plugins.apker.QuickEatType;
 import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.overlay.components.InfoBoxComponent;
 import net.runelite.client.ui.overlay.components.LineComponent;

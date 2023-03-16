@@ -1,4 +1,4 @@
-package net.runelite.client.plugins.Gatherer;
+package net.runelite.client.plugins.NGatherer;
 
 import com.google.inject.Provides;
 import net.runelite.api.*;
@@ -23,9 +23,10 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @PluginDescriptor(
-	name = "NGatherer (Auto)",
+	name = "Gatherer (Auto)",
 	description = "Gathers from various nodes and banks or drops.",
 	tags = {"anarchise","skiller","thieving","woodcut","mining","hunter"},
 	enabledByDefault = false
@@ -36,12 +37,12 @@ public class Gatherer extends Plugin
 	@Inject
 	private Client client;
 	@Provides
-	NGathererConfig getConfig(final ConfigManager configManager)
+	net.runelite.client.plugins.Gatherer.NGathererConfig getConfig(final ConfigManager configManager)
 	{
-		return configManager.getConfig(NGathererConfig.class);
+		return configManager.getConfig(net.runelite.client.plugins.Gatherer.NGathererConfig.class);
 	}
 	@Inject
-	private NGathererConfig config;
+	private net.runelite.client.plugins.Gatherer.NGathererConfig config;
 	@Inject
 	private ClientThread clientThread;
 	@Inject
@@ -114,7 +115,7 @@ public class Gatherer extends Plugin
 		else {
 			startedDropping = false;
 		}*/
-		core.dropAllExcept(core.stringToIntList(config.item1()), true, 100, 350);
+		core.dropAllExcept(stringToIntList(config.item1()), true, 100, 350);
 	}
 
 	public WidgetItem getFood() {
@@ -180,7 +181,7 @@ public class Gatherer extends Plugin
 		if (!startedDropping && core.inventoryFull() && !config.bank()) {
 			startedDropping = true;
 		}
-		if (!core.inventoryContainsExcept(core.stringToIntList(config.item1())) && startedDropping) {
+		if (!core.inventoryContainsExcept(stringToIntList(config.item1())) && startedDropping) {
 			startedDropping = false;
 		}
 		if (!config.bank() && startedDropping) {
@@ -340,10 +341,14 @@ public class Gatherer extends Plugin
 			core.targetMenu = null;
 		}
 	}
+	public List<Integer> stringToIntList(String string)
+	{
+		return (string == null || string.trim().equals("")) ? List.of(0) :
+				Arrays.stream(string.split(",")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
+	}
 
 	public WidgetItem getFish() {
-		//ItemID.BLUEGILL, ItemID.COMMON_TENCH, ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN
-		return core.getInventoryWidgetItem(core.stringToIntList("22826,22829,22832,22835"));
+		return core.getInventoryWidgetItem(stringToIntList("22826,22829,22832,22835"));
 	}
 
 	@Subscribe

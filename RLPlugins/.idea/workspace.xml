@@ -4,625 +4,103 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abb69374-f9bb-4536-805e-e0fb389bd24d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/javaCompile.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/taskHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/ARunedragons/Numb.ARunedragons.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/AZulrah/Numb.AZulrah.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/IronBuilder/Numb.IronBuilder.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NFarming/Numb.NFarming.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NGauntlet/Numb.NGauntlet.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NInfernoHelper/Numb.NInfernoHelper.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NQuickEat/Numb.NQuickEat.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NQuickPot/Numb.NQuickPot.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NQuickPray/Numb.NQuickPray.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NTempoross/Numb.NTempoross.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/NUtils/Numb.NUtils.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/abankstander/Numb.abankstander.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/aconstruction/Numb.aconstruction.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/apest/Numb.apest.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/arooftops/Numb.arooftops.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/awyverns/Numb.awyverns.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/AHotkeys.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/classes/java/main/net/runelite/client/plugins/ahotkeys/AHotkeys.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/classes/java/main/net/runelite/client/plugins/ahotkeys/AHotkeysConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/libs/AHotkeys-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/src/main/java/net/runelite/client/plugins/ahotkeys/AHotkeys.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/src/main/java/net/runelite/client/plugins/ahotkeys/AHotkeysConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AHotkeys/src/main/java/net/runelite/client/plugins/ahotkeys/AHotkeysListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/APker.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/PkToolsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/PkToolsHotkeyListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/PkToolsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/QuickEatType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/ScriptCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/ATempoross.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/src/main/java/net/runelite/client/plugins/ATempoross/NTempoross.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/src/main/java/net/runelite/client/plugins/ATempoross/NTemporossConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ATempoross/src/main/java/net/runelite/client/plugins/ATempoross/NTemporossState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/AVorkath.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/NGatherer.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/src/main/java/net/runelite/client/plugins/NGatherer/Gatherer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGatherer/src/main/java/net/runelite/client/plugins/NGatherer/NGathererConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/NGauntlet.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/Calculations.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/Core.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/NewMenuEntry.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/Walking.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/Hunllef.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntletConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntletState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGuardians/NGuardians.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGuardians/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGuardians/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGuardians/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/Guardians.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/NGuardiansConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/NQuickFighter.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighter$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighterConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighterState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/libs/NQuickFighter-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/src/main/java/net/runelite/client/plugins/NQuickFighter/NQuickFighter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NQuickFighter/src/main/java/net/runelite/client/plugins/NQuickFighter/NQuickFighterConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/Rooftops.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/classes/java/main/net/runelite/client/plugins/Utils/Calculations.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/classes/java/main/net/runelite/client/plugins/Utils/Core.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/classes/java/main/net/runelite/client/plugins/Utils/NewMenuEntry.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/classes/java/main/net/runelite/client/plugins/Utils/Walking.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/src/main/java/net/runelite/client/plugins/Rooftops/ARooftopsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Rooftops/src/main/java/net/runelite/client/plugins/Rooftops/ARooftopsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/autologhop.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/classes/java/main/net/runelite/client/plugins/autologhop/AutoLogHop$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/classes/java/main/net/runelite/client/plugins/autologhop/AutoLogHop.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/classes/java/main/net/runelite/client/plugins/autologhop/AutoLogHopConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/classes/java/main/net/runelite/client/plugins/autologhop/Method.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/libs/autologhop-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/src/main/java/net/runelite/client/plugins/autologhop/AutoLogHop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/src/main/java/net/runelite/client/plugins/autologhop/AutoLogHopConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/autologhop/src/main/java/net/runelite/client/plugins/autologhop/Method.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/libs/Numb.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/libs/Paralytic.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/configuration-cache/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/noVersion/buildSrc.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/BootstrapPlugin$apply$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/BootstrapPlugin$inlined$sam$i$org_gradle_api_Action$0.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/BootstrapPlugin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/BootstrapTask.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/JsonBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/Libraries$Versions.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/Libraries.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/META-INF/buildSrc.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/ProjectKt.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/classes/kotlin/main/ProjectVersions.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/buildSrcjar-classes.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/build-history.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/constants.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/counters.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/kotlin/compileKotlin/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/libs/buildSrc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/reports/plugin-development/validation-report.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/source-roots/buildSrc/source-roots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/BootstrapPlugin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/BootstrapTask.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/Dependencies.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/JsonBuilder.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buildSrc/src/main/kotlin/Project.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/classes/java/main/net/runelite/client/plugins/Utils/Calculations.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/classes/java/main/net/runelite/client/plugins/Utils/Core.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/classes/java/main/net/runelite/client/plugins/Utils/NewMenuEntry.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/classes/java/main/net/runelite/client/plugins/Utils/Walking.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/constructionhelper.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/AConstructionConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/AConstructionPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/CHMode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/CHWidget.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/MiscUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/TaskSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Build.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Craft.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Dialogue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Dialogue2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Enter_House.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Leave_House.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Phials.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Remove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Reset.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contructionhelper/src/main/java/net/runelite/client/plugins/constructionhelper/Tasks/Run.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/build/classes/java/main/net/runelite/client/plugins/leftclickloot/LeftClickLootPlugin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/build/libs/leftclickloot-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/leftclickloot.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/leftclickloot/src/main/java/net/runelite/client/plugins/leftclickloot/LeftClickLootPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/AHotkeys-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/APker-1.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/ATempoross-1.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/AVorkath-1.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/NGatherer-0.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/NGuardians-0.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/NQuickFighter-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/autologhop-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/leftclickloot-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/zulrah-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/Constants.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/InstanceTimerOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/OverlayUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PhaseOverlay$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PhaseOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerHelperOverlay$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerHelperOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerMarkerOverlay$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerMarkerOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/RotationType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/SceneOverlay$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/SceneOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/StandLocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahAttributes.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig$DisplayMode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig$DisplayType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig$SnakelingSettings.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahData$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahData.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahLocation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahNpc.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahPhase.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahPlugin$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahPlugin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/libs/zulrah-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/ZulrahConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/ZulrahPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/clock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/protect_from_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/protect_from_missiles.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/zulrah_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/zulrah_melee.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/zulrah_range.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zulrah/zulrah.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/ARunedragons/Numb.ARunedragons.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/AVorkath/Numb.AVorkath.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/AZulrah/Numb.AZulrah.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/NFarming/Numb.NFarming.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/NGauntlet/Numb.NGauntlet.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/NGuardians/Numb.NGuardians.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/NInfernoHelper/Numb.NInfernoHelper.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/NTempoross/Numb.NTempoross.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/ahotkeys/Numb.ahotkeys.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/arooftops/Numb.arooftops.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/.idea/modules/awyverns/Numb.awyverns.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/arunedragons.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/src/main/java/net/runelite/client/plugins/arunedragons/ARuneDragonsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/src/main/java/net/runelite/client/plugins/arunedragons/ARuneDragonsOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/src/main/java/net/runelite/client/plugins/arunedragons/ARuneDragonsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/src/main/java/net/runelite/client/plugins/arunedragons/ARuneDragonsState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/src/main/java/net/runelite/client/plugins/arunedragons/CombatType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/ARunedragons/src/main/java/net/runelite/client/plugins/arunedragons/PrayerRestoreType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AVorkath/avorkath.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/azulrah.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/AZulrahConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/AZulrahOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/AZulrahPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/AZulrahState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/Constants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ImagePanelComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/PrayerRestoreType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/RotationType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/StandLocation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/TextComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/Victim.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahAttributes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahImageManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahLocation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahNpc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahPhase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/java/net/runelite/client/plugins/azulrah/ZulrahType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/resources/net/runelite/client/plugins/azulrah/clock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/resources/net/runelite/client/plugins/azulrah/protect_from_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/resources/net/runelite/client/plugins/azulrah/protect_from_missiles.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/resources/net/runelite/client/plugins/azulrah/zulrah_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/resources/net/runelite/client/plugins/azulrah/zulrah_melee.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/AZulrah/src/main/resources/net/runelite/client/plugins/azulrah/zulrah_range.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/IronBuilder.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/classes/java/main/net/runelite/client/plugins/NGauntlet/NGauntletOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/classes/java/main/net/runelite/client/plugins/NGauntlet/PQuickEat.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/classes/java/main/net/runelite/client/plugins/NGauntlet/PQuickEatConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/classes/java/main/net/runelite/client/plugins/NGauntlet/PQuickEatType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/libs/NGauntlet-0.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/src/main/java/net/runelite/client/plugins/IronBuilder/IronBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/src/main/java/net/runelite/client/plugins/IronBuilder/IronBuilderConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/IronBuilder/src/main/java/net/runelite/client/plugins/IronBuilder/IronBuilderOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/apker.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/AHotkeysListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/PkToolsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/PkToolsHotkeyListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/PkToolsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/PrayerRestoreType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/ScriptCommand/ScriptCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/ScriptCommand/ScriptCommandFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/item1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/obj1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/apker/src/main/java/net/runelite/client/plugins/apker/type1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/arooftops.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ARooftopsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ARooftopsObstacleType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ARooftopsObstacles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ARooftopsOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ARooftopsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ARooftopsState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/AlchCourse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/Portals.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/arooftops/src/main/java/net/runelite/client/plugins/arooftops/ReflectBreakHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/awyverns.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/META-INF/extensions.idx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsConfig$DisplayMode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsConfig$DisplayType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsConfig$SnakelingSettings.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsOverlay.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsPlugin$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsPlugin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/AWyvernsType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/CombatType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/Constants.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/PrayerRestoreType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/TextComponent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/Victim$Type.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/classes/java/main/net/runelite/client/plugins/awyverns/Victim.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/config/proguard/proguard.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/libs/awyverns-1.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/resources/main/net/runelite/client/plugins/awyverns/clock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/resources/main/net/runelite/client/plugins/awyverns/protect_from_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/resources/main/net/runelite/client/plugins/awyverns/protect_from_missiles.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/resources/main/net/runelite/client/plugins/awyverns/zulrah_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/resources/main/net/runelite/client/plugins/awyverns/zulrah_melee.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/resources/main/net/runelite/client/plugins/awyverns/zulrah_range.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/AWyvernsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/AWyvernsOverlay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/AWyvernsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/AWyvernsState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/AWyvernsType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/CombatType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/Constants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/PrayerRestoreType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/TextComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/java/net/runelite/client/plugins/awyverns/Victim.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/resources/net/runelite/client/plugins/awyverns/clock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/resources/net/runelite/client/plugins/awyverns/protect_from_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/resources/net/runelite/client/plugins/awyverns/protect_from_missiles.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/resources/net/runelite/client/plugins/awyverns/zulrah_magic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/resources/net/runelite/client/plugins/awyverns/zulrah_melee.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/awyverns/src/main/resources/net/runelite/client/plugins/awyverns/zulrah_range.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../plugins-master/release/apker-1.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/RunAllatori.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../Allatori/files/RunAllatori.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Allatori/files/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NFarming-0.0.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NGatherer-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NGuardians-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NQuickEat-0.0.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NQuickFighter-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NQuickPot-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NQuickPray-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NTempoross-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/in/NUtils-0.0.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/log.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Allatori/files/log.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NFarming-0.0.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NGatherer-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NGuardians-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NInfernoHelper-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NQuickEat-0.0.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NQuickFighter-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NQuickPot-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NQuickPray-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NTempoross-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Allatori/files/out/NUtils-0.0.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/6.8.3/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.idea/modules/NumbSuite/Numb.NumbSuite.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NFarming/build/classes/java/main/net/runelite/client/plugins/NFarming/PFarming$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NFarming/build/classes/java/main/net/runelite/client/plugins/NFarming/PFarming$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NFarming/build/classes/java/main/net/runelite/client/plugins/NFarming/PFarming.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NFarming/build/classes/java/main/net/runelite/client/plugins/NFarming/PFarming.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NFarming/build/libs/NFarming-0.0.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NFarming/build/libs/NFarming-0.0.2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NFarming/src/main/java/net/runelite/client/plugins/NFarming/PFarming.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NFarming/src/main/java/net/runelite/client/plugins/NFarming/PFarming.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGatherer/NGatherer.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGatherer/NGatherer.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGatherer/build/classes/java/main/net/runelite/client/plugins/NGatherer/NGatherer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGatherer/build/classes/java/main/net/runelite/client/plugins/NGatherer/NGatherer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGatherer/build/classes/java/main/net/runelite/client/plugins/NGatherer/NGatherer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGatherer/build/classes/java/main/net/runelite/client/plugins/NGatherer/NGatherer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGatherer/build/libs/NGatherer-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGatherer/build/libs/NGatherer-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGatherer/src/main/java/net/runelite/client/plugins/NGatherer/NGatherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGatherer/src/main/java/net/runelite/client/plugins/NGatherer/NGatherer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGauntlet/build/classes/java/main/net/runelite/client/plugins/NGauntlet/NGauntlet$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGauntlet/build/classes/java/main/net/runelite/client/plugins/NGauntlet/NGauntlet$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGauntlet/build/classes/java/main/net/runelite/client/plugins/NGauntlet/NGauntlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGauntlet/build/classes/java/main/net/runelite/client/plugins/NGauntlet/NGauntlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/NGuardians$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/NGuardians$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/NGuardians.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/NGuardians.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGuardians/build/libs/NGuardians-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGuardians/build/libs/NGuardians-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/NGuardians.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/NGuardians.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/NGuardiansConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/NGuardiansConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NInfernoHelper/build/classes/java/main/net/runelite/client/plugins/NInfernoHelper/NInfernoHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NInfernoHelper/build/classes/java/main/net/runelite/client/plugins/NInfernoHelper/NInfernoHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NInfernoHelper/build/libs/NInfernoHelper-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NInfernoHelper/build/libs/NInfernoHelper-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NInfernoHelper/src/main/java/net/runelite/client/plugins/NInfernoHelper/NInfernoHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NInfernoHelper/src/main/java/net/runelite/client/plugins/NInfernoHelper/NInfernoHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickEat/NQuickEat.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickEat/NQuickEat.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickEat/build/classes/java/main/net/runelite/client/plugins/NQuickEat/PQuickEat.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickEat/build/classes/java/main/net/runelite/client/plugins/NQuickEat/PQuickEat.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickEat/build/libs/NQuickEat-0.0.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickEat/build/libs/NQuickEat-0.0.2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickEat/src/main/java/net/runelite/client/plugins/NQuickEat/PQuickEat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickEat/src/main/java/net/runelite/client/plugins/NQuickEat/PQuickEat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickFighter/NQuickFighter.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickFighter/NQuickFighter.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighter$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickFighter/build/classes/java/main/net/runelite/client/plugins/NQuickFighter/NQuickFighter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickFighter/build/libs/NQuickFighter-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickFighter/build/libs/NQuickFighter-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickFighter/src/main/java/net/runelite/client/plugins/NQuickFighter/NQuickFighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickFighter/src/main/java/net/runelite/client/plugins/NQuickFighter/NQuickFighter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPot/NQuickPot.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPot/NQuickPot.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPot/build/classes/java/main/net/runelite/client/plugins/NQuickPot/NQuickPot.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPot/build/classes/java/main/net/runelite/client/plugins/NQuickPot/NQuickPot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPot/build/classes/java/main/net/runelite/client/plugins/NQuickPot/NQuickPotPot.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPot/build/classes/java/main/net/runelite/client/plugins/NQuickPot/NQuickPotPot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPot/build/libs/NQuickPot-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPot/build/libs/NQuickPot-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPot/src/main/java/net/runelite/client/plugins/NQuickPot/NQuickPot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPot/src/main/java/net/runelite/client/plugins/NQuickPot/NQuickPot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPot/src/main/java/net/runelite/client/plugins/NQuickPot/NQuickPotPot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPot/src/main/java/net/runelite/client/plugins/NQuickPot/NQuickPotPot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPray/NQuickPray.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPray/NQuickPray.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPray/build/classes/java/main/net/runelite/client/plugins/NQuickPray/NQuickPray.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPray/build/classes/java/main/net/runelite/client/plugins/NQuickPray/NQuickPray.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPray/build/classes/java/main/net/runelite/client/plugins/NQuickPray/NQuickPrayType.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPray/build/classes/java/main/net/runelite/client/plugins/NQuickPray/NQuickPrayType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPray/build/libs/NQuickPray-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPray/build/libs/NQuickPray-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPray/src/main/java/net/runelite/client/plugins/NQuickPray/NQuickPray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPray/src/main/java/net/runelite/client/plugins/NQuickPray/NQuickPray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NQuickPray/src/main/java/net/runelite/client/plugins/NQuickPray/NQuickPrayType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NQuickPray/src/main/java/net/runelite/client/plugins/NQuickPray/NQuickPrayType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NTempoross/build/classes/java/main/net/runelite/client/plugins/NTempoross/NTempoross.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NTempoross/build/classes/java/main/net/runelite/client/plugins/NTempoross/NTempoross.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NTempoross/build/libs/NTempoross-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NTempoross/build/libs/NTempoross-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NTempoross/src/main/java/net/runelite/client/plugins/NTempoross/NTempoross.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NTempoross/src/main/java/net/runelite/client/plugins/NTempoross/NTempoross.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/NUtils.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/NUtils.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/NewMenuEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/NewMenuEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils$ByteArrayClassLoader$ByteUrlConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils$ByteArrayClassLoader$ByteUrlConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils$ByteArrayClassLoader$BytesHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils$ByteArrayClassLoader$BytesHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils$ByteArrayClassLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils$ByteArrayClassLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/classes/java/main/net/runelite/client/plugins/NUtils/PUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/libs/NUtils-0.0.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/libs/NUtils-0.0.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/src/main/java/net/runelite/client/plugins/NUtils/NewMenuEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/src/main/java/net/runelite/client/plugins/NUtils/NewMenuEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/src/main/java/net/runelite/client/plugins/NUtils/PConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/src/main/java/net/runelite/client/plugins/NUtils/PConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/NUtils/src/main/java/net/runelite/client/plugins/NUtils/PUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/NUtils/src/main/java/net/runelite/client/plugins/NUtils/PUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/build/libs/Numb.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/build/libs/Numb.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/buildSrcjar-classes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/buildSrcjar-classes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/kotlin/compileKotlin/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/libs/buildSrc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/libs/buildSrc.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/plugins.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NFarming-0.0.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NGatherer-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/release/NGatherer-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NGauntlet-0.0.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NGuardians-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NInfernoHelper-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NQuickEat-0.0.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/release/NQuickEat-0.0.2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NQuickFighter-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/release/NQuickFighter-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NQuickPot-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/release/NQuickPot-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NQuickPray-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/release/NQuickPray-0.0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NTempoross-0.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/release/NUtils-0.0.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/release/NUtils-0.0.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../plugins-master/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../plugins-master/settings.gradle.kts" afterDir="false" />
+    <list default="true" id="abb69374-f9bb-4536-805e-e0fb389bd24d" name="Changes" comment="First Commit (RIP)">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.8.3/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AHotkeys/AHotkeys.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/AHotkeys/AHotkeys.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AHotkeys/build/classes/java/main/net/runelite/client/plugins/ahotkeys/AHotkeys.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AHotkeys/build/classes/java/main/net/runelite/client/plugins/ahotkeys/AHotkeysConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AHotkeys/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AHotkeys/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/APker.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/classes/java/main/META-INF/extensions.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/classes/java/main/net/runelite/client/plugins/apker/PkToolsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/classes/java/main/net/runelite/client/plugins/apker/PkToolsHotkeyListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/libs/APker-1.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/libs/NUtils-0.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/PkToolsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/PkToolsHotkeyListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/PkToolsPlugin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/QuickEatType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/APker/src/main/java/net/runelite/client/plugins/apker/ScriptCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ATempoross/ATempoross.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/ATempoross/ATempoross.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ATempoross/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ATempoross/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AVorkath/AVorkath.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/AVorkath/AVorkath.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AVorkath/build/libs/AVorkath-1.0.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/AVorkath/build/libs/AVorkath-1.0.5.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AVorkath/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AVorkath/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/AVorkath/src/main/java/net/runelite/client/plugins/avorkath/AVorkathPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGatherer/build/classes/java/main/net/runelite/client/plugins/Gatherer/Gatherer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGatherer/build/libs/NGatherer-0.0.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/NGatherer/build/libs/NGatherer-0.0.3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGatherer/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NGatherer/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGatherer/src/main/java/net/runelite/client/plugins/NGatherer/Gatherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/NGatherer/src/main/java/net/runelite/client/plugins/NGatherer/Gatherer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/NGauntlet.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/META-INF/extensions.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/Calculations.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/Core.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/NewMenuEntry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/classes/java/main/net/runelite/client/plugins/Utils/Walking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/libs/NUtils-0.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/Hunllef.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntletConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGauntlet/src/main/java/net/runelite/client/plugins/NGauntlet/NGauntletState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/Guardians$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/Guardians$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/Guardians.class" beforeDir="false" afterPath="$PROJECT_DIR$/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/Guardians.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/NGuardiansState.class" beforeDir="false" afterPath="$PROJECT_DIR$/NGuardians/build/classes/java/main/net/runelite/client/plugins/NGuardians/NGuardiansState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGuardians/build/libs/NGuardians-0.0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/NGuardians/build/libs/NGuardians-0.0.1.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/Guardians.java" beforeDir="false" afterPath="$PROJECT_DIR$/NGuardians/src/main/java/net/runelite/client/plugins/NGuardians/Guardians.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autologhop/autologhop.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/autologhop/autologhop.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/6.8.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/InstanceTimerOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/OverlayUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PhaseOverlay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PhaseOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerHelperOverlay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerHelperOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerMarkerOverlay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/PrayerMarkerOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/RotationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/SceneOverlay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/SceneOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/StandLocation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahAttributes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig$DisplayMode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig$DisplayType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig$SnakelingSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahData$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahLocation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahNpc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahPhase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahPlugin$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahPlugin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/classes/java/main/net/runelite/client/plugins/zulrah/ZulrahType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/zulrah/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/ZulrahPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/zulrah/src/main/java/net/runelite/client/plugins/zulrah/ZulrahPlugin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -649,30 +127,15 @@
         <task path="$PROJECT_DIR$/leftclickcons">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/AHotkeys">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Numb" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Numb" type="f1a62948:ProjectNode" />
-                <item name="leftclickcons" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Numb" type="f1a62948:ProjectNode" />
-                <item name="leftclickcons" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Numb" type="f1a62948:ProjectNode" />
-                <item name="leftclickcons" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -755,11 +218,11 @@
       <recent name="net.runelite.client.plugins.leftclickpouches" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.RLPlugins:leftclickloot [build]">
-    <configuration name="RLPlugins:NUtils [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.plugins-master [bootstrapPlugins]">
+    <configuration name="RLPlugins:AHotkeys [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/NUtils" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/AHotkeys" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -863,11 +326,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.plugins-master [bootstrapPlugins]" />
+        <item itemvalue="Gradle.plugins-master [build]" />
+        <item itemvalue="Gradle.RLPlugins:AHotkeys [build]" />
         <item itemvalue="Gradle.RLPlugins:leftclickloot [build]" />
         <item itemvalue="Gradle.RLPlugins:leftclickcons [build]" />
-        <item itemvalue="Gradle.plugins-master [build]" />
-        <item itemvalue="Gradle.plugins-master [bootstrapPlugins]" />
-        <item itemvalue="Gradle.RLPlugins:NUtils [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -880,6 +343,14 @@
       <option name="presentableId" value="Default" />
       <updated>1653896446786</updated>
     </task>
+    <task id="LOCAL-00001" summary="First Commit (RIP)">
+      <created>1678970174561</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678970174561</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -895,5 +366,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="First Commit (RIP)" />
+    <option name="LAST_COMMIT_MESSAGE" value="First Commit (RIP)" />
   </component>
 </project>

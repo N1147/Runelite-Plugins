@@ -96,12 +96,6 @@ public class Guardians extends Plugin
 		if (client.getLocalPlayer().getAnimation() != -1 && client.getLocalPlayer().getAnimation() != 791 && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_RUNE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_ADAMANT_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BLACK_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_MITHRIL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_IRON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BRONZE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_STEEL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_3A_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_CRYSTAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_GILDED_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_INFERNAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_OR && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_UPGRADED){
 			return NGuardiansState.ANIMATING;
 		}
-		if (client.getLocalPlayer().getWorldArea().intersectsWith(LOBBY)) {
-			GameObject PORTAL = core.findNearestGameObject(43849);
-			core.sendGameMessage("ENTERING GAME");
-			core.useGameObjectDirect(PORTAL);
-			return NGuardiansState.IDLE;
-		}
 		if (!LargePouchHalfFilled) {
 			if (Entered() < 7 && !LargePouchHalfFilled) {
 				return NGuardiansState.IDLE;

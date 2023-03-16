@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 1.0.1
-Plugin-Id: apker-plugin
-Plugin-Provider: ZTD#1147
-Plugin-Description: Arsenal of PvP tools.
-Plugin-License: 3-Clause BSD License
-
