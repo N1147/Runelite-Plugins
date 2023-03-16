@@ -1,1 +1,0 @@
-java -Xms128m -Xmx2048m -jar ..\lib\allatori.jar config.xml
