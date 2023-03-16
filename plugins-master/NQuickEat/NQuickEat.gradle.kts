@@ -8,7 +8,7 @@ version = "0.0.2"
 project.extra["PluginName"] = "NQuickEat"
 project.extra["PluginDescription"] = "Eats food."
 project.extra["PluginProvider"] = "ZTD#1147"
-project.extra["PluginSupportUrl"] = "https://github.com/N1147/download"
+project.extra["PluginSupportUrl"] = "https://github.com/Anarchise/aplugins"
 dependencies {
     compileOnly(project(":NUtils"))
 }

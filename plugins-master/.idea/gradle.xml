@@ -9,17 +9,17 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/NFarming" />
+            <option value="$PROJECT_DIR$/IronBuilder" />
             <option value="$PROJECT_DIR$/NGatherer" />
-            <option value="$PROJECT_DIR$/NGauntlet" />
-            <option value="$PROJECT_DIR$/NGuardians" />
-            <option value="$PROJECT_DIR$/NInfernoHelper" />
             <option value="$PROJECT_DIR$/NQuickEat" />
             <option value="$PROJECT_DIR$/NQuickFighter" />
             <option value="$PROJECT_DIR$/NQuickPot" />
             <option value="$PROJECT_DIR$/NQuickPray" />
-            <option value="$PROJECT_DIR$/NTempoross" />
             <option value="$PROJECT_DIR$/NUtils" />
+            <option value="$PROJECT_DIR$/abankstander" />
+            <option value="$PROJECT_DIR$/aconstruction" />
+            <option value="$PROJECT_DIR$/apest" />
+            <option value="$PROJECT_DIR$/apker" />
             <option value="$PROJECT_DIR$/buildSrc" />
           </set>
         </option>

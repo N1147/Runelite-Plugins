@@ -1,0 +1,8 @@
+net/runelite/client/plugins/NGauntlet/PQuickEatConfig.java
+ net.runelite.client.plugins.NGauntlet.PQuickEatConfig
+net/runelite/client/plugins/NGauntlet/NGauntletOverlay.java
+ net.runelite.client.plugins.NGauntlet.NGauntletOverlay
+net/runelite/client/plugins/NGauntlet/PQuickEat.java
+ net.runelite.client.plugins.NGauntlet.PQuickEat
+net/runelite/client/plugins/NGauntlet/PQuickEatType.java
+ net.runelite.client.plugins.NGauntlet.PQuickEatType

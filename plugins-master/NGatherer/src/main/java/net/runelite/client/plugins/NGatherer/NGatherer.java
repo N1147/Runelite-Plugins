@@ -73,17 +73,15 @@ public class NGatherer extends Plugin
 		reset();
 	}
 
-	private void reset() throws IOException {
-		if (!started) {
-			if (utils.util()) {
-				started = true;
-			}
-		}
+	private void reset() throws IOException, ClassNotFoundException {
 		values = config.loot().toLowerCase().split("\\s*,\\s*");
 		if (!config.loot().isBlank()) {
 			lootableItems.clear();
 			lootableItems.addAll(Arrays.asList(values));
 		}
+		//FISHIES.clear();
+		//FISHIES.add(ItemID.BLUEGILL, ItemID.COMMON_TENCH);
+		//FISHIES.add(ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN);
 		itemIds.clear();
 		itemIds.addAll(utils.stringToIntList(config.items()));
 		startTeaks = false;
@@ -91,11 +89,14 @@ public class NGatherer extends Plugin
 		state = null;
 		botTimer = null;
 	}
-	private void handleDropItems() {utils.dropAllExcept(utils.stringToIntList(config.items()), true, 100, 350);}
+	private void handleDropItems() {
+		if (utils.inventoryContains())
+		utils.dropAllExcept(utils.stringToIntList(config.items()), true, 100, 350);
+	}
 
 	public WidgetItem getFood() {
 		WidgetItem item;
-		item = utils.getInventoryWidgetItem(config.foodID());
+		item = utils.getInventoryWidgetItem(Collections.singletonList(config.foodID()));
 		if (item != null)
 		{
 			return item;
@@ -108,7 +109,7 @@ public class NGatherer extends Plugin
 		reset();
 	}
 	@Subscribe
-	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException {
+	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException, ClassNotFoundException {
 		if (!configButtonClicked.getGroup().equalsIgnoreCase("NGatherer")) {
 			return;
 		}
@@ -305,10 +306,10 @@ public class NGatherer extends Plugin
 			if (utils.inventoryFull() && config.aerial()) {
 				startCutting = true;
 			}
-			if (config.aerial() && startCutting && !utils.inventoryContains(ItemID.BLUEGILL, ItemID.COMMON_TENCH, ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN)) {
+			if (config.aerial() && startCutting && !utils.inventoryContains(FISH)) {
 				startCutting = false;
 			}
-			if (config.aerial() && startCutting && utils.inventoryContains(ItemID.BLUEGILL, ItemID.COMMON_TENCH, ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN)) {
+			if (config.aerial() && startCutting && utils.inventoryContains(FISH)) {
 				return NGathererState.CUT_FISH;
 			}
 			if (!utils.inventoryFull() && bs != null && config.typethief() == NGathererTypeee.NPC) {
@@ -320,6 +321,7 @@ public class NGatherer extends Plugin
 		}
 		return NGathererState.TIMEOUT;
 	}
+	private final Set<Integer> FISH = Set.of(ItemID.BLUEGILL, ItemID.COMMON_TENCH, ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN);
 	private boolean banked = false;
 	private boolean startCutting = false;
 	private NGathererState getBankState()
@@ -362,12 +364,14 @@ public class NGatherer extends Plugin
 			clientThread.invoke(() -> client.invokeMenuAction("", "", targetObject.getId(), opcode, targetObject.getLocalLocation().getSceneX(), targetObject.getLocalLocation().getSceneY()));
 		}
 	}
+
 	public WidgetItem getFish() {
-		return utils.getInventoryWidgetItem(ItemID.BLUEGILL, ItemID.COMMON_TENCH, ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN);
+		//ItemID.BLUEGILL, ItemID.COMMON_TENCH, ItemID.MOTTLED_EEL, ItemID.GREATER_SIREN
+		return utils.getInventoryWidgetItem(utils.stringToIntList("22826,22829,22832,22835"));
 	}
 
 	@Subscribe
-	private void onGameTick(final GameTick event) throws IOException {
+	private void onGameTick(final GameTick event) throws IOException, ClassNotFoundException {
 		if (!startTeaks){
 			return;
 		}
@@ -375,11 +379,12 @@ public class NGatherer extends Plugin
 		bs2 = utils.findNearestGameObject(config.objID());
 		beast = utils.getFirstNPCWithLocalTarget();
 		player = client.getLocalPlayer();
+
 		if (client.getGameState() != GameState.LOGGED_IN) {
 			return;
 		}
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilga() >7) {
 				started = true;
 			}
 			startTeaks = false;
@@ -389,7 +394,7 @@ public class NGatherer extends Plugin
 			state = getState();
 			switch (state) {
 				case TIMEOUT:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout--;
 					break;
 				case ANIMATING:
@@ -399,8 +404,10 @@ public class NGatherer extends Plugin
 					lootItem(loot);
 					break;
 				case CUT_FISH:
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.KNIFE, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.KNIFE).getIndex(), WidgetInfo.INVENTORY.getId()));
-					clientThread.invoke(() -> client.invokeMenuAction("", "", getFish().getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), getFish().getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(ItemID.KNIFE,"use");
+					//utils.getInventoryWidgetItem()
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.KNIFE, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.KNIFE)).getIndex(), WidgetInfo.INVENTORY.getId()));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", getFish().getId(), MenuAction.ITEM_USE_ON_ITEM.getId(), getFish().getIndex(), WidgetInfo.INVENTORY.getId()));
 					break;
 				case DROP_INV:
 					handleDropItems();
@@ -412,7 +419,8 @@ public class NGatherer extends Plugin
 					timeout = tickDelay();
 					break;
 				case DROP_JUG:
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 1935, MenuAction.ITEM_FIFTH_OPTION.getId(), utils.getInventoryWidgetItem(1935).getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(1935,"drop");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", 1935, MenuAction.ITEM_FIFTH_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(1935)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					timeout = tickDelay();
 					break;
 				case WALK_FIRST:
@@ -425,99 +433,61 @@ public class NGatherer extends Plugin
 					break;
 				case OPEN_POUCH:
 					if (utils.inventoryContains(22521)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22521, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22521).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22521,"open-all");
 					}
 					if (utils.inventoryContains(22522)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22522, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22522).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22522,"open-all");
 					}
 					if (utils.inventoryContains(22523)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22523, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22523).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22523,"open-all");
 					}
 					if (utils.inventoryContains(22524)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22524, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22524).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22524,"open-all");
 					}
 					if (utils.inventoryContains(22525)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22525, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22525).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22525,"open-all");
 					}
 					if (utils.inventoryContains(22526)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22526, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22526).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22526,"open-all");
 					}
 					if (utils.inventoryContains(22527)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22527, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22527).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22527,"open-all");
 					}
 					if (utils.inventoryContains(22528)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22528, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22528).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22528,"open-all");
 					}
 					if (utils.inventoryContains(22529)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22529, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22529).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22529,"open-all");
 					}
 					if (utils.inventoryContains(22530)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22530, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22530).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22530,"open-all");
 					}
 					if (utils.inventoryContains(22531)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22531, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22531).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22531,"open-all");
 					}
 					if (utils.inventoryContains(22532)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22532, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22532).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22532,"open-all");
 					}
 					if (utils.inventoryContains(22533)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22533, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22533).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22533,"open-all");
 					}
 					if (utils.inventoryContains(22534)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22534, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22534).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22534,"open-all");
 					}
 					if (utils.inventoryContains(22535)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22535, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22535).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22535,"open-all");
 					}
 					if (utils.inventoryContains(22536)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22536, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22536).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22536,"open-all");
 					}
 					if (utils.inventoryContains(22537)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22537, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22537).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22537,"open-all");
 					}
 					if (utils.inventoryContains(22538)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 22538, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(22538).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(22538,"open-all");
 					}
 					if (utils.inventoryContains(24703)) {
-						clientThread.invoke(() -> client.invokeMenuAction(
-								"", "", 24703, MenuAction.ITEM_FIRST_OPTION.getId(),
-								utils.getInventoryWidgetItem(24703).getIndex(), WidgetInfo.INVENTORY.getId()));
+						utils.useItem(24703,"open-all");
 					}
 					timeout = tickDelay();
 					break;
@@ -538,7 +508,8 @@ public class NGatherer extends Plugin
 					timeout = tickDelay();
 					break;
 				case EQUIP_NECKLACE:
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 21143, MenuAction.ITEM_SECOND_OPTION.getId(), utils.getInventoryWidgetItem(21143).getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(ItemID.DODGY_NECKLACE,"equip","wear","wield");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", 21143, MenuAction.CC_OP.getId(), utils.getInventoryWidgetItem(Collections.singletonList(21143)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					timeout = tickDelay();
 					break;
 				case DEACTIVATE_PRAY:
@@ -567,16 +538,7 @@ public class NGatherer extends Plugin
 				case EAT_FOOD:
 					WidgetItem food = getFood();
 					if (food != null) {
-						clientThread.invoke(() ->
-								client.invokeMenuAction(
-										"",
-										"",
-										food.getId(),
-										MenuAction.ITEM_FIRST_OPTION.getId(),
-										food.getIndex(),
-										WidgetInfo.INVENTORY.getId()
-								)
-						);
+						utils.useItem(food.getId(),"eat","drink");
 					}
 					break;
 				case FIND_BANK:

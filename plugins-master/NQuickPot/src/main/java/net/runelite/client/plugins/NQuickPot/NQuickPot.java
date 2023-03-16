@@ -84,49 +84,7 @@ public class NQuickPot extends Plugin
 			}
 		}
 	}
-	public WidgetItem getConfigItem1()
-	{
-		WidgetItem item;
-		item = config.pot1().getItemFromInventory(client);
-		return item;
-	}
-	public WidgetItem getConfigItem2()
-	{
-		WidgetItem item;
-		item = config.pot2().getItemFromInventory(client);
-		return item;
-	}
-	public WidgetItem getConfigItem3()
-	{
-		WidgetItem item;
-		item = config.pot3().getItemFromInventory(client);
-		return item;
-	}
-	public WidgetItem GetAntifireItem()
-	{
-		WidgetItem item;
 
-		item = NQuickPotPot.ANTIFIRE.getItemFromInventory(client);
-
-		if (item != null)
-		{
-			return item;
-		}
-
-		return item;
-	}
-	public WidgetItem GetAntiVenomItem() {
-
-		WidgetItem item;
-
-		item = NQuickPotPot.ANTIVENOM.getItemFromInventory(client);
-
-		if (item != null) {
-			return item;
-		}
-
-		return item;
-	}
 	@Subscribe
 	public void onInteractingChanged(final InteractingChanged event)
 	{
@@ -157,50 +115,50 @@ public class NQuickPot extends Plugin
 	boolean started = false;
 
 	@Subscribe
-	public void onGameTick(GameTick event) throws IOException {
+	public void onGameTick(GameTick event) throws IOException, ClassNotFoundException {
 		if (client.getGameState() != GameState.LOGGED_IN) {
 			return;
 		}
-		if (!started) {
-			if (utils.util()) {
-				started = true;
-			}
-			return;
-		}
 		if (config.antivenom() && client.getVar(VarPlayer.IS_POISONED) > 0) {
-			WidgetItem ven = GetAntiVenomItem();
+			WidgetItem ven = utils.getInventoryWidgetItem(ItemID.ANTIDOTE1, ItemID.ANTIDOTE2, ItemID.ANTIDOTE3, ItemID.ANTIDOTE4, ItemID.SUPERANTIPOISON1, ItemID.SUPERANTIPOISON2, ItemID.SUPERANTIPOISON3, ItemID.SUPERANTIPOISON4,ItemID.ANTIDOTE1_5958, ItemID.ANTIDOTE2_5956, ItemID.ANTIDOTE3_5954, ItemID.ANTIDOTE4_5952, ItemID.ANTIVENOM1_12919 ,ItemID.ANTIVENOM2_12917,ItemID.ANTIVENOM3_12915, ItemID.ANTIVENOM4_12913, ItemID.ANTIPOISON1, ItemID.ANTIPOISON2, ItemID.ANTIPOISON3, ItemID.ANTIPOISON4, ItemID.ANTIPOISON_1, ItemID.ANTIPOISON_2, ItemID.ANTIPOISON_3, ItemID.ANTIPOISON_4);
 			if (ven != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", ven.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), ven.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(ven.getId(),"drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", ven.getId(), MenuAction.CC_OP.getId(), ven.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (config.antifire() && client.getVarbitValue(6101) == 0){
-			WidgetItem overload = GetAntifireItem();
+			WidgetItem overload = utils.getInventoryWidgetItem(ItemID.SUPER_ANTIFIRE_POTION1, ItemID.SUPER_ANTIFIRE_POTION2, ItemID.SUPER_ANTIFIRE_POTION3, ItemID.SUPER_ANTIFIRE_POTION4, ItemID.ANTIFIRE_POTION1, ItemID.ANTIFIRE_POTION2, ItemID.ANTIFIRE_POTION3, ItemID.ANTIFIRE_POTION4,ItemID.EXTENDED_SUPER_ANTIFIRE1,ItemID.EXTENDED_SUPER_ANTIFIRE2, ItemID.EXTENDED_SUPER_ANTIFIRE3, ItemID.EXTENDED_SUPER_ANTIFIRE4);
 			if (overload != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", overload.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), overload.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(overload.getId(),"drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", overload.getId(), MenuAction.CC_OP.getId(), overload.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (config.antifire() && client.getVarbitValue(3981) == 0){
-			WidgetItem overload = GetAntifireItem();
+			WidgetItem overload = utils.getInventoryWidgetItem(ItemID.SUPER_ANTIFIRE_POTION1, ItemID.SUPER_ANTIFIRE_POTION2, ItemID.SUPER_ANTIFIRE_POTION3, ItemID.SUPER_ANTIFIRE_POTION4, ItemID.ANTIFIRE_POTION1, ItemID.ANTIFIRE_POTION2, ItemID.ANTIFIRE_POTION3, ItemID.ANTIFIRE_POTION4,ItemID.EXTENDED_SUPER_ANTIFIRE1,ItemID.EXTENDED_SUPER_ANTIFIRE2, ItemID.EXTENDED_SUPER_ANTIFIRE3, ItemID.EXTENDED_SUPER_ANTIFIRE4);
 			if (overload != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", overload.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), overload.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(overload.getId(),"drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", overload.getId(), MenuAction.CC_OP.getId(), overload.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getBoostedSkillLevel(config.skill1().skill) <= config.level1()) {
-			WidgetItem item1 = getConfigItem1();
+			WidgetItem item1 = utils.getInventoryWidgetItem(config.pot1().ItemIDs);
 			if (item1 != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", item1.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), item1.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(item1.getId(),"drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", item1.getId(), MenuAction.CC_OP.getId(), item1.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getBoostedSkillLevel(config.skill2().skill) <= config.level2()) {
-			WidgetItem item2 = getConfigItem2();
+			WidgetItem item2 = utils.getInventoryWidgetItem(config.pot2().ItemIDs);
 			if (item2 != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", item2.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), item2.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(item2.getId(),"drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", item2.getId(), MenuAction.CC_OP.getId(), item2.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getBoostedSkillLevel(config.skill3().skill) <= config.level3()) {
-			WidgetItem item3 = getConfigItem3();
+			WidgetItem item3 = utils.getInventoryWidgetItem(config.pot3().ItemIDs);
 			if (item3 != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", item3.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), item3.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(item3.getId(),"drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", item3.getId(), MenuAction.CC_OP.getId(), item3.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 	}

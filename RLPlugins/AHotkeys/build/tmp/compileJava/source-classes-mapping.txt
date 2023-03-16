@@ -1,0 +1,4 @@
+net/runelite/client/plugins/ahotkeys/AHotkeys.java
+ net.runelite.client.plugins.ahotkeys.AHotkeys
+net/runelite/client/plugins/ahotkeys/AHotkeysConfig.java
+ net.runelite.client.plugins.ahotkeys.AHotkeysConfig

@@ -8,7 +8,6 @@ import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.ClientTick;
 import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -23,6 +22,8 @@ import org.pf4j.Extension;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.Set;
 
 @Extension
 @PluginDependency(PUtils.class)
@@ -36,19 +37,19 @@ import java.time.Instant;
 public class NGuardians extends Plugin
 {
 	@Override
-	protected void startUp() throws IOException {
+	protected void startUp() throws IOException, ClassNotFoundException {
 		reset();
 	}
 
 	@Override
-	protected void shutDown() throws IOException {
+	protected void shutDown() throws IOException, ClassNotFoundException {
 		reset();
 		started = false;
 	}
-	private void reset() throws IOException {
+	private void reset() throws IOException, ClassNotFoundException {
 		loaded = false;
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilgu() >=7) {
 				started = true;
 			}
 		}
@@ -78,7 +79,7 @@ public class NGuardians extends Plugin
 	private boolean loaded = false;
 
 	@Subscribe
-	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException {
+	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException, ClassNotFoundException {
 		if (!configButtonClicked.getGroup().equalsIgnoreCase("NGuardians")) {
 			return;
 		}
@@ -118,36 +119,42 @@ public class NGuardians extends Plugin
 			if (!utils.inventoryContains(ItemID.GUARDIAN_ESSENCE)) {
 				if (GiantPouchFilled) {
 					if (utils.inventoryContains(ItemID.COLOSSAL_POUCH)) {
-						WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.COLOSSAL_POUCH);
-						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+						WidgetItem Pouch3 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.COLOSSAL_POUCH));
+						utils.useItem(Pouch3.getId(),"empty");
+						//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.CC_OP.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					GiantPouchFilled = false;
 					return NGuardiansState.IDLE;
 				}
 				if (LargePouchFilled) {
 					if (utils.inventoryContains(ItemID.GIANT_POUCH)) {
-						WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.GIANT_POUCH);
-						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+						WidgetItem Pouch3 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GIANT_POUCH));
+						utils.useItem(Pouch3.getId(),"empty");
+						//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.CC_OP.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					LargePouchFilled = false;
 					return NGuardiansState.IDLE;
 				}
 				if (FullPouches){
 					if (utils.inventoryContains(ItemID.SMALL_POUCH)) {
-						WidgetItem Pouch = utils.getInventoryWidgetItem(ItemID.SMALL_POUCH);
-						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch.getIndex(), WidgetInfo.INVENTORY.getId()));
+						WidgetItem Pouch = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.SMALL_POUCH));
+						utils.useItem(Pouch.getId(),"empty");
+						//clientThread.invoke(() -> client.invokeMenuAction("Empty", "", Pouch.getId(), MenuAction.CC_OP.getId(), Pouch.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					if (utils.inventoryContains(ItemID.MEDIUM_POUCH)) {
-						WidgetItem Pouch2 = utils.getInventoryWidgetItem(ItemID.MEDIUM_POUCH);
-						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch2.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch2.getIndex(), WidgetInfo.INVENTORY.getId()));
+						WidgetItem Pouch2 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.MEDIUM_POUCH));
+						utils.useItem(Pouch2.getId(),"empty");
+						//clientThread.invoke(() -> client.invokeMenuAction("Empty", "", Pouch2.getId(), MenuAction.CC_OP.getId(), Pouch2.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					if (utils.inventoryContains(ItemID.LARGE_POUCH)) {
-						WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.LARGE_POUCH);
-						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+						WidgetItem Pouch3 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.LARGE_POUCH));
+						utils.useItem(Pouch3.getId(),"empty");
+						//clientThread.invoke(() -> client.invokeMenuAction("Empty", "", Pouch3.getId(), MenuAction.CC_OP.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					if (utils.inventoryContains(ItemID.COLOSSAL_POUCH)) {
-						WidgetItem Pouch4 = utils.getInventoryWidgetItem(ItemID.COLOSSAL_POUCH);
-						clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch4.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Pouch4.getIndex(), WidgetInfo.INVENTORY.getId()));
+						WidgetItem Pouch4 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.COLOSSAL_POUCH));
+						utils.useItem(Pouch4.getId(),"empty");
+						//clientThread.invoke(() -> client.invokeMenuAction("Empty", "", Pouch4.getId(), MenuAction.CC_OP.getId(), Pouch4.getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					FullPouches = false;
 					return NGuardiansState.IDLE;
@@ -171,7 +178,12 @@ public class NGuardians extends Plugin
 
 	private boolean LargePouchHalfFilled = false;
 	private boolean LargePouchFilled = false;
-
+	private final Set<Integer> STRONG_CELLS = Set.of(ItemID.OVERCHARGED_CELL, ItemID.WEAK_CELL, ItemID.STRONG_CELL, ItemID.MEDIUM_CELL);
+	private final Set<Integer> RUNES = Set.of(ItemID.AIR_RUNE, ItemID.WATER_RUNE, ItemID.MIND_RUNE, ItemID.EARTH_RUNE, ItemID.CHAOS_RUNE, ItemID.NATURE_RUNE, ItemID.BODY_RUNE, ItemID.FIRE_RUNE, ItemID.LAW_RUNE);
+	private final Set<Integer> BROKEN_POUCHES = Set.of(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906);
+	private final Set<Integer> STONED = Set.of(ItemID.CATALYTIC_GUARDIAN_STONE, ItemID.ELEMENTAL_GUARDIAN_STONE);
+	private final Set<Integer> CELLS = Set.of(ItemID.OVERCHARGED_CELL, ItemID.WEAK_CELL, ItemID.STRONG_CELL, ItemID.MEDIUM_CELL);
+	private final Set<Integer> POUCHES = Set.of(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906);
 	private NGuardiansState getStates() {
 		/*if (client.getWidget(219, 1) != null){
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 1, 14352385));
@@ -190,25 +202,27 @@ public class NGuardians extends Plugin
 		}
 		*/
 		if (client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryFull() && !utils.inventoryContains(ItemID.GUARDIAN_FRAGMENTS) && utils.inventoryContains(ItemID.GUARDIAN_ESSENCE)) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GUARDIAN_ESSENCE, MenuAction.ITEM_FIFTH_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.GUARDIAN_ESSENCE).getIndex(), WidgetInfo.INVENTORY.getId()));
+			WidgetItem ESSENCE = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GUARDIAN_ESSENCE));
+			utils.useItem(ESSENCE.getId(), "drop");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GUARDIAN_ESSENCE, MenuAction.ITEM_FIFTH_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GUARDIAN_ESSENCE)).getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGuardiansState.IDLE;
 		}
 
-		if (config.repair() && utils.inventoryContains(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906)) {
+		if (config.repair() && utils.inventoryContains(POUCHES)) {
 			if (client.getWidget(217, 6) != null) {
 				if (client.getWidget(217, 6).getText().equals("Can you repair my pouches?")) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 14221317));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_CONTINUE.getId(), -1, 14221317));
 					return NGuardiansState.IDLE;
 				}
 			}
 			if (client.getWidget(231, 6) != null) {
-				if (client.getWidget(231, 6).getText().equals("What do you want? Can't you see I'm busy?") && utils.inventoryContains(ItemID.LARGE_POUCH_5513, ItemID.MEDIUM_POUCH_5511, ItemID.GIANT_POUCH_5515, ItemID.COLOSSAL_POUCH_26786, ItemID.COLOSSAL_POUCH_26906)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, 15138821));
+				if (client.getWidget(231, 6).getText().equals("What do you want? Can't you see I'm busy?") && utils.inventoryContains(BROKEN_POUCHES)) {
+					clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_CONTINUE.getId(), -1, 15138821));
 					return NGuardiansState.IDLE;
 				}
 			}
 			if (client.getWidget(219, 1) != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 1, 14352385));
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_CONTINUE.getId(), 1, 14352385));
 				return NGuardiansState.IDLE;
 			}
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 2, MenuAction.CC_OP.getId(), -1, 14286953));
@@ -220,12 +234,12 @@ public class NGuardians extends Plugin
 		if (client.getWidget(746, 29).getText().equals("10/10") || client.getWidget(746, 29).getText().equals("8/8")) {
 			GuardiansNeeded = false;
 		}
-		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(ItemID.CATALYTIC_GUARDIAN_STONE, ItemID.ELEMENTAL_GUARDIAN_STONE)){
+		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && utils.inventoryContains(STONED)){
 			NPC GREAT_GUARDIAN = utils.findNearestNpc(11403);
 			clientThread.invoke(() -> client.invokeMenuAction("", "", GREAT_GUARDIAN.getIndex(), MenuAction.NPC_FIRST_OPTION.getId(), 0, 0));
 			return NGuardiansState.IDLE;
 		}
-		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && !GuardiansNeeded && utils.inventoryContains(ItemID.OVERCHARGED_CELL, ItemID.WEAK_CELL, ItemID.STRONG_CELL, ItemID.MEDIUM_CELL)) {
+		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && !GuardiansNeeded && utils.inventoryContains(CELLS)) {
 			GroundObject CELL_TILE_INACTIVE = utils.findNearestGroundObject(ObjectID.INACTIVE_CELL_TILE_43739);
 			GroundObject CELL_TILE_WEAK = utils.findNearestGroundObject(ObjectID.WEAK_CELL_TILE);
 			GroundObject CELL_TILE_MEDIUM = utils.findNearestGroundObject(ObjectID.MEDIUM_CELL_TILE);
@@ -268,7 +282,7 @@ public class NGuardians extends Plugin
 			}
 			return NGuardiansState.IDLE;
 		}
-		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && GuardiansNeeded && utils.inventoryContains(ItemID.OVERCHARGED_CELL, ItemID.WEAK_CELL, ItemID.STRONG_CELL, ItemID.MEDIUM_CELL)) {
+		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && GuardiansNeeded && utils.inventoryContains(STRONG_CELLS)) {
 			GameObject ESSENCE_PILE = utils.findNearestGameObject(43722, 43723);
 			clientThread.invoke(() -> client.invokeMenuAction("", "", ESSENCE_PILE.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), ESSENCE_PILE.getSceneMinLocation().getX(),ESSENCE_PILE.getSceneMinLocation().getY()));
 			return NGuardiansState.IDLE;
@@ -280,30 +294,35 @@ public class NGuardians extends Plugin
 		}
 		if (utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && !GiantPouchFilled) {
 			if (utils.inventoryContains(ItemID.COLOSSAL_POUCH)) {
-				WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.COLOSSAL_POUCH);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem Pouch3 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.COLOSSAL_POUCH));
+				utils.useItem(Pouch3.getId(),"fill");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.CC_OP.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && !LargePouchFilled) {
 			if (utils.inventoryContains(ItemID.GIANT_POUCH)) {
-				WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.GIANT_POUCH);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem Pouch3 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GIANT_POUCH));
+				utils.useItem(Pouch3.getId(),"fill");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.CC_OP.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGuardiansState.IDLE;
 			}
 		}
 		if (utils.inventoryContains(ItemID.GUARDIAN_ESSENCE) && utils.inventoryFull() && !FullPouches) {
 			if (utils.inventoryContains(ItemID.SMALL_POUCH)) {
-				WidgetItem Pouch = utils.getInventoryWidgetItem(ItemID.SMALL_POUCH);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), Pouch.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem Pouch = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.SMALL_POUCH));
+				utils.useItem(Pouch.getId(),"fill");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch.getId(), MenuAction.CC_OP.getId(), Pouch.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 			if (utils.inventoryContains(ItemID.MEDIUM_POUCH)) {
-				WidgetItem Pouch2 = utils.getInventoryWidgetItem(ItemID.MEDIUM_POUCH);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch2.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), Pouch2.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem Pouch2 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.MEDIUM_POUCH));
+				utils.useItem(Pouch2.getId(),"fill");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch2.getId(), MenuAction.CC_OP.getId(), Pouch2.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 			if (utils.inventoryContains(ItemID.LARGE_POUCH)) {
-				WidgetItem Pouch3 = utils.getInventoryWidgetItem(ItemID.LARGE_POUCH);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem Pouch3 = utils.getInventoryWidgetItem(Collections.singletonList(ItemID.LARGE_POUCH));
+				utils.useItem(Pouch3.getId(),"fill");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", Pouch3.getId(), MenuAction.CC_OP.getId(), Pouch3.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 			FullPouches = true;
 			return NGuardiansState.IDLE;
@@ -342,9 +361,14 @@ public class NGuardians extends Plugin
 			return NGuardiansState.IDLE;
 		}
 		if (!MinedEssence && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_RUNE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_ADAMANT_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BLACK_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_MITHRIL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_IRON_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_BRONZE_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_STEEL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_3A_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_CRYSTAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_GILDED_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_INFERNAL_PICKAXE && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_OR && client.getLocalPlayer().getAnimation() != AnimationID.MINING_DRAGON_PICKAXE_UPGRADED) {
-			if (!client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine)) {
+			if (client.getBoostedSkillLevel(Skill.AGILITY) >= 56 && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine)) {
 				GroundObject Rubble = utils.findNearestGroundObject(43724);
 				clientThread.invoke(() -> client.invokeMenuAction("", "", Rubble.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Rubble.getLocalLocation().getSceneX(), Rubble.getLocalLocation().getSceneY()));
+				return NGuardiansState.IDLE;
+			}
+			if (client.getBoostedSkillLevel(Skill.AGILITY) <= 56 && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine)) {
+				GameObject GUARDIAN_REMAINS = utils.findNearestGameObject(43717);
+				clientThread.invoke(() -> client.invokeMenuAction("", "", GUARDIAN_REMAINS.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), GUARDIAN_REMAINS.getSceneMinLocation().getX(), GUARDIAN_REMAINS.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
 			}
 			if (client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine)) {
@@ -354,7 +378,7 @@ public class NGuardians extends Plugin
 			}
 		}
 		if (!client.getLocalPlayer().getWorldArea().intersectsWith(WEssenceMine) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine) && MinedEssence && !utils.inventoryFull()) {
-			if (utils.inventoryContains(ItemID.AIR_RUNE, ItemID.WATER_RUNE, ItemID.MIND_RUNE, ItemID.EARTH_RUNE, ItemID.CHAOS_RUNE, ItemID.NATURE_RUNE, ItemID.BODY_RUNE, ItemID.FIRE_RUNE, ItemID.LAW_RUNE)) {
+			if (utils.inventoryContains(RUNES)) {
 				GameObject RUNE_POOL = utils.findNearestGameObject(43696);
 				clientThread.invoke(() -> client.invokeMenuAction("", "", RUNE_POOL.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), RUNE_POOL.getSceneMinLocation().getX(), RUNE_POOL.getSceneMinLocation().getY()));
 				return NGuardiansState.IDLE;
@@ -491,7 +515,7 @@ public class NGuardians extends Plugin
 		if (utils.inventoryItemContainsAmount(ItemID.GUARDIAN_FRAGMENTS, config.essence(), true, false)) {
 			MinedEssence = true;
 		}
-		if (client.getLocalPlayer().getWorldArea().intersectsWith(InsideGame) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine)) {
+		if (client.getLocalPlayer().getAnimation() <= 0 && client.getLocalPlayer().getWorldArea().intersectsWith(InsideGame) && !client.getLocalPlayer().getWorldArea().intersectsWith(EssenceMine)) {
 			if (utils.inventoryContains(ItemID.GUARDIAN_FRAGMENTS)) {
 				MinedEssence = true;
 			}
@@ -500,12 +524,12 @@ public class NGuardians extends Plugin
 
 
 	@Subscribe
-	public void onGameTick(GameTick event) throws IOException {
+	public void onGameTick(GameTick event) throws IOException, ClassNotFoundException {
 		if (client.getGameState() != GameState.LOGGED_IN) {
 			return;
 		}
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilgu() >=7) {
 				started = true;
 			}
 			return;
@@ -521,7 +545,7 @@ public class NGuardians extends Plugin
 			state = getState();
 			switch (state) {
 				case TIMEOUT:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout--;
 					break;
 				case ANIMATING:

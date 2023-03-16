@@ -1,0 +1,4 @@
+net/runelite/client/plugins/NGatherer/NGathererConfig.java
+ net.runelite.client.plugins.Gatherer.NGathererConfig
+net/runelite/client/plugins/NGatherer/Gatherer.java
+ net.runelite.client.plugins.Gatherer.Gatherer

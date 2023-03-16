@@ -47,6 +47,7 @@ public class PQuickEat extends Plugin
 	private ConfigManager configManager;
 	@Inject
 	private PUtils utils;
+
 	public WidgetItem getBrew() {
 		return PQuickEatType.BREWS.getItemFromInventory(client);
 	}
@@ -55,7 +56,7 @@ public class PQuickEat extends Plugin
 	{
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 		if (inventoryWidget != null) {
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = utils.getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (item.getId() == id)
@@ -68,38 +69,41 @@ public class PQuickEat extends Plugin
 	}
 	private boolean started = false;
 	@Subscribe
-	private void onGameTick(final GameTick event) throws IOException {
-		if (!started) {
-			if (utils.util()) {
-				started = true;
-			}
-			return;
-		}
+	private void onGameTick(final GameTick event) throws IOException, ClassNotFoundException {
 		int health = this.client.getBoostedSkillLevel(Skill.HITPOINTS);
 		if (health <= this.config.tripleHP()) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.food1(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food1()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.food1(),"eat","drink");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food1(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food1()).getIndex(), WidgetInfo.INVENTORY.getId()));
 			if (config.brews()) {
 				WidgetItem restoreItem = getBrew();
-				clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", restoreItem.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), restoreItem.getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.food3(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food3()).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(restoreItem.getId(),"eat","drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", restoreItem.getId(), MenuAction.CC_OP.getId(), restoreItem.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(config.food3(),"eat","drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food3(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food3()).getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 			if (!config.brews()) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.food2(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food2()).getIndex(), WidgetInfo.INVENTORY.getId()));
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.food3(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food3()).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(config.food2(),"eat","drink");
+				utils.useItem(config.food3(),"eat","drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food2(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food2()).getIndex(), WidgetInfo.INVENTORY.getId()));
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food3(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food3()).getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (health <= this.config.doubleHP() && health > this.config.tripleHP()) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.food1(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food1()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.food1(),"eat","drink");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food1(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food1()).getIndex(), WidgetInfo.INVENTORY.getId()));
 			if (config.brews()) {
 				WidgetItem restoreItem = getBrew();
-				clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", restoreItem.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), restoreItem.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(restoreItem.getId(),"eat","drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("Drink", "<col=ff9040>Potion", restoreItem.getId(), MenuAction.CC_OP.getId(), restoreItem.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 			if (!config.brews()) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", config.food2(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food2()).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(config.food2(),"eat","drink");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food2(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food2()).getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (health < this.config.singleHP() && health > this.config.doubleHP()) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.food1(), MenuAction.ITEM_FIRST_OPTION.getId(), InventoryWidgetItem(config.food1()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.food1(),"eat","drink");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.food1(), MenuAction.CC_OP.getId(), InventoryWidgetItem(config.food1()).getIndex(), WidgetInfo.INVENTORY.getId()));
 		}
 	}
 }

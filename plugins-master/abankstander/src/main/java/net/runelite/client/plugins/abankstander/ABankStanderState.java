@@ -1,0 +1,22 @@
+
+package net.runelite.client.plugins.abankstander;
+
+public enum ABankStanderState
+{
+	NULL_PLAYER,
+	ACTION_FIRST,
+	ACTION,
+	ACTION_2,
+	OPEN_BANK,
+	DEPOSIT_ITEMS,
+	WITHDRAW_TOOL,
+	WITHDRAW_ITEMS,
+	CLOSE_BANK,
+	WALKING,
+	ALCHING,
+	STUNNING,
+	CRAFTING_RUNES,
+	USE_PORTAL,
+	ANIMATING,
+	NOT_SURE;
+}

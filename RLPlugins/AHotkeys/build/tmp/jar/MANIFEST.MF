@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Plugin-Version: 0.0.2
+Plugin-Id: ahotkeys-plugin
+Plugin-Provider: ZTD#1147
+Plugin-Description: Assign in-game tasks to hotkeys
+Plugin-License: 3-Clause BSD License
+

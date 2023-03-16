@@ -1,0 +1,15 @@
+-keep,allowobfuscation class * extends net.runelite.client.plugins.Plugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.ui.overlay.OverlayPanel { *; }
+-keep,allowobfuscation class * extends net.runelite.client.ui.overlay.Overlay { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.abankstander.ABankStanderPlugin { *; }
+-keepclassmembers class * extends net.runelite.client.config.Config { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.abankstander.ABankStanderConfig { *; }
+-keep interface net.runelite.client.plugins.abankstander.ABankStanderConfig { *; }
+-keep class net.runelite.client.plugins.abankstander.ABankStanderType { *; } #to keep enums
+-keep class net.runelite.client.plugins.abankstander.ABankStanderOverlay { *; }
+-keep class net.runelite.client.plugins.abankstander.ReflectBreakHandler { *; }
+-keep class net.runeltie.client.plugins.abankstander.ABankStanderState { *; }
+-keep class net.runelite.client.plugins.abankstander.ABankStanderBarType { *; } #to keep enums
+-keep class net.runelite.client.plugins.abankstander.ABankStanderTypeFletching { *; } #to keep enums
+-keep class net.runelite.client.plugins.abankstander.ABankStanderTypeToSmith { *; } #to keep enums
+-keepclassmembernames class * { java.lang.Class class$(java.lang.String); java.lang.Class class$(java.lang.String, boolean); }

@@ -3,22 +3,52 @@
         <jar in="in/*.jar" out="out/*.jar"/>
     </input>
     <keep-names>
-        <class template="class net.runelite.client.plugins.NFarming.PFarming"/>
-        <class template="class net.runelite.client.plugins.NFarming.PFarmingConfig"/>
-        <class template="class net.runelite.client.plugins.NFarming.PFarmingState">
+        <class template="class net.runelite.client.plugins.Launcher.LauncherConfig">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
+
+            <class template="class net.runelite.client.plugins.Launcher.LauncherPlugin">
+                <field template="*"/>
+                <method template="*(**)"/>
+                <!--<method template="private+ void*(*)"/>-->
+                <method template="void onClientTick(ClientTick)"/>
+            </class>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Break"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Build"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Craft"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Dialogue"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Dialogue2"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Enter_House"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Leave_House"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Phials"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Remove"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Reset"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Tasks.Run"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.AConstructionConfig"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.AConstructionOverlay"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.AConstructionPlugin"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.CHMode"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.CHWidget"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.MiscUtils"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.ReflectBreakHandler"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.Task"/>
+        <class template="class net.runelite.client.plugins.constructionhelper.TaskSet">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+        <class template="class net.runelite.client.plugins.avorkath.AVorkathConfig"/>
+        <class template="class net.runelite.client.plugins.avorkath.AVorkathOverlay"/>
+        <class template="class net.runelite.client.plugins.avorkath.AVorkathPlugin"/>
+        <class template="class net.runelite.client.plugins.avorkath.AVorkathState"/>
+        <class template="class net.runelite.client.plugins.avorkath.PrayerRestoreType">
+            <field template="*"/>
+            <method template="*(**)"/>
+        </class>
+
         <class template="class net.runelite.client.plugins.NGatherer.NGatherer"/>
         <class template="class net.runelite.client.plugins.NGatherer.NGathererConfig"/>
         <class template="class net.runelite.client.plugins.NGatherer.NGathererState">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NGauntlet.Hunllef"/>
-        <class template="class net.runelite.client.plugins.NGauntlet.NGauntlet"/>
-        <class template="class net.runelite.client.plugins.NGauntlet.NGauntletConfig"/>
-        <class template="class net.runelite.client.plugins.NGauntlet.NGauntletState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
@@ -28,58 +58,22 @@
             <field template="*"/>
             <method template="*(**)"/>
         </class>
-        <class template="class net.runelite.client.plugins.NInfernoHelper.NInfernoHelperConfig"/>
-        <class template="class net.runelite.client.plugins.NInfernoHelper.NInfernoHelper"/>
-        <class template="class net.runelite.client.plugins.NInfernoHelper.InfernoUtils">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEat"/>
-        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEatConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickEat.PQuickEatType">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
+
         <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighter"/>
         <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighterConfig"/>
         <class template="class net.runelite.client.plugins.NQuickFighter.NQuickFighterState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPot"/>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotPot"/>
-        <class template="class net.runelite.client.plugins.NQuickPot.NQuickPotType">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPray"/>
-        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPrayConfig"/>
-        <class template="class net.runelite.client.plugins.NQuickPray.NQuickPrayType">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
+
         <class template="class net.runelite.client.plugins.NTempoross.NTempoross"/>
         <class template="class net.runelite.client.plugins.NTempoross.NTemporossConfig"/>
         <class template="class net.runelite.client.plugins.NTempoross.NTemporossState">
             <field template="*"/>
             <method template="*(**)"/>
         </class>
-        <class template="class net.runelite.client.plugins.NUtils.PUtils"/>
-        <class template="class net.runelite.client.plugins.NUtils.Runes"/>
-        <class template="class net.runelite.client.plugins.NUtils.Spells"/>
-        <class template="class net.runelite.client.plugins.NUtils.Tab"/>
-        <class template="class net.runelite.client.plugins.NUtils.PrayerMap"/>
-        <class template="class net.runelite.client.plugins.NUtils.NewMenuEntry"/>
-        <class template="class net.runelite.client.plugins.NUtils.Banks"/>
-        <class template="class net.runelite.client.plugins.NUtils.PConfig">
-            <field template="*"/>
-            <method template="*(**)"/>
-        </class>
-        <class template="class io.jsonwebtoken.*">
-            <field access="private+"/>
-            <method template="private+ *(**)"/>
-        </class>
+
+
     </keep-names>
 
     <property name="log-file" value="log.xml"/>

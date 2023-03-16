@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Plugin-Version: 1.0.8
+Plugin-Id: azulrah-plugin
+Plugin-Provider: Anarchise
+Plugin-Dependencies: nutils-plugin
+Plugin-Description: Anarchise' Automated Zulrah.
+Plugin-License: 3-Clause BSD License
+

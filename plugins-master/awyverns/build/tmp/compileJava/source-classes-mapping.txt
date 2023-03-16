@@ -1,0 +1,25 @@
+net/runelite/client/plugins/awyverns/AWyvernsState.java
+ net.runelite.client.plugins.awyverns.AWyvernsState
+net/runelite/client/plugins/awyverns/AWyvernsOverlay.java
+ net.runelite.client.plugins.awyverns.AWyvernsOverlay
+net/runelite/client/plugins/awyverns/TextComponent.java
+ net.runelite.client.plugins.awyverns.TextComponent
+net/runelite/client/plugins/awyverns/AWyvernsConfig.java
+ net.runelite.client.plugins.awyverns.AWyvernsConfig
+ net.runelite.client.plugins.awyverns.AWyvernsConfig$DisplayMode
+ net.runelite.client.plugins.awyverns.AWyvernsConfig$DisplayType
+ net.runelite.client.plugins.awyverns.AWyvernsConfig$SnakelingSettings
+net/runelite/client/plugins/awyverns/AWyvernsType.java
+ net.runelite.client.plugins.awyverns.AWyvernsType
+net/runelite/client/plugins/awyverns/PrayerRestoreType.java
+ net.runelite.client.plugins.awyverns.PrayerRestoreType
+net/runelite/client/plugins/awyverns/CombatType.java
+ net.runelite.client.plugins.awyverns.CombatType
+net/runelite/client/plugins/awyverns/AWyvernsPlugin.java
+ net.runelite.client.plugins.awyverns.AWyvernsPlugin
+ net.runelite.client.plugins.awyverns.AWyvernsPlugin$1
+net/runelite/client/plugins/awyverns/Constants.java
+ net.runelite.client.plugins.awyverns.Constants
+net/runelite/client/plugins/awyverns/Victim.java
+ net.runelite.client.plugins.awyverns.Victim
+ net.runelite.client.plugins.awyverns.Victim$Type

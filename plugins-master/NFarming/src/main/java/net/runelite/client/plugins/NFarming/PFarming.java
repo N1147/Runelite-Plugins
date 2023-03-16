@@ -7,7 +7,6 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -23,7 +22,10 @@ import org.pf4j.Extension;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 @Extension
 @PluginDependency(PUtils.class)
@@ -125,9 +127,9 @@ public class PFarming extends Plugin
 	{
 		reset();
 	}
-	private void reset() throws IOException {
+	private void reset() throws IOException, ClassNotFoundException {
 		if (!started) {
-			if (utils.util()) {
+			if (utils.util() >=5) {
 				started = true;
 			}
 		}
@@ -139,6 +141,7 @@ public class PFarming extends Plugin
         gnomef = false;
 		lumbridge = false;
         harvested = false;
+		teled =false;
 		checkedHealth = false;
         brimhaven = false;
         stumpcleared = false;
@@ -151,7 +154,8 @@ public class PFarming extends Plugin
 		items = utils.stringToIntList(config.itemsToNote());
 		WidgetItem InventoryItem = utils.getInventoryWidgetItem(items);
 		if (InventoryItem != null) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", InventoryItem.getId(), MenuAction.ITEM_USE.getId(), InventoryItem.getIndex(), WidgetInfo.INVENTORY.getId()));
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", InventoryItem.getId(), MenuAction.ITEM_USE.getId(), InventoryItem.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(InventoryItem.getId(), "use");
 			clientThread.invoke(() -> client.invokeMenuAction("", "", utils.findNearestNpc(0).getIndex(), MenuAction.ITEM_USE_ON_NPC.getId(), 0, 0));
 			return;
 		}
@@ -160,11 +164,11 @@ public class PFarming extends Plugin
 			return;
 		}
 	}
-
-	Collection<Integer> items;
+	private List<Integer> items = new ArrayList<>();
+	//Collection<Integer> items;
 
 	@Subscribe
-	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException {
+	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException, ClassNotFoundException {
 		if (!configButtonClicked.getGroup().equalsIgnoreCase("PFarming")) {
 			return;
 		}
@@ -184,7 +188,7 @@ public class PFarming extends Plugin
 			clientThread.invoke(() -> client.invokeMenuAction("", "", bankTarget.getId(), utils.getBankMenuOpcode(bankTarget.getId()), bankTarget.getSceneMinLocation().getX(), bankTarget.getSceneMinLocation().getY()));
 		}
 	}
-	public PFarmingState getState() throws IOException {
+	public PFarmingState getState() throws IOException, ClassNotFoundException {
 		if (timeout > 0)
 		{
 			return PFarmingState.TIMEOUT;
@@ -202,7 +206,14 @@ public class PFarming extends Plugin
 	boolean firstgate = false;
 	boolean checkedHealth = false;
 	boolean firstclear = true;
-	private PFarmingState getStates() throws IOException {
+	boolean teled = false;
+	private PFarmingState getStates() throws IOException, ClassNotFoundException {
+		if (banked && !teled) {
+			//clientThread.invoke(() -> client.invokeMenuAction("Break", "", 8009, MenuAction.CC_OP.getId(), utils.getInventoryWidgetItem(Collections.singletonList(8009)).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(8009, "break");
+			teled = true;
+			return PFarmingState.IDLE;
+		}
 		if (utils.inventoryFull()) {
 			handleFullInventory();
 			return PFarmingState.IDLE;
@@ -235,7 +246,8 @@ public class PFarming extends Plugin
 
 		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch)) {
 			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.FALADOR_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.FALADOR_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(ItemID.FALADOR_TELEPORT, "use");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.FALADOR_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.FALADOR_TELEPORT)).getIndex(), WidgetInfo.INVENTORY.getId()));
 				taverly = true;
 				stumpcleared = false;
 				harvested = false;
@@ -263,7 +275,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(TaverlyPatch) && patch != null) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.treeSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.treeSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -298,7 +311,8 @@ public class PFarming extends Plugin
 		}
 		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch)) {
 			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.LUMBRIDGE_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.LUMBRIDGE_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(ItemID.LUMBRIDGE_TELEPORT, "use");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.LUMBRIDGE_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.LUMBRIDGE_TELEPORT)).getIndex(), WidgetInfo.INVENTORY.getId()));
 				falador = true;
 				stumpcleared = false;
 				harvested = false;
@@ -326,7 +340,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(FaladorPatch) && patch != null) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.treeSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.treeSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -342,7 +357,8 @@ public class PFarming extends Plugin
 		}
 		if (client.getWidget(231, 6) != null && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH)) {
 			if (client.getWidget(231, 6).getText().contains("already looking after that patch for you")) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.VARROCK_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(ItemID.VARROCK_TELEPORT).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(ItemID.VARROCK_TELEPORT, "break");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.VARROCK_TELEPORT, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.VARROCK_TELEPORT)).getIndex(), WidgetInfo.INVENTORY.getId()));
 				lumbridge = true;
 				stumpcleared = false;
 				harvested = false;
@@ -370,7 +386,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(LUMBRIDGE_PATCH) && patch != null) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.treeSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.treeSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -412,7 +429,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (!harvested && checkedHealth && stumpcleared && client.getLocalPlayer().getWorldArea().intersectsWith(VarrockPatch) && patch != null && !varrock) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.treeSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.treeSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -424,7 +442,7 @@ public class PFarming extends Plugin
 		 */
 		if (client.getWidget(187, 3) != null && !gnomet) {
 			if (!client.getWidget(187, 3).isHidden()) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 1, 12255235));
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_CONTINUE.getId(), 1, 12255235));
 				stumpcleared = false;
 				harvested = false;
 				checkedHealth = false;
@@ -476,7 +494,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (!harvested && checkedHealth && stumpcleared && !gnomet && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchT) && patch != null) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.treeSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.treeSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.treeSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.treeSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", patch.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), patch.getSceneMinLocation().getX(), patch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -511,7 +530,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(GnomePatchF) && fruitpatch != null && !gnomef && gnomet) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.fruitSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.fruitSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 7962, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -539,7 +559,7 @@ public class PFarming extends Plugin
 		}
 		if (client.getWidget(187, 3) != null && gnomef) {
 			if (!client.getWidget(187, 3).isHidden()) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_TYPE_6.getId(), 0, 12255235));
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 0, MenuAction.WIDGET_CONTINUE.getId(), 0, 12255235));
 				stumpcleared = false;
 				harvested = false;
 				return PFarmingState.IDLE;
@@ -581,7 +601,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(KHAZARDPATCH) && fruitpatch != null && !khazard) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.fruitSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.fruitSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 7963, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -591,7 +612,8 @@ public class PFarming extends Plugin
 		}
 		if (client.getWidget(231, 4) != null) {
 			if (client.getWidget(231, 4).getText().contains("Gileth")) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", 8010, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(8010).getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(8010, "break");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", 8010, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(8010)).getIndex(), WidgetInfo.INVENTORY.getId()));
 				khazard = true;
 				stumpcleared = false;
 				harvested = false;
@@ -630,7 +652,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(CATHERBYPATCH) && fruitpatch != null && !catherby) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.fruitSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.fruitSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 7965, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -687,7 +710,8 @@ public class PFarming extends Plugin
 			return PFarmingState.IDLE;
 		}
 		if (stumpcleared && !harvested && client.getLocalPlayer().getWorldArea().intersectsWith(BRIMHAVEN_PATCH1) && fruitpatch != null && !brimhaven) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(config.fruitSappling()).getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(config.fruitSappling(), "use");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", config.fruitSappling(), MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(config.fruitSappling())).getIndex(), WidgetInfo.INVENTORY.getId()));
 			clientThread.invoke(() -> client.invokeMenuAction("", "", 7964, MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), fruitpatch.getSceneMinLocation().getX(), fruitpatch.getSceneMinLocation().getY()));
 			return PFarmingState.IDLE;
 		}
@@ -719,6 +743,7 @@ public class PFarming extends Plugin
 		return PFarmingState.TIMEOUT;
 	}
 	private final Set<Integer> AXES = Set.of(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862);
+	private final Set<Integer> AXEZ = Set.of(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862);
 	private PFarmingState getBankState() {
 		if (!banked) {
 			utils.depositAll();
@@ -737,7 +762,7 @@ public class PFarming extends Plugin
 			utils.withdrawItem(ItemID.RAKE);
 			return PFarmingState.IDLE;
 		}
-		if (!utils.isItemEquipped(AXES) && !utils.inventoryContains(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862)) {
+		if (!utils.isItemEquipped(AXES) && !utils.inventoryContains(AXEZ)) {
 			utils.withdrawAnyOf(ItemID.BRONZE_AXE, ItemID.IRON_AXE, ItemID.STEEL_AXE, ItemID.BLACK_AXE, ItemID.MITHRIL_AXE, ItemID.ADAMANT_AXE, ItemID.RUNE_AXE, ItemID.GILDED_AXE, ItemID.DRAGON_AXE, ItemID.DRAGON_AXE_OR, ItemID.CRYSTAL_AXE, ItemID.CRYSTAL_AXE_23862);
 			return PFarmingState.IDLE;
 		}
@@ -778,8 +803,10 @@ public class PFarming extends Plugin
 			banked = true;
 			return PFarmingState.IDLE;
 		}
-		if (banked) {
-			clientThread.invoke(() -> client.invokeMenuAction("", "", 8009, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(8009).getIndex(), WidgetInfo.INVENTORY.getId()));
+		if (banked && !teled) {
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", 8009, MenuAction.ITEM_FIRST_OPTION.getId(), utils.getInventoryWidgetItem(Collections.singletonList(8009)).getIndex(), WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER.getId()));
+			//utils.closeBank();
+			clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), 11, 786434));
 			return PFarmingState.IDLE;
 		}
 
@@ -794,7 +821,7 @@ public class PFarming extends Plugin
 	}
 	boolean started = false;
 	@Subscribe
-	private void onGameTick(final GameTick event) throws IOException {
+	private void onGameTick(final GameTick event) throws IOException, ClassNotFoundException {
 		if (!startTeaks){
 			return;
 		}
@@ -810,7 +837,7 @@ public class PFarming extends Plugin
 			return;
 		}
 		if (!started) {
-			if (utils.util()) {
+			if (utils.util() >=5) {
 				started = true;
 			}
 			startTeaks = false;
@@ -820,7 +847,7 @@ public class PFarming extends Plugin
 			state = getState();
 			switch (state) {
 				case TIMEOUT:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout--;
 					break;
 				case IDLE:

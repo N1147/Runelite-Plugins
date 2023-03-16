@@ -1,0 +1,40 @@
+net/runelite/client/plugins/azulrah/ZulrahAttributes.java
+ net.runelite.client.plugins.azulrah.ZulrahAttributes
+net/runelite/client/plugins/azulrah/AZulrahState.java
+ net.runelite.client.plugins.azulrah.AZulrahState
+net/runelite/client/plugins/azulrah/Constants.java
+ net.runelite.client.plugins.azulrah.Constants
+net/runelite/client/plugins/azulrah/ZulrahNpc.java
+ net.runelite.client.plugins.azulrah.ZulrahNpc
+net/runelite/client/plugins/azulrah/ZulrahLocation.java
+ net.runelite.client.plugins.azulrah.ZulrahLocation
+net/runelite/client/plugins/azulrah/AZulrahConfig.java
+ net.runelite.client.plugins.azulrah.AZulrahConfig
+net/runelite/client/plugins/azulrah/PrayerRestoreType.java
+ net.runelite.client.plugins.azulrah.PrayerRestoreType
+net/runelite/client/plugins/azulrah/ZulrahType.java
+ net.runelite.client.plugins.azulrah.ZulrahType
+net/runelite/client/plugins/azulrah/AZulrahPlugin.java
+ net.runelite.client.plugins.azulrah.AZulrahPlugin
+ net.runelite.client.plugins.azulrah.AZulrahPlugin$1
+net/runelite/client/plugins/azulrah/ZulrahData.java
+ net.runelite.client.plugins.azulrah.ZulrahData
+ net.runelite.client.plugins.azulrah.ZulrahData$1
+net/runelite/client/plugins/azulrah/AZulrahOverlay.java
+ net.runelite.client.plugins.azulrah.AZulrahOverlay
+net/runelite/client/plugins/azulrah/StandLocation.java
+ net.runelite.client.plugins.azulrah.StandLocation
+net/runelite/client/plugins/azulrah/ZulrahImageManager.java
+ net.runelite.client.plugins.azulrah.ZulrahImageManager
+ net.runelite.client.plugins.azulrah.ZulrahImageManager$1
+net/runelite/client/plugins/azulrah/TextComponent.java
+ net.runelite.client.plugins.azulrah.TextComponent
+net/runelite/client/plugins/azulrah/ZulrahPhase.java
+ net.runelite.client.plugins.azulrah.ZulrahPhase
+net/runelite/client/plugins/azulrah/RotationType.java
+ net.runelite.client.plugins.azulrah.RotationType
+net/runelite/client/plugins/azulrah/ImagePanelComponent.java
+ net.runelite.client.plugins.azulrah.ImagePanelComponent
+net/runelite/client/plugins/azulrah/Victim.java
+ net.runelite.client.plugins.azulrah.Victim
+ net.runelite.client.plugins.azulrah.Victim$Type

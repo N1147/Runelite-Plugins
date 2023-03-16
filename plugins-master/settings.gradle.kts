@@ -1,16 +1,26 @@
 rootProject.name = "Numb"
 include("NUtils")
+
 include("NQuickEat")
 include("NQuickPray")
 include("NGatherer")
-include("NFarming")
-include("NTempoross")
 include("NQuickPot")
 include("NQuickFighter")
-include("NInfernoHelper")
-include("NGauntlet")
-include("NGuardians")
-//include("NumbSuite")
+include("aconstruction")
+include("apest")
+include("apker")
+include("abankstander")
+
+include("IronBuilder")
+//include("NTempoross")
+//include("NGuardians")
+//include("AVorkath")
+//include("ARunedragons")
+
+
+//include("NGauntlet")
+//include("arooftops")
+
 
 for (project in rootProject.children) {
     project.apply {

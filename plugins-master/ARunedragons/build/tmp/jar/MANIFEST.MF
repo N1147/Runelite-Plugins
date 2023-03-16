@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Plugin-Version: 1.0.9
+Plugin-Id: anarchiserunedragonplugin-plugin
+Plugin-Provider: ZTD#1147
+Plugin-Dependencies: nutils-plugin
+Plugin-Description: Auto Rune Dragons.
+Plugin-License: 3-Clause BSD License
+

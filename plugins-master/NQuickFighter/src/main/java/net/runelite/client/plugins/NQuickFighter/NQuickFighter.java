@@ -6,7 +6,6 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -85,18 +84,18 @@ public class NQuickFighter extends Plugin
 
 
 	@Override
-	protected void startUp() throws IOException {
+	protected void startUp() throws IOException, ClassNotFoundException {
 		resetVals();
 	}
 
 	@Override
-	protected void shutDown() throws IOException {
+	protected void shutDown() throws IOException, ClassNotFoundException {
 		resetVals();
 	}
 
-	private void resetVals() throws IOException {
+	private void resetVals() throws IOException, ClassNotFoundException {
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilqui() >=7) {
 				started = true;
 			}
 		}
@@ -123,7 +122,7 @@ public class NQuickFighter extends Plugin
 	}
 
 	@Subscribe
-	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException {
+	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException, ClassNotFoundException {
 		if (!configButtonClicked.getGroup().equalsIgnoreCase("NQuickFighter"))
 		{
 			return;
@@ -149,7 +148,7 @@ public class NQuickFighter extends Plugin
 		}
 	}
 
-	public void setLocation() throws IOException {
+	public void setLocation() throws IOException, ClassNotFoundException {
 		if (client != null && client.getLocalPlayer() != null && client.getGameState().equals(GameState.LOGGED_IN))
 		{
 			skillLocation = client.getLocalPlayer().getWorldLocation();
@@ -192,18 +191,12 @@ public class NQuickFighter extends Plugin
 	}
 	boolean started = false;
 	@Subscribe
-	private void onGameTick(GameTick tick) throws IOException {
+	private void onGameTick(GameTick tick) throws IOException, ClassNotFoundException {
 		if (!startTeaks)
 		{
 			return;
 		}
-		if (!started) {
-			if (utils.util()) {
-				started = true;
-			}
-			startTeaks = false;
-			return;
-		}
+
 		player = client.getLocalPlayer();
 		if (client != null && player != null && skillLocation != null)
 		{
@@ -213,12 +206,12 @@ public class NQuickFighter extends Plugin
 			switch (state)
 			{
 				case TIMEOUT:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout--;
 					break;
 				case ANIMATING:
 				case MOVING:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout = tickDelay();
 					break;
 				case ATTACK:
@@ -266,7 +259,8 @@ public class NQuickFighter extends Plugin
 		List<WidgetItem> bones = utils.getInventoryItems("bones");
 		for (WidgetItem bone : bones) {
 			if (bone != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "",bone.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), bone.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(bone.getId(),"bury");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",bone.getId(), MenuAction.CC_OP.getId(), bone.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 	}

@@ -8,7 +8,7 @@ version = "0.0.1"
 project.extra["PluginName"] = "NGatherer"
 project.extra["PluginDescription"] = "Gathers from various nodes and banks or drops."
 project.extra["PluginProvider"] = "ZTD#1147"
-project.extra["PluginSupportUrl"] = "https://github.com/N1147/download"
+project.extra["PluginSupportUrl"] = "https://github.com/Anarchise/aplugins"
 dependencies {
     compileOnly(project(":NUtils"))
 }

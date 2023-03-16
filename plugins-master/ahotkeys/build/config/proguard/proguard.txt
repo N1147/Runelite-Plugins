@@ -1,0 +1,68 @@
+-keep,allowobfuscation class * extends net.runelite.client.plugins.Plugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.ui.overlay.OverlayPanel { *; }
+-keep,allowobfuscation class * extends net.runelite.client.ui.overlay.Overlay { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.abankstander.ABankStanderPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.blastfurnacebot.BlastFurnaceBotPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.constructionhelper.AConstructionPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.acrabs.ACrabsPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.afood.AFoodPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.anightmarezone.NMZPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.pestcontrol.PestControlPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.apker.PkToolsPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.apvm.APvmHelperPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.arooftops.ARooftopsPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.abarbfisher.ATemporossPlugin { *; }
+-keep,allowobfuscation class * extends net.runelite.client.plugins.avorkath.AVorkathPlugin { *; }
+-keepclassmembers class * extends net.runelite.client.config.Config { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.abankstander.ABankStanderConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.constructionhelper.AConstructionConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.blastfurnacebot.BlastFurnaceBotConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.acrabs.ACrabsConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.afood.AFoodConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.anightmarezone.NMZConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.pestcontrol.PestControlConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.apker.PkToolsConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.apvm.APvmHelperConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.arooftops.ARooftopsConfig { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.abarbfisher.ATemporossConfiguration { *; }
+-keepclassmembers class * extends net.runelite.client.plugins.avorkath.AVorkathConfig { *; }
+-keep interface net.runelite.client.plugins.abankstander.ABankStanderConfig { *; }
+-keep class net.runelite.client.plugins.abankstander.ABankStanderType { *; } #to keep enums
+-keep class net.runelite.client.plugins.abankstander.ABankStanderOverlay { *; }
+-keep class net.runelite.client.plugins.abankstander.ReflectBreakHandler { *; }
+-keep class net.runeltie.client.plugins.abankstander.ABankStanderState { *; }
+-keep class net.runelite.client.plugins.abankstander.ABankStanderBarType { *; } #to keep enums
+-keep class net.runelite.client.plugins.abankstander.ABankStanderTypeFletching { *; } #to keep enums
+-keep class net.runelite.client.plugins.abankstander.ABankStanderTypeToSmith { *; } #to keep enums
+-keep class net.runelite.client.plugins.blastfurnacebot.Bars { *; } #to keep enums
+-keep class net.runelite.client.plugins.blastfurnacebot.BlastFurnaceState { *; } #to keep enums
+-keep class net.runelite.client.plugins.blastfurnacebot.Ores { *; } #to keep enums
+-keep class net.runelite.client.plugins.constructionhelper.CHMode { *; } #to keep enums
+-keep class net.runelite.client.plugins.constructionhelper.CHWidget { *; } #to keep enums
+-keep class net.runelite.client.plugins.afood.PrayerRestoreType { *; } #to keep enums
+-keep class net.runelite.client.plugins.anightmarezone.AbsorbType { *; } #to keep enums
+-keep class net.runelite.client.plugins.acrabs.ACrabsState { *; }
+-keep class net.runelite.client.plugins.anightmarezone.NMZState { *; }
+-keep class net.runelite.client.plugins.pestcontrol.Boat { *; }
+-keep class net.runelite.client.plugins.pestcontrol.PestControlState { *; }
+-keep class net.runelite.client.plugins.apker.PrayerRestoreType { *; }
+-keep class net.runelite.client.plugins.apvm.APvmHelperType { *; }
+-keep class net.runelite.client.plugins.apvm.HydraPhase { *; }
+-keep class net.runelite.client.plugins.apvm.OlmAnimation { *; }
+-keep class net.runelite.client.plugins.apvm.PrayerRestoreType { *; }
+-keep class net.runelite.client.plugins.apvm.RotationType { *; }
+-keep class net.runelite.client.plugins.apvm.StandLocation { *; }
+-keep class net.runelite.client.plugins.apvm.ZulrahLocation { *; }
+-keep class net.runelite.client.plugins.apvm.ZulrahType { *; }
+-keep class net.runelite.client.plugins.arooftops.AlchCourse { *; }
+-keep class net.runelite.client.plugins.arooftops.ARooftopsObstacles { *; }
+-keep class net.runelite.client.plugins.arooftops.ARooftopsState { *; }
+-keep class net.runelite.client.plugins.arooftops.ARooftopsObstaclesType { *; }
+-keep class net.runelite.client.plugins.arooftops.Course { *; }
+-keep class net.runelite.client.plugins.arooftops.Portals { *; }
+-keep class net.runelite.client.plugins.atempoross.ATemporossState { *; }
+-keep class net.runelite.client.plugins.askiller.ASkillerType { *; }
+-keep class net.runelite.client.plugins.avorkath.AVorkathType { *; }
+-keep class net.runelite.client.plugins.avorkath.AVorkathState { *; }
+-keep class net.runelite.client.plugins.avorkath.PrayerRestoreType { *; }
+-keepclassmembernames class * { java.lang.Class class$(java.lang.String); java.lang.Class class$(java.lang.String, boolean); }

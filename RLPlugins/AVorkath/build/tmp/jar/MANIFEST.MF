@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Plugin-Version: 1.0.5
+Plugin-Id: avorkath-plugin
+Plugin-Provider: ZTD#1147
+Plugin-Description: Automated Vorkath Boss.
+Plugin-License: 3-Clause BSD License
+

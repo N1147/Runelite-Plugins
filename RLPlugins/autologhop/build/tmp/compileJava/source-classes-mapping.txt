@@ -1,0 +1,7 @@
+net/runelite/client/plugins/autologhop/AutoLogHop.java
+ net.runelite.client.plugins.autologhop.AutoLogHop
+ net.runelite.client.plugins.autologhop.AutoLogHop$1
+net/runelite/client/plugins/autologhop/AutoLogHopConfig.java
+ net.runelite.client.plugins.autologhop.AutoLogHopConfig
+net/runelite/client/plugins/autologhop/Method.java
+ net.runelite.client.plugins.autologhop.Method

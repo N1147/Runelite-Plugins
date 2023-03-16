@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Plugin-Version: 0.0.2
+Plugin-Id: zulrahhelper-plugin
+Plugin-Provider: ZTD#1147
+Plugin-Description: Helps with Zulrah.
+Plugin-License: 3-Clause BSD License
+

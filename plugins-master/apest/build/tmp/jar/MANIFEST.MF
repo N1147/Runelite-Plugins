@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Plugin-Version: 1.0.5
+Plugin-Id: anarchisepestcontrol-plugin
+Plugin-Provider: Anarchise
+Plugin-Dependencies: nutils-plugin
+Plugin-Description: Plays pest control.
+Plugin-License: 3-Clause BSD License
+

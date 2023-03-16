@@ -2,9 +2,10 @@ package net.runelite.client.plugins.NUtils;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.runelite.api.MenuAction;
-import net.runelite.api.MenuEntry;
+import net.runelite.api.*;
+import net.runelite.api.widgets.Widget;
 
+import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 /**
@@ -160,6 +161,45 @@ public class NewMenuEntry implements MenuEntry {
 	@Override
 	public MenuEntry onClick(Consumer<MenuEntry> callback) {
 		return this;
+	}
+
+	@Override
+	public boolean isItemOp() {
+		return false;
+	}
+
+	@Override
+	public int getItemOp() {
+		return 0;
+	}
+
+	@Override
+	public int getItemId() {
+		return 0;
+	}
+
+	@Nullable
+	@Override
+	public Widget getWidget() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public NPC getNpc() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public Player getPlayer() {
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public Actor getActor() {
+		return null;
 	}
 
 	@Override

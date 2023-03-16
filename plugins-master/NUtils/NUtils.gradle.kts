@@ -6,11 +6,12 @@ project.extra["PluginDescription"] = "Numb plugin utilities."
 dependencies {
     annotationProcessor(Libraries.lombok)
     annotationProcessor(Libraries.pf4j)
-    compileOnly("com.openosrs:runelite-api:4.21.0")
-    compileOnly("com.openosrs:runelite-client:4.21.0")
+    compileOnly("com.openosrs:runelite-api:4.31.2")
+    compileOnly("com.openosrs:runelite-client:4.31.2")
     compileOnly(Libraries.guice)
     compileOnly(Libraries.lombok)
     compileOnly(Libraries.pf4j)
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:2.1.2")
 }
 
 tasks {

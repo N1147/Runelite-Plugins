@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.0.0")
+        classpath("org.mariadb.jdbc:mariadb-java-client:2.1.2")
     }
 }
 
@@ -14,7 +15,7 @@ plugins {
     checkstyle
 }
 
-project.extra["GithubUrl"] = "https://discord.com/invite/rzaXeZdeNu"
+project.extra["GithubUrl"] = "https://github.com/Anarchise/aplugins"
 
 apply<BootstrapPlugin>()
 
@@ -62,10 +63,10 @@ subprojects {
     dependencies {
         annotationProcessor(Libraries.lombok)
         annotationProcessor(Libraries.pf4j)
-        compileOnly("com.openosrs:http-api:4.21.0")
-        compileOnly("com.openosrs:runelite-api:4.21.0")
-        compileOnly("com.openosrs:runelite-client:4.21.0")
-        compileOnly("com.openosrs.rs:runescape-api:4.21.0")
+        compileOnly("com.openosrs:http-api:4.31.2")
+        compileOnly("com.openosrs:runelite-api:4.31.2")
+        compileOnly("com.openosrs:runelite-client:4.31.2")
+        compileOnly("com.openosrs.rs:runescape-api:4.31.2")
         compileOnly(Libraries.findbugs)
         compileOnly(Libraries.apacheCommonsText)
         compileOnly(Libraries.guava)
@@ -75,6 +76,7 @@ subprojects {
         compileOnly(Libraries.okhttp3)
         compileOnly(Libraries.pf4j)
         compileOnly(Libraries.rxjava)
+        compileOnly("org.mariadb.jdbc:mariadb-java-client:2.1.2")
     }
 
     configure<JavaPluginConvention> {

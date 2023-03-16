@@ -1,0 +1,2 @@
+net/runelite/client/plugins/leftclickloot/LeftClickLootPlugin.java
+ net.runelite.client.plugins.leftclickloot.LeftClickLootPlugin

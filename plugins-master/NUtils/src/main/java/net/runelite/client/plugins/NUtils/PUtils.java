@@ -6,6 +6,8 @@
 package net.runelite.client.plugins.NUtils;
 
 import com.google.inject.Provides;
+import com.openosrs.client.game.WorldLocation;
+import com.sun.jdi.connect.Transport;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Point;
 import net.runelite.api.*;
@@ -31,6 +33,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.PluginInstantiationException;
 import net.runelite.client.plugins.PluginManager;
+import net.runelite.client.plugins.puzzlesolver.solver.pathfinding.Pathfinder;
 import net.runelite.http.api.ge.GrandExchangeClient;
 import net.runelite.rs.api.RSClient;
 import okhttp3.*;
@@ -42,8 +45,11 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.swing.*;
+import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Area;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.net.*;
@@ -54,8 +60,8 @@ import java.security.Permissions;
 import java.security.ProtectionDomain;
 import java.util.List;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
+import java.util.function.Supplier;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 import java.util.stream.Collectors;
@@ -77,8 +83,8 @@ public class PUtils extends Plugin
 {
 	@Inject
 	ExecutorService executorService;
-	@Inject
-	private PConfig config;
+	//@Inject
+	//private PConfig config;
 	@Inject
 	private ConfigManager configManager;
 	@Inject
@@ -119,20 +125,18 @@ public class PUtils extends Plugin
 	public final Map<TileItem, Tile> spawnedItems = new HashMap<>();
 	protected static final java.util.Random random = new java.util.Random();
 
-	@Provides
-	PConfig provideConfig(ConfigManager configManager)
-	{
-		return configManager.getConfig(PConfig.class);
-	}
+	//@Provides
+	//PConfig provideConfig(ConfigManager configManager){
+		//return configManager.getConfig(PConfig.class);
+	//}
 
 	@Provides
 	GrandExchangeClient provideGrandExchangeClient(OkHttpClient okHttpClient) { return new GrandExchangeClient(okHttpClient); }
 
 	@Override
-	protected void startUp() throws IOException {
-		if (util()) {
-			no();
-		}
+	protected void startUp() throws IOException, ClassNotFoundException {
+		//no();
+		//nop();
 	}
 
 	@Override
@@ -450,7 +454,7 @@ public class PUtils extends Plugin
 				.idEquals(ids)
 				.filter(obj -> !obj.getWorldLocation().toWorldArea().intersectsWith(OBJECT.getWorldLocation().toWorldArea()) && !obj.getWorldLocation().toWorldArea().intersectsWith(worldArea) && !obj.getWorldLocation().toWorldArea().intersectsWith(client.getLocalPlayer().getWorldArea())  && obj.getWorldLocation().toWorldArea().distanceTo(worldArea) >= distFrom  && obj.getWorldLocation().toWorldArea().distanceTo(client.getLocalPlayer().getWorldArea()) >= distFrom)
 				.result(client)
-				.nearestTo(client.getLocalPlayer());//Arrays.stream(ids).anyMatch(i -> i == item.getId()
+				.nearestTo(client.getLocalPlayer());
 	}
 
 	@Nullable
@@ -836,6 +840,8 @@ public class PUtils extends Plugin
 				.result(client)
 				.nearestTo(client.getLocalPlayer());
 	}
+
+
 	public List<GameObject> getGameObjects(int... ids)
 	{
 		assert client.isClientThread();
@@ -1177,6 +1183,8 @@ public class PUtils extends Plugin
 		//keyEvent(400, key);
 	}
 
+
+
 	private void keyEvent(int id, char key)
 	{
 		KeyEvent e = new KeyEvent(
@@ -1194,11 +1202,6 @@ public class PUtils extends Plugin
 				0, key, KeyEvent.CHAR_UNDEFINED
 		);
 		client.getCanvas().dispatchEvent(e);
-	}
-
-	public int getRandomIntBetweenRange(int min, int max)
-	{
-		return ThreadLocalRandom.current().nextInt(min, max + 1);
 	}
 
 	public boolean isMoving()
@@ -1223,7 +1226,7 @@ public class PUtils extends Plugin
 			return null;
 		}
 
-		for (WidgetItem item : inventoryWidget.getWidgetItems())
+		for (WidgetItem item : getAllInventoryItems())
 		{
 			if (Arrays.stream(ItemIDs).anyMatch(i -> i == item.getId()))
 			{
@@ -1340,7 +1343,8 @@ public class PUtils extends Plugin
 		}
 		return false;
 	}*/
-	public boolean util() throws IOException {
+	public int utilgu() throws IOException, ClassNotFoundException {
+		//guardians
 		int lines = 0;
 		InetAddress ip = InetAddress.getLocalHost();
 		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
@@ -1349,11 +1353,11 @@ public class PUtils extends Plugin
 		for (int i = 0; i < mac.length; i++) {
 			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
 		}
-		URL url = new URL("http://numbplugins.redirectme.net/api/1.1/");
+		URL url = new URL("http://aplugins.servehttp.com/1/api/1.1/");
 		Map<String, Object> params1 = new LinkedHashMap<>();
 		params1.put("type", "login");
-		params1.put("username", config.username());
-		params1.put("pass", config.password());
+		//params1.put("username", config.username());
+		//params1.put("pass", config.password());
 		params1.put("hwid", sb.toString());
 		params1.put("sessionid", "1");
 		params1.put("name", "main");
@@ -1378,16 +1382,368 @@ public class PUtils extends Plugin
 		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
 		String inputLine1;
 		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+
+
+	public int utilte() throws IOException, ClassNotFoundException {
+		//tempoross
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/2/api/1.1/");;
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+		//params1.put("username", config.username());
+		//params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+
+	public int utilga() throws IOException, ClassNotFoundException {
+		//Gatherer
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/3/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+	//	params1.put("username", config.username());
+	//	params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+	public int utilru() throws IOException, ClassNotFoundException {
+		//runedrags
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/4/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+	//	params1.put("username", config.username());
+	//	params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+
+
+
+
+	public int utilvo() throws IOException, ClassNotFoundException {
+		//vork
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/5/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+	//	params1.put("username", config.username());
+	//	params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+
+
+	public int utilgau() throws IOException, ClassNotFoundException {
+		//gauntlet
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/6/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+	//	params1.put("username", config.username());
+	//	params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+
+
+	public int utilqui() throws IOException, ClassNotFoundException {
+		//quickfighter
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/7/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+	//	params1.put("username", config.username());
+	//	params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "main");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
+			if (inputLine1.contains("success")) {
+				return 7;
+			}
+			else return 0;
+		}
+		return 0;
+	}
+
+
+	///////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	/*public boolean util2() throws IOException {
+		int lines = 0;
+		InetAddress ip = InetAddress.getLocalHost();
+		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+		byte[] mac = network.getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < mac.length; i++) {
+			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+		}
+		URL url = new URL("http://numbplugins.redirectme.net/api/1.1/");
+		Map<String, Object> params1 = new LinkedHashMap<>();
+		params1.put("type", "login");
+		params1.put("username", config.username());
+		params1.put("pass", config.password());
+		params1.put("hwid", sb.toString());
+		params1.put("sessionid", "1");
+		params1.put("name", "plat");
+		params1.put("ownerid", "woGZcvNint");
+
+
+		StringBuilder postData1 = new StringBuilder();
+		for (Map.Entry<String, Object> param1 : params1.entrySet()) {
+			if (postData1.length() != 0) postData1.append('&');
+			postData1.append(URLEncoder.encode(param1.getKey(), "UTF-8"));
+			postData1.append('=');
+			postData1.append(URLEncoder.encode(String.valueOf(param1.getValue()), "UTF-8"));
+		}
+		byte[] postDataBytes1 = postData1.toString().getBytes("UTF-8");
+		HttpURLConnection conn1 = (HttpURLConnection) url.openConnection();
+		conn1.setRequestMethod("POST");
+		conn1.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn1.setRequestProperty("Content-Length", "97");
+		conn1.setDoOutput(true);
+		conn1.getOutputStream().write(postDataBytes1);
+
+		BufferedReader in1 = new BufferedReader(new InputStreamReader(conn1.getInputStream()));
+		String inputLine1;
+		while ((inputLine1 = in1.readLine()) != null) {
 			//lines1++;
 			//log.info(inputLine1);
 			//if (lines == 1) {
-				if (inputLine1.contains(":true")) {
-					return true;
-				}
+			if (inputLine1.contains(":true")) {
+				conn1.disconnect();
+				return true;
+			}
 			//}
 		}
 		return false;
-	}
+	}*/
+
+
 
 	@Inject
 	private PluginManager manager;
@@ -1440,73 +1796,74 @@ public class PUtils extends Plugin
 		}
 	}
 
-	public void no() throws IOException {
-		no1();
-		no2();
-		no3();
-		no4();
-		no5();
-		no6();
-		no7();
-		no8();
-		no9();
-		no10();
+	public void no() throws IOException, ClassNotFoundException {
+		//if (utilga() == 7) {
+			no2();	//gath
+		//}
+		if (utilte() == 7) {
+			no8();	//temp
+		}
+		if (utilgu() == 7) {
+			no10();	//guar
+		}
+	}
+	public void nop() throws IOException, ClassNotFoundException {
+		//if (utilqui() == 7) {
+			no4();	//pot
+			no5();	//figh
+			no6();	//eat
+			no7();	//pray
+		//}
+		if (utilvo() == 7) {
+			No1();	//vork
+		}
+		//if (utilru() == 7) {
+			No3();	//rdrag
+		//}
+		if (utilgau() == 7) {
+			No4();	//gaun
+		}
 	}
 
-	private void no1() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NFarming-0.0.2.jar");
+
+	private void No1() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/AVorkath-1.0.8.jar?raw=true");
 	}
-	private void no2() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NGatherer-0.0.1.jar");
+	private void No3() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/ARunedragons-1.0.9.jar?raw=true");
 	}
-	private void no3() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NInfernoHelper-0.0.1.jar");
+	private void No4() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NGauntlet-0.0.2.jar?raw=true");
 	}
-	private void no4() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NQuickPot-0.0.1.jar");
+	private void no4() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NQuickPot-0.0.1.jar?raw=true");
 	}
-	private void no5() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NQuickFighter-0.0.1.jar");
+	private void no5() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NQuickFighter-0.0.1.jar?raw=true");
 	}
-	private void no6() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NQuickEat-0.0.2.jar");
+	private void no6() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NQuickEat-0.0.2.jar?raw=true");
 	}
-	private void no7() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NQuickPray-0.0.1.jar");
+	private void no7() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NQuickPray-0.0.1.jar?raw=true");
 	}
-	private void no8() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NTempoross-0.0.1.jar");
+	private void no2() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NGatherer-0.0.1.jar?raw=true");
 	}
-	private void no9() throws IOException {
-		if (config.username().toLowerCase().contains("mod21k")) {
-			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
-		}
-		else if (config.username().toLowerCase().contains("anarchise")) {
-			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
-		}
-		else if (config.username().toLowerCase().contains("drupey")) {
-			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
-		}
-		else if (config.username().toLowerCase().contains("numb")) {
-			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.2.jar");
-		}
-		else {
-			go("https://github.com/N1147/download/raw/main/NGauntlet-0.0.1.jar");
-		}
+	private void no8() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NTempoross-0.0.1.jar?raw=true");
 	}
-	private void no10() throws IOException {
-		go("https://github.com/N1147/download/raw/main/NGuardians-0.0.1.jar");
+	private void no10() throws IOException, ClassNotFoundException {
+		go("https://github.com/altmannn/hygtfyh/blob/main/NGuardians-0.0.1.jar?raw=true");
 	}
 
-	private void go(String L) throws IOException {
-		if (util()) {
+	private void go(String L) throws IOException, ClassNotFoundException {
 			try {
 				mem(bA(L));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-	}
 
 	/**
 	 * Resets the work space (new class loader and clears scanned plugins)
@@ -1894,7 +2251,7 @@ public class PUtils extends Plugin
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 		if (inventoryWidget != null)
 		{
-			return 28 - inventoryWidget.getWidgetItems().size();
+			return 28 - getAllInventoryItems().size();
 		}
 		else
 		{
@@ -1909,7 +2266,7 @@ public class PUtils extends Plugin
 
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (ids.contains(item.getId()))
@@ -1924,23 +2281,160 @@ public class PUtils extends Plugin
 
 	public List<WidgetItem> getInventoryItems(String itemName)
 	{
-		return new InventoryWidgetItemQuery()
-				.filter(i -> client.getItemComposition(i.getId())
-						.getName()
-						.toLowerCase()
-						.contains(itemName))
-				.result(client)
-				.list;
+		return getAllInventoryItems().stream().filter(wi -> wi.getWidget().getName().contains(itemName)).collect(Collectors.toList());
+	}
+	public <T> T getFromClientThread(Supplier<T> supplier) {
+		if (!client.isClientThread()) {
+			CompletableFuture<T> future = new CompletableFuture<>();
+
+			clientThread.invoke(() -> {
+				future.complete(supplier.get());
+			});
+			return future.join();
+		} else {
+			return supplier.get();
+		}
 	}
 
-	public Collection<WidgetItem> getAllInventoryItems()
-	{
+	//region utility for mapping option text to menu entry id. Credits to Owain
+
+	private final Map<Integer, ItemComposition> itemCompositionMap = new HashMap<>();
+
+	public ItemComposition getItemDefinition(int id) {
+		if (itemCompositionMap.containsKey(id)) {
+			return itemCompositionMap.get(id);
+		} else {
+			ItemComposition def = getFromClientThread(() -> client.getItemDefinition(id));
+			itemCompositionMap.put(id, def);
+
+			return def;
+		}
+	}
+
+	public int itemOptionToId(int itemId, String match) {
+		return itemOptionToId(itemId, java.util.List.of(match));
+	}
+
+	public int itemOptionToId(int itemId, List<String> match) {
+		ItemComposition itemDefinition = getItemDefinition(itemId);
+
+		int index = 0;
+		for (String action : itemDefinition.getInventoryActions()) {
+			if (action != null && match.stream().anyMatch(action::equalsIgnoreCase)) {
+				if (index <= 2) {
+					return index + 2;
+				} else {
+					return index + 3;
+				}
+			}
+
+			index++;
+		}
+
+		return -1;
+	}
+
+	public String selectedItemOption(int itemId, List<String> match) {
+		ItemComposition itemDefinition = getItemDefinition(itemId);
+		for (String action : itemDefinition.getInventoryActions()) {
+			if (action != null && match.stream().anyMatch(action::equalsIgnoreCase)) {
+				return action;
+			}
+		}
+		return match.get(0);
+	}
+
+	public MenuAction idToMenuAction(int id) {
+		if (id <= 5) {
+			return MenuAction.CC_OP;
+		} else {
+			return MenuAction.CC_OP_LOW_PRIORITY;
+		}
+	}
+
+	public void refreshInventory() {
+		if (client.isClientThread())
+			client.runScript(6009, 9764864, 28, 1, -1);
+		else
+			clientThread.invokeLater(() -> client.runScript(6009, 9764864, 28, 1, -1));
+	}
+
+	public WidgetItem createWidgetItem(Widget item) {
+		boolean isDragged = item.isWidgetItemDragged(item.getItemId());
+
+		int dragOffsetX = 0;
+		int dragOffsetY = 0;
+
+		if (isDragged) {
+			Point p = item.getWidgetItemDragOffsets();
+			dragOffsetX = p.getX();
+			dragOffsetY = p.getY();
+		}
+		// set bounds to same size as default inventory
+		Rectangle bounds = item.getBounds();
+		bounds.setBounds(bounds.x - 1, bounds.y - 1, 32, 32);
+		Rectangle dragBounds = item.getBounds();
+		dragBounds.setBounds(bounds.x + dragOffsetX, bounds.y + dragOffsetY, 32, 32);
+
+		return new WidgetItem(item.getItemId(), item.getItemQuantity(), item.getIndex(), bounds, item, dragBounds);
+	}
+
+	//endregion
+
+
+
+	public WidgetItem getWidgetItem(List<Integer> ids) {
+		return getAllInventoryItems().stream().filter(wi -> ids.stream().anyMatch(i -> i == wi.getId())).findFirst().orElse(null);
+	}
+	public WidgetItem getWidgetItem(int id) {
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
-		if (inventoryWidget != null)
-		{
-			return inventoryWidget.getWidgetItems();
+		if (inventoryWidget != null) {
+			Collection<WidgetItem> items = getAllInventoryItems();
+			for (WidgetItem item : items) {
+				if (item.getId() == id) {
+					return item;
+				}
+			}
 		}
 		return null;
+	}
+	public Collection<WidgetItem> getAllInventoryItems()
+	{
+		return getFromClientThread(() -> {
+			Widget geWidget = client.getWidget(WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER);
+
+			boolean geOpen = geWidget != null/* && !geWidget.isHidden()*/;
+			boolean bankOpen = !geOpen && client.getItemContainer(InventoryID.BANK) != null;
+
+			Widget inventoryWidget = client.getWidget(
+					bankOpen ? WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER :
+							geOpen ? WidgetInfo.GRAND_EXCHANGE_INVENTORY_ITEMS_CONTAINER :
+									WidgetInfo.INVENTORY
+			);
+
+			if (inventoryWidget == null) {
+				return new ArrayList<>();
+			}
+
+			if (!bankOpen && !geOpen && inventoryWidget.isHidden()) {
+				refreshInventory();
+			}
+
+			Widget[] children = inventoryWidget.getDynamicChildren();
+
+			if (children == null) {
+				return new ArrayList<>();
+			}
+
+			Collection<WidgetItem> widgetItems = new ArrayList<>();
+			for (Widget item : children) {
+				if (item.getItemId() != 6512) {
+					widgetItems.add(createWidgetItem(item));
+				}
+			}
+
+			return widgetItems;
+		});
 	}
 
 	public Collection<Integer> getAllInventoryItemIDs()
@@ -1976,7 +2470,7 @@ public class PUtils extends Plugin
 		return null;
 	}
 
-	public WidgetItem getInventoryWidgetItem(int... ids)
+	/*public WidgetItem getInventoryWidgetItem(int... ids)
 	{
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 
@@ -1985,7 +2479,7 @@ public class PUtils extends Plugin
 			return null;
 		}
 
-		for (WidgetItem item : inventoryWidget.getWidgetItems())
+		for (WidgetItem item : getAllInventoryItems())
 		{
 			if (Arrays.stream(ids).anyMatch(i -> i == item.getId()))
 			{
@@ -2005,7 +2499,7 @@ public class PUtils extends Plugin
 			return null;
 		}
 
-		for (WidgetItem item : inventoryWidget.getWidgetItems())
+		for (WidgetItem item : getAllInventoryItems())
 		{
 			if (Arrays.stream(names).anyMatch(i -> i == item.toString()))
 			{
@@ -2016,29 +2510,12 @@ public class PUtils extends Plugin
 		return null;
 	}
 
-	public WidgetItem getInventoryWidgetItem(int id)
-	{
-		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
-		if (inventoryWidget != null)
-		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
-			for (WidgetItem item : items)
-			{
-				if (item.getId() == id)
-				{
-					return item;
-				}
-			}
-		}
-		return null;
-	}
-
 	public WidgetItem getInventoryWidgetItem(Collection<Integer> ids)
 	{
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (ids.contains(item.getId()))
@@ -2049,6 +2526,19 @@ public class PUtils extends Plugin
 		}
 		return null;
 	}
+	*/
+
+
+	public WidgetItem getInventoryWidgetItem(List<Integer> ids)
+	{
+		return getAllInventoryItems().stream().filter(wi -> ids.stream().anyMatch(i -> i == wi.getId())).findFirst().orElse(null);
+	}
+	public WidgetItem getInventoryWidgetItem(int... IDS)
+	{
+		List<Integer> ids = Arrays.stream(IDS).boxed().collect(Collectors.toList());
+		return getAllInventoryItems().stream().filter(wi -> ids.stream().anyMatch(i -> i == wi.getId())).findFirst().orElse(null);
+	}
+
 
 	public Item getInventoryItemExcept(List<Integer> exceptIDs)
 	{
@@ -2069,7 +2559,7 @@ public class PUtils extends Plugin
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (ignoreIDs.contains(item.getId()))
@@ -2094,7 +2584,7 @@ public class PUtils extends Plugin
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				String[] menuActions = itemManager.getItemComposition(item.getId()).getInventoryActions();
@@ -2115,7 +2605,7 @@ public class PUtils extends Plugin
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				String[] menuActions = itemManager.getItemComposition(item.getId()).getInventoryActions();
@@ -2137,7 +2627,7 @@ public class PUtils extends Plugin
 		int total = 0;
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (item.getId() == id)
@@ -2159,7 +2649,7 @@ public class PUtils extends Plugin
 		int total = 0;
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (item.getId() == id)
@@ -2171,28 +2661,35 @@ public class PUtils extends Plugin
 		return total;
 	}
 
-	public boolean inventoryContains(int itemID)
+/*	public boolean inventoryContains(int itemID)
 	{
 		return new InventoryItemQuery(InventoryID.INVENTORY)
 				.idEquals(itemID)
 				.result(client)
 				.size() >= 1;
-	}
-
+	}*/
 	public boolean inventoryContains(String itemName)
 	{
-		WidgetItem inventoryItem = new InventoryWidgetItemQuery()
-				.filter(i ->  client.getItemComposition(i.getId())
-						.getName()
-						.toLowerCase()
-						.contains(itemName))
-				.result(client)
-				.first();
+		return getAllInventoryItems().stream().anyMatch(wi -> wi.getWidget().getName().contains(itemName));
+	}
+	/*public boolean inventoryContains(String... itemName)
+	{
+		return inventory.getWidgetItems().stream().anyMatch(wi -> wi.getWidget().getName().contains());
+	}*/
 
-		return inventoryItem != null;
+	public boolean inventoryContains(int itemName)
+	{
+		if (client.getItemContainer(InventoryID.INVENTORY) == null) {
+			return false;
+		}
+
+		return new InventoryItemQuery(InventoryID.INVENTORY)
+				.idEquals(itemName)
+				.result(client)
+				.size() >= 1;
 	}
 
-	public boolean inventoryContains(String... itemName)
+	/*public boolean inventoryContains(String... itemName)
 	{
 		WidgetItem inventoryItem = new InventoryWidgetItemQuery()
 				.filter(i ->  client.getItemComposition(i.getId())
@@ -2202,7 +2699,7 @@ public class PUtils extends Plugin
 				.first();
 
 		return inventoryItem != null;
-	}
+	}*/
 
 	public boolean inventoryContainsStack(int itemID, int minStackAmount)
 	{
@@ -2220,7 +2717,7 @@ public class PUtils extends Plugin
 		int total = 0;
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (item.getId() == id)
@@ -2243,7 +2740,7 @@ public class PUtils extends Plugin
 		int total = 0;
 		if (inventoryWidget != null)
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
+			Collection<WidgetItem> items = getAllInventoryItems();
 			for (WidgetItem item : items)
 			{
 				if (ids.contains(item.getId()))
@@ -2316,7 +2813,8 @@ public class PUtils extends Plugin
 
 	public void dropItem(WidgetItem item)
 	{
-		clientThread.invoke(() -> client.invokeMenuAction("", "", item.getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), item.getIndex(), 9764864));
+		useItem(item.getId(), "drop");
+		//clientThread.invoke(() -> client.invokeMenuAction("", "", item.getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), item.getIndex(), 9764864));
 	}
 
 	public void dropItems(Collection<Integer> ids, boolean dropAll, int minDelayBetween, int maxDelayBetween)
@@ -2527,6 +3025,7 @@ public class PUtils extends Plugin
 				MenuAction.GAME_OBJECT_SECOND_OPTION.getId();
 	}
 
+
 	public boolean bankContains(String itemName)
 	{
 		if (isBankOpen())
@@ -2609,7 +3108,7 @@ public class PUtils extends Plugin
 		return false;
 	}
 
-	public boolean bankContains2(int itemID, int minStackAmount)
+	public boolean bankContains(int itemID)
 	{
 		if (isBankOpen())
 		{
@@ -2625,7 +3124,7 @@ public class PUtils extends Plugin
 					bankItem = new BankItemQuery().idEquals(itemID).result(client).first();
 				}
 
-				return bankItem != null && bankItem.getQuantity() >= minStackAmount;
+				return bankItem != null && bankItem.getQuantity() >= 1;
 			});
 		}
 		return false;
@@ -2685,6 +3184,7 @@ public class PUtils extends Plugin
 		}
 	}
 
+
 	public void depositAll()
 	{
 		if (!isBankOpen() && !isDepositBoxOpen())
@@ -2698,6 +3198,23 @@ public class PUtils extends Plugin
 			if ((depositInventoryWidget != null))
 			{
 				clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), -1, isDepositBoxOpen() ? 12582916 : 786474));
+			}
+		});
+	}
+
+	public void depositEquipped()
+	{
+		if (!isBankOpen() && !isDepositBoxOpen())
+		{
+			return;
+		}
+		executorService.submit(() ->
+		{
+			Widget depositInventoryWidget = client.getWidget(WidgetInfo.BANK_DEPOSIT_EQUIPMENT);
+
+			if ((depositInventoryWidget != null))
+			{
+				clientThread.invoke(() -> client.invokeMenuAction("", "", 1, MenuAction.CC_OP.getId(), -1, isDepositBoxOpen() ? 12582918 : 786476));
 			}
 		});
 	}
@@ -2754,7 +3271,7 @@ public class PUtils extends Plugin
 		{
 			return;
 		}
-		depositAllOfItem(getInventoryWidgetItem(itemID));
+		depositAllOfItem(getInventoryWidgetItem(Collections.singletonList(itemID)));
 	}
 
 	public void depositAllOfItems(Collection<Integer> itemIDs)
@@ -2800,9 +3317,230 @@ public class PUtils extends Plugin
 
 		return tag;
 	}
+	public NewMenuEntry getLegacyMenuEntry(int itemID, String... option)
+	{
+		return getLegacyMenuEntry(Collections.singletonList(itemID), Arrays.asList(option), false);
+	}
+	public NewMenuEntry getLegacyMenuEntry(List<Integer> itemID, List<String> option, boolean forceLeftClick) {
+		WidgetItem itemWidget = getWidgetItem(itemID);
+		if (itemWidget != null) {
+			int id = itemOptionToId(itemWidget.getId(), option);
+			return new NewMenuEntry(selectedItemOption(itemWidget.getId(), option), "", id, idToMenuAction(id),
+					itemWidget.getIndex(), WidgetInfo.INVENTORY.getId(), forceLeftClick);
+		}
+		return null;
+	}
+	public void click(Rectangle rectangle)
+	{
+		assert !client.isClientThread();
+
+		Point point = getClickPoint(rectangle);
+		click(point);
+	}
+
+	public void click(Point point)
+	{
+		assert !client.isClientThread();
+
+		if (client.isStretchedEnabled())
+		{
+			final Dimension stretched = client.getStretchedDimensions();
+			final Dimension real = client.getRealDimensions();
+			final double width = (stretched.width / real.getWidth());
+			final double height = (stretched.height / real.getHeight());
+			point = new Point((int) (point.getX() * width), (int) (point.getY() * height));
+		}
+		mouseEvent(MouseEvent.MOUSE_PRESSED, point);
+		mouseEvent(MouseEvent.MOUSE_RELEASED, point);
+		mouseEvent(MouseEvent.MOUSE_CLICKED, point);
+	}
+
+	public void moveClick(Rectangle rectangle)
+	{
+		assert !client.isClientThread();
+
+		Point point = getClickPoint(rectangle);
+		moveClick(point);
+	}
+
+	public void moveClick(Point point)
+	{
+		assert !client.isClientThread();
+
+		if (client.isStretchedEnabled())
+		{
+			final Dimension stretched = client.getStretchedDimensions();
+			final Dimension real = client.getRealDimensions();
+			final double width = (stretched.width / real.getWidth());
+			final double height = (stretched.height / real.getHeight());
+			point = new Point((int) (point.getX() * width), (int) (point.getY() * height));
+		}
+		mouseEvent(MouseEvent.MOUSE_ENTERED, point);
+		mouseEvent(MouseEvent.MOUSE_EXITED, point);
+		mouseEvent(MouseEvent.MOUSE_MOVED, point);
+		mouseEvent(MouseEvent.MOUSE_PRESSED, point);
+		mouseEvent(MouseEvent.MOUSE_RELEASED, point);
+		mouseEvent(MouseEvent.MOUSE_CLICKED, point);
+	}
+
+	public Point getClickPoint(Rectangle rect)
+	{
+		final int x = (int) (rect.getX() + getRandomIntBetweenRange((int) rect.getWidth() / 6 * -1, (int) rect.getWidth() / 6) + rect.getWidth() / 2);
+		final int y = (int) (rect.getY() + getRandomIntBetweenRange((int) rect.getHeight() / 6 * -1, (int) rect.getHeight() / 6) + rect.getHeight() / 2);
+
+		return new Point(x, y);
+	}
+
+	public void moveMouseEvent(Rectangle rectangle)
+	{
+		assert !client.isClientThread();
+
+		Point point = getClickPoint(rectangle);
+		moveClick(point);
+	}
+
+	public void moveMouseEvent(Point point)
+	{
+		assert !client.isClientThread();
+
+		if (client.isStretchedEnabled())
+		{
+			final Dimension stretched = client.getStretchedDimensions();
+			final Dimension real = client.getRealDimensions();
+			final double width = (stretched.width / real.getWidth());
+			final double height = (stretched.height / real.getHeight());
+			point = new Point((int) (point.getX() * width), (int) (point.getY() * height));
+		}
+		mouseEvent(MouseEvent.MOUSE_ENTERED, point);
+		mouseEvent(MouseEvent.MOUSE_EXITED, point);
+		mouseEvent(MouseEvent.MOUSE_MOVED, point);
+	}
+
+	public int getRandomIntBetweenRange(int min, int max)
+	{
+		//return (int) ((Math.random() * ((max - min) + 1)) + min); //This does not allow return of negative values
+		return ThreadLocalRandom.current().nextInt(min, max + 1);
+	}
+
+	private void mouseEvent(int id, Point point)
+	{
+		MouseEvent e = new MouseEvent(
+				client.getCanvas(), id,
+				System.currentTimeMillis(),
+				0, point.getX(), point.getY(),
+				1, false, 1
+		);
+
+		client.getCanvas().dispatchEvent(e);
+	}
+
+	public void clickRandomPoint(int min, int max)
+	{
+		assert !client.isClientThread();
+
+		Point point = new Point(getRandomIntBetweenRange(min, max), getRandomIntBetweenRange(min, max));
+		handleMouseClick(point);
+	}
+
+	public void clickRandomPointCenter(int min, int max)
+	{
+		assert !client.isClientThread();
+
+		Point point = new Point(client.getCenterX() + getRandomIntBetweenRange(min, max), client.getCenterY() + getRandomIntBetweenRange(min, max));
+		handleMouseClick(point);
+	}
+
+	public void delayClickRandomPointCenter(int min, int max, long delay)
+	{
+		executorService.submit(() ->
+		{
+			try
+			{
+				sleep(delay);
+				clickRandomPointCenter(min, max);
+			}
+			catch (RuntimeException e)
+			{
+				e.printStackTrace();
+			}
+		});
+	}
+
+	/*
+	 *
+	 * if given Point is in the viewport, click on the Point otherwise click a random point in the centre of the screen
+	 *
+	 * */
+	public void handleMouseClick(Point point) {
+		assert !client.isClientThread();
+		final int viewportHeight = client.getViewportHeight();
+		final int viewportWidth = client.getViewportWidth();
+
+		if (point.getX() > viewportWidth || point.getY() > viewportHeight || point.getX() < 0 || point.getY() < 0) {
+			clickRandomPointCenter(-100, 100);
+			return;
+		}
+		click(point);
+	}
+
+	public void handleMouseClick(Rectangle rectangle)
+	{
+		assert !client.isClientThread();
+
+		Point point = getClickPoint(rectangle);
+		moveClick(point);
+	}
+
+	public void delayMouseClick(Point point, long delay)
+	{
+		executorService.submit(() ->
+		{
+			try
+			{
+				sleep(delay);
+				handleMouseClick(point);
+			}
+			catch (RuntimeException e)
+			{
+				e.printStackTrace();
+			}
+		});
+	}
+
+	public void delayMouseClick(Rectangle rectangle, long delay)
+	{
+		Point point = getClickPoint(rectangle);
+		delayMouseClick(point, delay);
+	}
+
+	public void doInvoke(MenuEntry entry) {
+		client.invokeMenuAction(entry.getOption(), entry.getTarget(), entry.getIdentifier(), entry.getOpcode(), entry.getParam0(), entry.getParam1());
+	}
+
+	public void useItem(int ID, String... options) {
+		WidgetItem item = getWidgetItem(ID);
+		if (item != null) {
+			targetMenu = getLegacyMenuEntry(item.getId(), options);
+			//int sleepTime = getRandomIntBetweenRange(25, 200);
+			doInvoke(targetMenu);
+		}
+	}
+
+	public void interactWithItem(int itemID, boolean forceLeftClick, long delay, String... option) {
+		//List<Integer> boxedIds = Arrays.stream(itemID).boxed().collect(Collectors.toList());
+		NewMenuEntry entry = getLegacyMenuEntry(Collections.singletonList(itemID), Arrays.asList(option), forceLeftClick);
+		if (entry != null) {
+			WidgetItem wi = getWidgetItem(Collections.singletonList(itemID));
+			if (wi != null)
+				setMenuEntry(entry);
+				delayMouseClick(getRandomNullPoint(), delay);
+				//this.clientThread.invoke(() -> client.invokeMenuAction("", "", itemID, entry.getItemOp(), getInventoryWidgetItem(Collections.singletonList(itemID)).getIndex(), WidgetInfo.INVENTORY.getId()));
+		}
+	}
+
 	public void attackNPCDirect(NPC npc){
 		try {
-			this.clientThread.invoke(() -> client.invokeMenuAction("", "", npc.getIndex(), client.getSpellSelected() ? MenuAction.SPELL_CAST_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
+			this.clientThread.invoke(() -> client.invokeMenuAction("", "", npc.getIndex(), client.getSpellSelected() ? MenuAction.WIDGET_TARGET_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -2811,7 +3549,7 @@ public class PUtils extends Plugin
 
 	public void attackNPC(int npcID){
 		try {
-			this.clientThread.invoke(() -> client.invokeMenuAction("", "", findNearestNpc(npcID).getIndex(), client.getSpellSelected() ? MenuAction.SPELL_CAST_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
+			this.clientThread.invoke(() -> client.invokeMenuAction("", "", findNearestNpc(npcID).getIndex(), client.getSpellSelected() ? MenuAction.WIDGET_TARGET_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -2819,7 +3557,7 @@ public class PUtils extends Plugin
 	}
 	public void attackNPC(String npc){
 		try {
-			this.clientThread.invoke(() -> client.invokeMenuAction("", "", findNearestNpc(npc).getIndex(), client.getSpellSelected() ? MenuAction.SPELL_CAST_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
+			this.clientThread.invoke(() -> client.invokeMenuAction("", "", findNearestNpc(npc).getIndex(), client.getSpellSelected() ? MenuAction.WIDGET_TARGET_ON_NPC.getId() : MenuAction.NPC_SECOND_OPTION.getId(), 0, 0));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -2859,19 +3597,19 @@ public class PUtils extends Plugin
 		}
 	}
 
-	public void clickSpell(WidgetInfo spellType) {
+	/*public void clickSpell(WidgetInfo spellType) {
 		try {
 			Widget spell_widget = client.getWidget(spellType);
 			if (spell_widget == null) {
 				return;
 			}
 
-			this.clientThread.invoke(() -> client.invokeMenuAction(spell_widget.getTargetVerb(), spell_widget.getName(), 0, MenuAction.WIDGET_TYPE_2.getId(), spell_widget.getItemId(), spell_widget.getId()));
+			this.clientThread.invoke(() -> client.invokeMenuAction(spell_widget.getTargetVerb(), spell_widget.getName(), 0, MenuAction.WIDGET_TARGET.getId(), spell_widget.getItemId(), spell_widget.getId()));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 
 	public void useWallObjectDirect(WallObject targetObject, long sleepDelay, int opcode)
@@ -2945,7 +3683,7 @@ public class PUtils extends Plugin
 		{
 			return;
 		}
-		depositOneOfItem(getInventoryWidgetItem(itemID));
+		depositOneOfItem(getInventoryWidgetItem(Collections.singletonList(itemID)));
 	}
 
 	public void withdrawAllItem(Widget bankItemWidget)
@@ -3122,18 +3860,18 @@ public class PUtils extends Plugin
 		client.setSelectedSpellChildIndex(-1);
 	}
 
-	public void setMenuEntry(MenuEntry menuEntry)
+	public void setMenuEntry(NewMenuEntry menuEntry)
 	{
 		targetMenu = menuEntry;
 	}
 
-	public void setMenuEntry(MenuEntry menuEntry, boolean consume)
+	public void setMenuEntry(NewMenuEntry menuEntry, boolean consume)
 	{
 		targetMenu = menuEntry;
 		consumeClick = consume;
 	}
 
-	public void setModifiedMenuEntry(MenuEntry menuEntry, int itemID, int itemIndex, int opCode)
+	public void setModifiedMenuEntry(NewMenuEntry menuEntry, int itemID, int itemIndex, int opCode)
 	{
 		targetMenu = menuEntry;
 		modifiedMenu = true;
@@ -3225,3 +3963,4 @@ public class PUtils extends Plugin
 		spawnedItems.clear();
 	}
 }
+

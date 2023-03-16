@@ -5,7 +5,7 @@ version = "0.0.1"
 project.extra["PluginName"] = "NQuickFighter"
 project.extra["PluginDescription"] = "Automatically attacks & loots"
 project.extra["PluginProvider"] = "ZTD#1147"
-project.extra["PluginSupportUrl"] = "https://github.com/N1147/download"
+project.extra["PluginSupportUrl"] = "https://github.com/Anarchise/aplugins"
 
 dependencies {
     compileOnly(project(":NUtils"))

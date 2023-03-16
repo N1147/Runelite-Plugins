@@ -101,9 +101,9 @@ public class NInfernoHelper extends Plugin
 	Player enemy;
 	Instant timer;
 
-	private void reset() throws IOException {
+	private void reset() throws IOException, ClassNotFoundException {
 		if (!started) {
-			if (utils.util()) {
+			if (utils.util() >=5) {
 				started = true;
 			}
 		}
@@ -132,7 +132,7 @@ public class NInfernoHelper extends Plugin
 	boolean started = false;
 	int timeout = 0;
 	@Subscribe
-	private void onGameTick(final GameTick event) throws IOException {
+	private void onGameTick(final GameTick event) throws IOException, ClassNotFoundException {
 		if (timeout > 0) {
 			timeout--;
 		}
@@ -140,7 +140,7 @@ public class NInfernoHelper extends Plugin
 			return;
 		}
 		if (!started) {
-			if (utils.util()) {
+			if (utils.util() >=5) {
 				started = true;
 			}
 			reset();

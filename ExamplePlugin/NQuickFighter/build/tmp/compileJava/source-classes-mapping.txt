@@ -1,0 +1,6 @@
+net/runelite/client/plugins/NQuickFighter/NQuickFighterConfig.java
+ net.runelite.client.plugins.NQuickFighter.NQuickFighterConfig
+net/runelite/client/plugins/NQuickFighter/NQuickFighter.java
+ net.runelite.client.plugins.NQuickFighter.NQuickFighter
+ net.runelite.client.plugins.NQuickFighter.NQuickFighter$1
+ net.runelite.client.plugins.NQuickFighter.NQuickFighterState

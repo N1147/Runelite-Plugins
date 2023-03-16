@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Plugin-Version: 1.0.1
+Plugin-Id: atempoross-plugin
+Plugin-Provider: ZTD#1147
+Plugin-Description: Automated tempoross.
+Plugin-License: 3-Clause BSD License
+

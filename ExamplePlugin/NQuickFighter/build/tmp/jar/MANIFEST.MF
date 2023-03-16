@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Plugin-Version: 0.0.2
+Plugin-Id: quickfighterauto-plugin
+Plugin-Provider: Anarchise#7778
+Plugin-Description: Fights and loots.
+Plugin-License: 3-Clause BSD License
+

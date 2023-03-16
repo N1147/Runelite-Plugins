@@ -2,10 +2,9 @@ package net.runelite.client.plugins.NQuickPray;
 
 import com.google.inject.Provides;
 import net.runelite.api.Client;
-import net.runelite.api.MenuAction;
+import net.runelite.api.ItemID;
 import net.runelite.api.Skill;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -50,9 +49,6 @@ public class NQuickPray extends Plugin
 	private ConfigManager configManager;
 	@Inject
 	private PUtils utils;
-	public WidgetItem getRestore() {
-		return NQuickPrayType.PRAYER_POTION.getItemFromInventory(client);
-	}
 
 	public int randomInt(int min, int max)
 	{
@@ -60,26 +56,13 @@ public class NQuickPray extends Plugin
 	}
 	private boolean started = false;
 	@Subscribe
-	private void onGameTick(final GameTick event) throws IOException {
-		if (!started) {
-			if (utils.util()) {
-				started = true;
-			}
-			return;
-		}
-		WidgetItem restoreItem = getRestore();
+	private void onGameTick(final GameTick event) throws IOException, ClassNotFoundException {
+		WidgetItem restoreItem = utils.getInventoryWidgetItem(ItemID.SANFEW_SERUM1, ItemID.SANFEW_SERUM2, ItemID.SANFEW_SERUM3, ItemID.SANFEW_SERUM4, ItemID.SUPER_RESTORE1, ItemID.SUPER_RESTORE2, ItemID.SUPER_RESTORE3, ItemID.SUPER_RESTORE4,
+				ItemID.BLIGHTED_SUPER_RESTORE1, ItemID.BLIGHTED_SUPER_RESTORE2, ItemID.BLIGHTED_SUPER_RESTORE3,
+				ItemID.BLIGHTED_SUPER_RESTORE4, ItemID.PRAYER_POTION1, ItemID.PRAYER_POTION2, ItemID.PRAYER_POTION3, ItemID.PRAYER_POTION4);
 		int points = client.getBoostedSkillLevel(Skill.PRAYER);
 		if (points <= randomInt(config.prayMin(), config.prayMax())) {
-			clientThread.invoke(() ->
-					client.invokeMenuAction(
-							"Drink",
-							"<col=ff9040>Potion",
-							restoreItem.getId(),
-							MenuAction.ITEM_FIRST_OPTION.getId(),
-							restoreItem.getIndex(),
-							WidgetInfo.INVENTORY.getId()
-					)
-			);
+			utils.useItem(restoreItem.getId(),"drink");
 		}
 	}
 }

@@ -95,18 +95,18 @@ public class NTempoross extends Plugin
 	}
 
 	@Override
-	protected void startUp() throws IOException {
+	protected void startUp() throws IOException, ClassNotFoundException {
 		resetVals();
 	}
 
 	@Override
-	protected void shutDown() throws IOException {
+	protected void shutDown() throws IOException, ClassNotFoundException {
 		resetVals();
 	}
 
-	private void resetVals() throws IOException {
+	private void resetVals() throws IOException, ClassNotFoundException {
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilqui() >=7) {
 				started = true;
 			}
 		}
@@ -120,7 +120,7 @@ public class NTempoross extends Plugin
 	}
 
 	@Subscribe
-	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException {
+	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException, ClassNotFoundException {
 		if (!configButtonClicked.getGroup().equalsIgnoreCase("NTempoross"))
 		{
 			return;
@@ -531,13 +531,13 @@ public class NTempoross extends Plugin
 	}
 	public boolean started = false;
 	@Subscribe
-	private void onGameTick(GameTick tick) throws IOException {
+	private void onGameTick(GameTick tick) throws IOException, ClassNotFoundException {
 		if (!startBarbarianFisher) {
 			return;
 		}
 		player = client.getLocalPlayer();
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilte() >=7) {
 				started = true;
 			}
 			startBarbarianFisher = false;
@@ -547,7 +547,7 @@ public class NTempoross extends Plugin
 			state = getState();
 			switch (state) {
 				case TIMEOUT:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout--;
 					break;
 				case ITERATING:

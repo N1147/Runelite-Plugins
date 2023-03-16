@@ -1,29 +1,3 @@
-/*
- * Copyright (c) 2020, dutta64 <https://github.com/dutta64>
- * Copyright (c) 2019, kThisIsCvpv <https://github.com/kThisIsCvpv>
- * Copyright (c) 2019, ganom <https://github.com/Ganom>
- * Copyright (c) 2019, kyle <https://github.com/xKylee>
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 
 package net.runelite.client.plugins.NGauntlet;
 
@@ -227,28 +201,29 @@ public class NGauntlet extends Plugin
 	}
 
 	@Override
-	protected void startUp() throws IOException {
+	protected void startUp() throws IOException, ClassNotFoundException {
 		reset();
 	}
 
 
 	@Override
-	protected void shutDown() throws IOException {
+	protected void shutDown() throws IOException, ClassNotFoundException {
 		reset();
 	}
 	private boolean started = false;
 	String[] values;
 	String lootnames = "shards,frame,ore,tirinum,bark,leaf,bowstring,orb,spike,teleport";
 
-	private void reset() throws IOException {
+	private void reset() throws IOException, ClassNotFoundException {
 		start = false;
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilgau() >=7) {
 				started = true;
 			}
 		}
 		inHunllef = false;
 		loot.clear();
+		CRYSTALZ.clear();
 		values = lootnames.toLowerCase().split("\\s*,\\s*");
 		if (!lootnames.isBlank()) {
 			lootableItems.clear();
@@ -278,7 +253,7 @@ public class NGauntlet extends Plugin
 	private boolean start = false;
 
 	@Subscribe
-	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException {
+	private void onConfigButtonPressed(ConfigButtonClicked configButtonClicked) throws IOException, ClassNotFoundException {
 		if (!configButtonClicked.getGroup().equalsIgnoreCase("NGauntletConfig")) {
 			return;
 		}
@@ -309,7 +284,7 @@ public class NGauntlet extends Plugin
 	}
 
 	@Subscribe
-	private void onVarbitChanged(final VarbitChanged event) throws IOException {
+	private void onVarbitChanged(final VarbitChanged event) throws IOException, ClassNotFoundException {
 		if (isHunllefVarbitSet())
 		{
 			if (!inHunllef)
@@ -346,30 +321,34 @@ public class NGauntlet extends Plugin
 		switch (currentIcon) {
 			case MELEE:
 				if (utils.isItemEquipped(HALBERDS)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
-					utils.sendGameMessage("Switching");
+					utils.useItem(AllWeapons.getId(),"wield","wear");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+					//utils.sendGameMessage("Switching");
 				}
 				break;
 			case RANGED:
 				if (utils.isItemEquipped(BOWS)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
-					utils.sendGameMessage("Switching");
+					utils.useItem(AllWeapons.getId(),"wield","wear");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+					//utils.sendGameMessage("Switching");
 				}
 				break;
 			case MAGIC:
 				if (utils.isItemEquipped(STAVES)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
-					utils.sendGameMessage("Switching");
+					utils.useItem(AllWeapons.getId(),"wield","wear");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+					//utils.sendGameMessage("Switching");
 				}
 				break;
 		}
 	}
 	private boolean hasWeaponSupplies = false;
 	private boolean hasPotions = true;
+	private final Set<Integer> STRINGSNORBS = Set.of(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB);
 	@Subscribe
-	private void onClientTick(ClientTick event) throws IOException {
+	private void onClientTick(ClientTick event) throws IOException, ClassNotFoundException {
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilgau() >=7) {
 				started = true;
 			}
 			reset();
@@ -431,10 +410,10 @@ public class NGauntlet extends Plugin
 		/////////
 		//Weapons
 		if (config.PerfectWeapons()) {
-			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING) && utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
+			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(BOWSTRINGS) && utils.inventoryContains(ORBS) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
-			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING) && utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
+			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(BOWSTRINGS) && utils.inventoryContains(ORBS) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
 			if (utils.inventoryItemContainsAmount(WEAPON_FRAMES, 2, false, false)) {
@@ -457,10 +436,10 @@ public class NGauntlet extends Plugin
 			}
 		}
 		if (!config.PerfectWeapons()) {
-			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
+			if (hasWeaponFrames && utils.inventoryContains(BOWS_NOBASIC) && utils.inventoryContains(STRINGSNORBS) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
-			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING, ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
+			if (hasWeaponFrames && utils.isItemEquipped(BOWS_NOBASIC) && utils.inventoryContains(STRINGSNORBS) && utils.inventoryItemContainsAmount(SHARDS, hasArmour ? 250 : 400, true, false)) {
 				hasWeaponSupplies = true;
 			}
 			if (utils.inventoryItemContainsAmount(WEAPON_FRAMES, 2, false, false)) {
@@ -510,7 +489,7 @@ public class NGauntlet extends Plugin
 		if (utils.inventoryItemContainsAmount(HERBS, 2, false, false) && utils.inventoryContains(POTIONS_ALL)) {
 			hasHerbs = true;	//2 herbs 1 pot
 		}
-		if (firstWeapon && utils.inventoryContains(ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CORRUPTED_BOW_ATTUNED)) {
+		if (firstWeapon && utils.inventoryContains(ATTUNED_BOWS)) {
 			firstWeapon = false;
 		}
 		if (firstWeapon && utils.isItemEquipped(ATTUNED_BOWS)) {
@@ -521,13 +500,16 @@ public class NGauntlet extends Plugin
 	private WorldPoint hunllefSpawnLocation = null;
 	private WorldArea LOBBY = new WorldArea(new WorldPoint(3025, 6116, 1), new WorldPoint(3040, 6130, 1));
 	@Subscribe
-	private void onGameTick(GameTick event) throws IOException {
+	private void onGameTick(GameTick event) throws IOException, ClassNotFoundException {
 		if (!started) {
-			if (utils.util()) {
+			if (utils.utilgau() >=7) {
 				started = true;
 			}
 			reset();
 			return;
+		}
+		if (CRYSTALZ.isEmpty()) {
+			CRYSTALZ.add(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
 		}
 		//if (!start) {
 		//	return;
@@ -612,11 +594,11 @@ public class NGauntlet extends Plugin
 			state = getState();
 			switch (state) {
 				case TIMEOUT:
-					utils.handleRun(20, 10);
+					//utils.handleRun(20, 10);
 					timeout--;
 					break;
 				case IDLE:
-					utils.handleRun(20, 10);
+					///utils.handleRun(20, 10);
 					//timeout = 1;
 					break;
 				case IDLE_2:
@@ -629,7 +611,7 @@ public class NGauntlet extends Plugin
 			state = getStateBoss();
 			switch (state) {
 				case TIMEOUT:
-					utils.handleRun(30, 20);
+					//utils.handleRun(30, 20);
 					timeout--;
 					break;
 				case IDLE:
@@ -650,19 +632,22 @@ public class NGauntlet extends Plugin
 		if (client.getBoostedSkillLevel(Skill.HITPOINTS) <= config.healthMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.PADDLEFISH, ItemID.CORRUPTED_PADDLEFISH, ItemID.CRYSTAL_PADDLEFISH);
 			if (AllWeapons != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(AllWeapons.getId(),"wield","wear");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getBoostedSkillLevel(Skill.PRAYER) <= config.prayMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.EGNIOL_POTION_1, ItemID.EGNIOL_POTION_2, ItemID.EGNIOL_POTION_3, ItemID.EGNIOL_POTION_4);
 			if (AllWeapons != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(AllWeapons.getId(),"wield","wear");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getEnergy() <= config.runMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.EGNIOL_POTION_1, ItemID.EGNIOL_POTION_2, ItemID.EGNIOL_POTION_3, ItemID.EGNIOL_POTION_4);
 			if (AllWeapons != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(AllWeapons.getId(),"wield","wear");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 
@@ -685,36 +670,57 @@ public class NGauntlet extends Plugin
 		return NGauntletState.UNHANDLED_STATE;
 	}
 	private boolean FirstAction = true;
+	private boolean ChestOpened = true;
+	private final Set<Integer> BASIC_BODIES = Set.of(ItemID.CRYSTAL_BODY_BASIC, ItemID.CORRUPTED_BODY_BASIC);
+	private final Set<Integer> BASIC_LEGS = Set.of(ItemID.CRYSTAL_LEGS_BASIC, ItemID.CORRUPTED_LEGS_BASIC);
+	private final Set<Integer> TELEPORTCRYSTALS = Set.of(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
+	private final Set<Integer> FRAMESNBOWS = Set.of(ItemID.WEAPON_FRAME, ItemID.WEAPON_FRAME_23871, ItemID.CRYSTAL_BOW_BASIC, ItemID.CORRUPTED_BOW_BASIC);
+	private final Set<Integer> AXES = Set.of(ItemID.CRYSTAL_AXE_23862, ItemID.CORRUPTED_AXE);
+	private final Set<Integer> PICKAXES = Set.of(ItemID.CRYSTAL_PICKAXE_23863, ItemID.CORRUPTED_PICKAXE);
+	private final Set<Integer> DUST = Set.of(ItemID.CRYSTAL_DUST_23867, ItemID.CORRUPTED_DUST);
+	private final Set<Integer> ARMOUR = Set.of(ItemID.CRYSTAL_BODY_ATTUNED, ItemID.CORRUPTED_BODY_ATTUNED, ItemID.CRYSTAL_LEGS_ATTUNED, ItemID.CORRUPTED_LEGS_ATTUNED, ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC);
+
+	private List<Integer> CRYSTALZ = new ArrayList<>();
 	private NGauntletState getState() {
-		if (!inHunllef && !inGauntlet && client.getLocalPlayer().getWorldArea().intersectsWith(LOBBY)) {
-			if (findOpenableChest(37341) != null){
-				GameObject Linum = utils.findNearestGameObject(37341);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
-				return NGauntletState.IDLE;
+		if (client.getLocalPlayer().getWorldArea().intersectsWith(LOBBY)) {
+			if (!ChestOpened) {
+				if (utils.findNearestGameObject(37341) != null) {
+					GameObject Linum = utils.findNearestGameObject(37341);
+					clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
+					return NGauntletState.IDLE;
+				}
 			}
-			if (utils.findNearestGameObject(37340) != null){
-				GameObject Linum = utils.findNearestGameObject(37340);
-				clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), config.EnterCorrupted() ? MenuAction.GAME_OBJECT_SECOND_OPTION.getId() : MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
-				return NGauntletState.IDLE;
+			if (ChestOpened) {
+				if (utils.findNearestGameObject(37340) != null) {
+					GameObject Linum = utils.findNearestGameObject(37340);
+					clientThread.invoke(() -> client.invokeMenuAction("", "", Linum.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), Linum.getSceneMinLocation().getX(), Linum.getSceneMinLocation().getY()));
+					return NGauntletState.IDLE;
+				}
+			}
+			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 2, 37341) != null && !ChestOpened) {
+				ChestOpened = true;
 			}
 		}
 
 		if (client.getBoostedSkillLevel(Skill.HITPOINTS) <= config.healthMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.PADDLEFISH, ItemID.CORRUPTED_PADDLEFISH, ItemID.CRYSTAL_PADDLEFISH);
 			if (AllWeapons != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(AllWeapons.getId(),"wield","wear");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getBoostedSkillLevel(Skill.PRAYER) <= config.prayMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.EGNIOL_POTION_1, ItemID.EGNIOL_POTION_2, ItemID.EGNIOL_POTION_3, ItemID.EGNIOL_POTION_4);
 			if (AllWeapons != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(AllWeapons.getId(),"wield","wear");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 		if (client.getEnergy() <= config.runMin()) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.EGNIOL_POTION_1, ItemID.EGNIOL_POTION_2, ItemID.EGNIOL_POTION_3, ItemID.EGNIOL_POTION_4);
 			if (AllWeapons != null) {
-				clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+				utils.useItem(AllWeapons.getId(),"wield","wear");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			}
 		}
 
@@ -732,8 +738,9 @@ public class NGauntlet extends Plugin
 				return NGauntletState.IDLE;
 			}////////
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),20,37339) == null) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 		}
@@ -741,30 +748,35 @@ public class NGauntlet extends Plugin
 		///////////////
 		///////////////
 		//Wear stuff
-		if (config.AttunedArmour() && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.inventoryContains(ItemID.CRYSTAL_BODY_ATTUNED, ItemID.CORRUPTED_BODY_ATTUNED, ItemID.CRYSTAL_LEGS_ATTUNED, ItemID.CORRUPTED_LEGS_ATTUNED, ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC)) {
+		if (config.AttunedArmour() && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.inventoryContains(ARMOUR)) {
 			WidgetItem Armour = utils.getItemFromInventory(ItemID.CRYSTAL_BODY_ATTUNED, ItemID.CORRUPTED_BODY_ATTUNED, ItemID.CRYSTAL_LEGS_ATTUNED, ItemID.CORRUPTED_LEGS_ATTUNED, ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", Armour.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Armour.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(Armour.getId(),"wield","wear");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", Armour.getId(), MenuAction.CC_OP.getId(), Armour.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;	//Armour not equipped ^
 		}
-		if (!config.AttunedArmour() && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.inventoryContains(ItemID.CRYSTAL_BODY_BASIC, ItemID.CORRUPTED_BODY_BASIC, ItemID.CRYSTAL_LEGS_BASIC, ItemID.CORRUPTED_LEGS_BASIC, ItemID.CRYSTAL_BODY_ATTUNED, ItemID.CORRUPTED_BODY_ATTUNED, ItemID.CRYSTAL_LEGS_ATTUNED, ItemID.CORRUPTED_LEGS_ATTUNED, ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC)) {
+		if (!config.AttunedArmour() && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.inventoryContains(ARMOUR)) {
 			WidgetItem Armour = utils.getItemFromInventory(ItemID.CRYSTAL_BODY_BASIC, ItemID.CORRUPTED_BODY_BASIC, ItemID.CRYSTAL_LEGS_BASIC, ItemID.CORRUPTED_LEGS_BASIC, ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", Armour.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), Armour.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(Armour.getId(),"wield","wear");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", Armour.getId(), MenuAction.CC_OP.getId(), Armour.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;	//Armour not equipped ^
 		}
 
 		if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.isItemEquipped(SCEPTRES) && utils.inventoryContains(STAVES_NOBASIC)) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.CRYSTAL_HALBERD_BASIC, ItemID.CRYSTAL_HALBERD_ATTUNED, ItemID.CRYSTAL_HALBERD_PERFECTED, ItemID.CORRUPTED_HALBERD_BASIC, ItemID.CORRUPTED_HALBERD_ATTUNED, ItemID.CORRUPTED_HALBERD_PERFECTED, ItemID.CORRUPTED_BOW_BASIC, ItemID.CORRUPTED_BOW_ATTUNED, ItemID.CORRUPTED_BOW_PERFECTED, ItemID.CORRUPTED_STAFF_BASIC, ItemID.CORRUPTED_STAFF_ATTUNED, ItemID.CORRUPTED_STAFF_PERFECTED, ItemID.CRYSTAL_BOW_BASIC, ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CRYSTAL_BOW_PERFECTED, ItemID.CRYSTAL_STAFF_BASIC, ItemID.CRYSTAL_STAFF_ATTUNED, ItemID.CRYSTAL_STAFF_PERFECTED);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(AllWeapons.getId(),"wield","wear");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;	//Wearing sceptre ^
 		}
 		if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.isItemEquipped(SCEPTRES) && utils.inventoryContains(BOWS_NOBASIC)) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.CRYSTAL_HALBERD_BASIC, ItemID.CRYSTAL_HALBERD_ATTUNED, ItemID.CRYSTAL_HALBERD_PERFECTED, ItemID.CORRUPTED_HALBERD_BASIC, ItemID.CORRUPTED_HALBERD_ATTUNED, ItemID.CORRUPTED_HALBERD_PERFECTED, ItemID.CORRUPTED_BOW_BASIC, ItemID.CORRUPTED_BOW_ATTUNED, ItemID.CORRUPTED_BOW_PERFECTED, ItemID.CORRUPTED_STAFF_BASIC, ItemID.CORRUPTED_STAFF_ATTUNED, ItemID.CORRUPTED_STAFF_PERFECTED, ItemID.CRYSTAL_BOW_BASIC, ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CRYSTAL_BOW_PERFECTED, ItemID.CRYSTAL_STAFF_BASIC, ItemID.CRYSTAL_STAFF_ATTUNED, ItemID.CRYSTAL_STAFF_PERFECTED);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(AllWeapons.getId(),"wield","wear");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;	//Wearing sceptre ^
 		}
 		if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") == null && utils.isItemEquipped(SCEPTRES) && utils.inventoryContains(HALBERDS_NOBASIC)) {
 			WidgetItem AllWeapons = utils.getItemFromInventory(ItemID.CRYSTAL_HALBERD_BASIC, ItemID.CRYSTAL_HALBERD_ATTUNED, ItemID.CRYSTAL_HALBERD_PERFECTED, ItemID.CORRUPTED_HALBERD_BASIC, ItemID.CORRUPTED_HALBERD_ATTUNED, ItemID.CORRUPTED_HALBERD_PERFECTED, ItemID.CORRUPTED_BOW_BASIC, ItemID.CORRUPTED_BOW_ATTUNED, ItemID.CORRUPTED_BOW_PERFECTED, ItemID.CORRUPTED_STAFF_BASIC, ItemID.CORRUPTED_STAFF_ATTUNED, ItemID.CORRUPTED_STAFF_PERFECTED, ItemID.CRYSTAL_BOW_BASIC, ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CRYSTAL_BOW_PERFECTED, ItemID.CRYSTAL_STAFF_BASIC, ItemID.CRYSTAL_STAFF_ATTUNED, ItemID.CRYSTAL_STAFF_PERFECTED);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(AllWeapons.getId(),"wield","wear");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", AllWeapons.getId(), MenuAction.CC_OP.getId(), AllWeapons.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;	//Wearing sceptre ^
 		}
 		//Wear stuff
@@ -788,33 +800,38 @@ public class NGauntlet extends Plugin
 					}
 				}
 				if (utils.inventoryContains(ItemID.WATERFILLED_VIAL) && utils.inventoryContains(ItemID.GRYM_LEAF_23875)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_LEAF_23875, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_LEAF_23875).getIndex(), WidgetInfo.INVENTORY.getId()));
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.WATERFILLED_VIAL, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.WATERFILLED_VIAL).getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(ItemID.GRYM_LEAF_23875,"use");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_LEAF_23875, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GRYM_LEAF_23875)).getIndex(), WidgetInfo.INVENTORY.getId()));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.WATERFILLED_VIAL, MenuAction.ITEM_USE_ON_ITEM.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.WATERFILLED_VIAL)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					//return NGauntletState.IDLE;
 				}
 				if (utils.inventoryContains(ItemID.WATERFILLED_VIAL) && utils.inventoryContains(ItemID.GRYM_LEAF)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_LEAF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_LEAF).getIndex(), WidgetInfo.INVENTORY.getId()));
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.WATERFILLED_VIAL, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.WATERFILLED_VIAL).getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(ItemID.GRYM_LEAF,"use");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_LEAF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GRYM_LEAF)).getIndex(), WidgetInfo.INVENTORY.getId()));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.WATERFILLED_VIAL, MenuAction.ITEM_USE_ON_ITEM.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.WATERFILLED_VIAL)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					//return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && !utils.inventoryContains(ItemID.CRYSTAL_DUST_23867, ItemID.CORRUPTED_DUST) && utils.inventoryItemContainsAmount(SHARDS, 10, true, false)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.PESTLE_AND_MORTAR_23865, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.PESTLE_AND_MORTAR_23865).getIndex(), WidgetInfo.INVENTORY.getId()));
+				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && !utils.inventoryContains(DUST) && utils.inventoryItemContainsAmount(SHARDS, 10, true, false)) {
+					utils.useItem(ItemID.PESTLE_AND_MORTAR_23865,"use");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.PESTLE_AND_MORTAR_23865, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.PESTLE_AND_MORTAR_23865)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					if (utils.inventoryContains(ItemID.CRYSTAL_SHARDS)) {
-						clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CRYSTAL_SHARDS, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CRYSTAL_SHARDS).getIndex(), WidgetInfo.INVENTORY.getId()));
+						clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CRYSTAL_SHARDS, MenuAction.ITEM_USE_ON_ITEM.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.CRYSTAL_SHARDS)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					if (utils.inventoryContains(ItemID.CORRUPTED_SHARDS)) {
-						clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CORRUPTED_SHARDS, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CORRUPTED_SHARDS).getIndex(), WidgetInfo.INVENTORY.getId()));
+						clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CORRUPTED_SHARDS, MenuAction.ITEM_USE_ON_ITEM.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.CORRUPTED_SHARDS)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					}
 					//return NGauntletState.IDLE;
 				}
 				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && utils.inventoryItemContainsAmount(ItemID.CRYSTAL_DUST_23867, 10, true, false)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_POTION_UNF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_POTION_UNF).getIndex(), WidgetInfo.INVENTORY.getId()));
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CRYSTAL_DUST_23867, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CRYSTAL_DUST_23867).getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(ItemID.GRYM_POTION_UNF,"use");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_POTION_UNF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GRYM_POTION_UNF)).getIndex(), WidgetInfo.INVENTORY.getId()));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CRYSTAL_DUST_23867, MenuAction.ITEM_USE_ON_ITEM.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.CRYSTAL_DUST_23867)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					//return NGauntletState.IDLE;
 				}
 				if (utils.inventoryContains(ItemID.GRYM_POTION_UNF) && utils.inventoryItemContainsAmount(ItemID.CORRUPTED_DUST, 10, true, false)) {
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_POTION_UNF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(ItemID.GRYM_POTION_UNF).getIndex(), WidgetInfo.INVENTORY.getId()));
-					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CORRUPTED_DUST, MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), utils.getInventoryWidgetItem(ItemID.CORRUPTED_DUST).getIndex(), WidgetInfo.INVENTORY.getId()));
+					utils.useItem(ItemID.GRYM_POTION_UNF,"use");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.GRYM_POTION_UNF, MenuAction.ITEM_USE.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.GRYM_POTION_UNF)).getIndex(), WidgetInfo.INVENTORY.getId()));
+					clientThread.invoke(() -> client.invokeMenuAction("", "", ItemID.CORRUPTED_DUST, MenuAction.ITEM_USE_ON_ITEM.getId(), utils.getInventoryWidgetItem(Collections.singletonList(ItemID.CORRUPTED_DUST)).getIndex(), WidgetInfo.INVENTORY.getId()));
 					//return NGauntletState.IDLE;
 				}
 				if (utils.inventoryContains(ItemID.VIAL_23879) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(), 1, "Water Pump") == null) {
@@ -826,8 +843,9 @@ public class NGauntlet extends Plugin
 					return NGauntletState.IDLE;    ///// < Just wait bro.... lmao
 				}
 				if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 100, true, false) && !utils.inventoryContains(EMPTY_VIALS) && !utils.inventoryContains(WATER_FILLED_VIALS) && !utils.inventoryContains(POTIONS_ALL)) {
-					WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-					clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+					WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+					utils.useItem(CRYSTAL.getId(),"activate");
+					//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 					return NGauntletState.IDLE;
 				}
 				if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null && utils.inventoryItemContainsAmount(SHARDS, 100, true, false) && !utils.inventoryContains(EMPTY_VIALS) && !utils.inventoryContains(WATER_FILLED_VIALS) && !utils.inventoryContains(POTIONS_ALL)) {
@@ -846,8 +864,9 @@ public class NGauntlet extends Plugin
 
 		if (hasWeapons && hasArmour && !hasFish) {
 			if (utils.inventoryItemContainsAmount(ItemID.RAW_PADDLEFISH, config.foodAmt(), false, false) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Range") == null) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.inventoryItemContainsAmount(ItemID.RAW_PADDLEFISH, config.foodAmt(), false, false) && utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Range") != null) {
@@ -864,33 +883,36 @@ public class NGauntlet extends Plugin
 		//Food
 		/////////////////
 
-		if (hasBark && utils.inventoryContains(ItemID.CRYSTAL_AXE_23862, ItemID.CORRUPTED_AXE)) {
+		if (hasBark && utils.inventoryContains(AXES)) {
 			WidgetItem TOOLS = utils.getItemFromInventory(ItemID.CRYSTAL_AXE_23862, ItemID.CORRUPTED_AXE);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", TOOLS.getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), TOOLS.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(TOOLS.getId(),"drop");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", TOOLS.getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), TOOLS.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;
 		}
-		if (hasOres && utils.inventoryContains(ItemID.CRYSTAL_PICKAXE_23863, ItemID.CORRUPTED_PICKAXE)) {
+		if (hasOres && utils.inventoryContains(PICKAXES)) {
 			WidgetItem TOOLS = utils.getItemFromInventory(ItemID.CRYSTAL_PICKAXE_23863, ItemID.CORRUPTED_PICKAXE);
-			clientThread.invoke(() -> client.invokeMenuAction("", "", TOOLS.getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), TOOLS.getIndex(), WidgetInfo.INVENTORY.getId()));
+			utils.useItem(TOOLS.getId(),"drop");
+			//clientThread.invoke(() -> client.invokeMenuAction("", "", TOOLS.getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), TOOLS.getIndex(), WidgetInfo.INVENTORY.getId()));
 			return NGauntletState.IDLE;
 		}
 
 		//////
 		//Weapons
-		if (firstWeapon && utils.inventoryContains(ItemID.WEAPON_FRAME, ItemID.WEAPON_FRAME_23871, ItemID.CRYSTAL_BOW_BASIC, ItemID.CORRUPTED_BOW_BASIC)) {
+		if (firstWeapon && utils.inventoryContains(FRAMESNBOWS)) {
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") != null) {
-				if (!utils.inventoryContains(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL)) {
+				if (!utils.inventoryContains(TELEPORTCRYSTALS)) {
 					utils.typeString("1");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CORRUPTED_BOW_ATTUNED)) {
+				if (!utils.inventoryContains(ATTUNED_BOWS)) {
 					utils.typeString("8");
 					return NGauntletState.IDLE;
 				}
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 150, true, false)) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null && utils.inventoryItemContainsAmount(SHARDS, 150, true, false)) {
@@ -902,18 +924,19 @@ public class NGauntlet extends Plugin
 		}
 		if (firstWeapon && utils.isItemEquipped(BOWS)) {
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") != null) {
-				if (!utils.inventoryContains(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL)) {
+				if (!utils.inventoryContains(TELEPORTCRYSTALS)) {
 					utils.typeString("1");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_BOW_ATTUNED, ItemID.CORRUPTED_BOW_ATTUNED) && !utils.isItemEquipped(BOWS_NOBASIC)) {
+				if (!utils.inventoryContains(ATTUNED_BOWS) && !utils.isItemEquipped(BOWS_NOBASIC)) {
 					utils.typeString("8");
 					return NGauntletState.IDLE;
 				}
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 150, true, false)) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null && utils.inventoryItemContainsAmount(SHARDS, 150, true, false)) {
@@ -936,7 +959,7 @@ public class NGauntlet extends Plugin
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 150, true, false)) {
 				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null) {
@@ -948,19 +971,19 @@ public class NGauntlet extends Plugin
 
 		if (!firstWeapon && hasWeaponSupplies && !hasWeapons) {
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") != null) {
-				if (!utils.inventoryContains(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL)) {
+				if (!utils.inventoryContains(TELEPORTCRYSTALS)) {
 					utils.typeString("1");
 					return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ItemID.CRYSTAL_ORB, ItemID.CORRUPTED_ORB) && !utils.inventoryContains(ItemID.CRYSTAL_STAFF_PERFECTED, ItemID.CORRUPTED_STAFF_PERFECTED)) {
+				if (utils.inventoryContains(ORBS) && !utils.inventoryContains(STAVES_PERFECT)) {
 					utils.typeString("7");
 					return NGauntletState.IDLE;
 				}
-				if (utils.isItemEquipped(ATTUNED_BOWS) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING)) {
+				if (utils.isItemEquipped(ATTUNED_BOWS) && utils.inventoryContains(BOWSTRINGS)) {
 					utils.typeString("8");
 					return NGauntletState.IDLE;
 				}
-				if (utils.inventoryContains(ATTUNED_BOWS) && utils.inventoryContains(ItemID.CRYSTALLINE_BOWSTRING, ItemID.CORRUPTED_BOWSTRING)) {
+				if (utils.inventoryContains(ATTUNED_BOWS) && utils.inventoryContains(BOWSTRINGS)) {
 					utils.typeString("8");
 					return NGauntletState.IDLE;
 				}
@@ -970,8 +993,9 @@ public class NGauntlet extends Plugin
 				}
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null) {
@@ -1003,7 +1027,7 @@ public class NGauntlet extends Plugin
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 200, true, false)) {
 				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null) {
@@ -1018,26 +1042,27 @@ public class NGauntlet extends Plugin
 		}*/ ////// TODO: FIX ^
 		if (config.AttunedArmour() && hasArmourSupplies && !hasArmour) {
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") != null) {
-				if (!utils.inventoryContains(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL)) {
+				if (!utils.inventoryContains(TELEPORTCRYSTALS)) {
 					utils.typeString("1");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC) && !utils.isItemEquipped(HELMS)) {
+				if (!utils.inventoryContains(HELMS) && !utils.isItemEquipped(HELMS)) {
 					utils.typeString("3");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_BODY_ATTUNED, ItemID.CORRUPTED_BODY_ATTUNED) && !utils.isItemEquipped(BODIES)) {
+				if (!utils.inventoryContains(BODIES) && !utils.isItemEquipped(BODIES)) {
 					utils.typeString("4");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_LEGS_ATTUNED, ItemID.CORRUPTED_LEGS_ATTUNED) && !utils.isItemEquipped(LEGS)) {
+				if (!utils.inventoryContains(LEGS) && !utils.isItemEquipped(LEGS)) {
 					utils.typeString("5");
 					return NGauntletState.IDLE;
 				}
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 300, true, false)) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null) {
@@ -1051,28 +1076,30 @@ public class NGauntlet extends Plugin
 		//////////////////
 		//////////////////////
 		///////////////////////
+
 		if (!config.AttunedArmour() && hasArmourSupplies && !hasArmour) {
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),2,"Singing Bowl") != null) {
-				if (!utils.inventoryContains(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL)) {
+				if (!utils.inventoryContains(TELEPORTCRYSTALS)) {
 					utils.typeString("1");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_HELM_BASIC, ItemID.CORRUPTED_HELM_BASIC) && !utils.isItemEquipped(HELMS)) {
+				if (!utils.inventoryContains(HELMS) && !utils.isItemEquipped(HELMS)) {
 					utils.typeString("3");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_BODY_BASIC, ItemID.CORRUPTED_BODY_BASIC) && !utils.isItemEquipped(BODIES)) {
+				if (!utils.inventoryContains(BASIC_BODIES) && !utils.isItemEquipped(BODIES)) {
 					utils.typeString("4");
 					return NGauntletState.IDLE;
 				}
-				if (!utils.inventoryContains(ItemID.CRYSTAL_LEGS_BASIC, ItemID.CORRUPTED_LEGS_BASIC) && !utils.isItemEquipped(LEGS)) {
+				if (!utils.inventoryContains(BASIC_LEGS) && !utils.isItemEquipped(LEGS)) {
 					utils.typeString("5");
 					return NGauntletState.IDLE;
 				}
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") == null && utils.inventoryItemContainsAmount(SHARDS, 300, true, false)) {
-				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(ItemID.TELEPORT_CRYSTAL, ItemID.CORRUPTED_TELEPORT_CRYSTAL);
-				clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
+				WidgetItem CRYSTAL = utils.getInventoryWidgetItem(CRYSTALZ);
+				utils.useItem(CRYSTAL.getId(),"activate");
+				//clientThread.invoke(() -> client.invokeMenuAction("", "",CRYSTAL.getId(), MenuAction.CC_OP.getId(), CRYSTAL.getIndex(), WidgetInfo.INVENTORY.getId()));
 				return NGauntletState.IDLE;
 			}
 			if (utils.findNearestGameObjectWithin(client.getLocalPlayer().getWorldLocation(),10,"Singing Bowl") != null) {
@@ -1206,7 +1233,7 @@ public class NGauntlet extends Plugin
 		loot.remove(event.getItem());
 	}
 	@Subscribe
-	private void onGameStateChanged(final GameStateChanged event) throws IOException {
+	private void onGameStateChanged(final GameStateChanged event) throws IOException, ClassNotFoundException {
 		switch (event.getGameState())
 		{
 			case LOADING:
@@ -1490,7 +1517,10 @@ public class NGauntlet extends Plugin
 	{
 		inHunllef = true;
 	}
-	private void initGauntlet() { inGauntlet = true; }
+	private void initGauntlet() {
+		inGauntlet = true;
+		ChestOpened = false;
+	}
 
 	private boolean isGauntletVarbitSet()
 	{
