@@ -1,6 +1,0 @@
-net/runelite/client/plugins/NGuardians/NGuardiansConfig.java
- net.runelite.client.plugins.NGuardians.NGuardiansConfig
-net/runelite/client/plugins/NGuardians/Guardians.java
- net.runelite.client.plugins.NGuardians.Guardians
- net.runelite.client.plugins.NGuardians.Guardians$1
- net.runelite.client.plugins.NGuardians.NGuardiansState

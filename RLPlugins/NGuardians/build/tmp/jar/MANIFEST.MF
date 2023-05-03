@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Plugin-Version: 0.0.1
-Plugin-Id: nguardians-plugin
-Plugin-Provider: ZTD#1147
-Plugin-Description: Automated Guardians of the Rift.
-Plugin-License: 3-Clause BSD License
-
