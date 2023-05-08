@@ -1,6 +1,0 @@
-net/runelite/client/plugins/avorkath/AVorkathConfig.java
- net.runelite.client.plugins.avorkath.AVorkathConfig
-net/runelite/client/plugins/avorkath/AVorkathPlugin.java
- net.runelite.client.plugins.avorkath.AVorkathPlugin
- net.runelite.client.plugins.avorkath.AVorkathPlugin$1
- net.runelite.client.plugins.avorkath.AVorkathState
